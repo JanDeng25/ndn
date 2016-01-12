@@ -37,8 +37,7 @@ class LRUCache{
 public:
     LRUCache(size_t size){
         entries_ = new Node<K,T>[size];
-        for(size_t i=0; i<size; ++i)// 存储可用结点的地址
-            free_entries_.push_back(entries_+i);
+        for(size_t i=0; i<size; ++i)// 瀛樺偍鍙敤缁撶偣鐨勫湴鍧�            free_entries_.push_back(entries_+i);
         head_ = new Node<K,T>;
         tail_ = new Node<K,T>;
         head_->prev = NULL;
@@ -46,6 +45,8 @@ public:
         tail_->prev = head_;
         tail_->next = NULL;
     }
+
+
     ~LRUCache(){
         delete head_;
         delete tail_;
@@ -59,7 +60,7 @@ public:
             attach(node);
         }
         else{
-            if(free_entries_.empty()){// 可用结点为空，即cache已满
+            if(free_entries_.empty()){// 鍙敤缁撶偣涓虹┖锛屽嵆cache宸叉弧
                 node = tail_->prev;
                 detach(node);
                 hashmap_.erase(node->key);
@@ -81,18 +82,17 @@ public:
             attach(node);
             return node->data;
         }
-        else{// 如果cache中没有，返回T的默认值。与hashmap行为一致
+        else{// 濡傛灉cache涓病鏈夛紝杩斿洖T鐨勯粯璁ゅ�銆備笌hashmap琛屼负涓�嚧
             return T();
         }
     }
 private:
-    // 分离结点
+    // 鍒嗙缁撶偣
     void detach(Node<K,T>* node){
         node->prev->next = node->next;
         node->next->prev = node->prev;
     }
-    // 将结点插入头部
-    void attach(Node<K,T>* node){
+    // 灏嗙粨鐐规彃鍏ュご閮�    void attach(Node<K,T>* node){
         node->prev = head_;
         node->next = head_->next;
         head_->next = node;
@@ -101,9 +101,8 @@ private:
 private:
     std::unordered_map<K,Node<K,T>*> hashmap_;
     //hash_map<K, Node<K,T>* > hashmap_;
-    vector<Node<K,T>* > free_entries_; // 存储可用结点的地址
-    Node<K,T> *head_, *tail_;
-    Node<K,T> *entries_; // 双向链表中的结点
+    vector<Node<K,T>* > free_entries_; // 瀛樺偍鍙敤缁撶偣鐨勫湴鍧�    Node<K,T> *head_, *tail_;
+    Node<K,T> *entries_; // 鍙屽悜閾捐〃涓殑缁撶偣
 };
 
 } /* namespace cache */
