@@ -69,7 +69,7 @@ NrCsImpl::NotifyNewAggregate ()
 		m_forwardingStrategy = GetObject<ForwardingStrategy>();
 	}
 
-	if (m_sensor == 0)
+	/*if (m_sensor == 0)
 	{
 		m_sensor = GetObject<ndn::nrndn::NodeSensor>();
 		// Setup Lane change action
@@ -81,9 +81,9 @@ NrCsImpl::NotifyNewAggregate ()
 			//NrFibEntry needs m_sensor. Initialize immediately after m_sensor is aggregated
 			InitializeNrFibEntry();
 		}
-	}
+	}*/
 
-  Fib::NotifyNewAggregate ();
+  ContentStore::NotifyNewAggregate ();
 }
 
 
