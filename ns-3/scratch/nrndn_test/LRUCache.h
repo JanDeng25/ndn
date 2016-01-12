@@ -45,8 +45,6 @@ public:
         tail_->prev = head_;
         tail_->next = NULL;
     }
-
-
     ~LRUCache(){
         delete head_;
         delete tail_;
