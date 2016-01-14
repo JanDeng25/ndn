@@ -11,6 +11,7 @@
 
 #include "ns3/ndn-pit-entry.h"
 #include "ns3/ndn-pit-entry-incoming-face.h"
+#include "ns3/ndn-name.h"
 
 #include <string>
 #include <unordered_map>
