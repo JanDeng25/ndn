@@ -25,10 +25,10 @@ EntryNrImpl::EntryNrImpl(Ptr<Fib> fib, Ptr<const Name> &prefix,Time cleanInterva
 	:Entry(fib,prefix),
 	 m_infaceTimeout(cleanInterval)
 {
-	NS_ASSERT_MSG(prefix.size()<2,"In EntryNrImpl, "
+	/*NS_ASSERT_MSG(prefix.size()<2,"In EntryNrImpl, "
 			"each name of data should be only one component, "
 			"for example: /routeSegment, do not use more than one slash, "
-			"such as/route1/route2/...");
+			"such as/route1/route2/...");*/
 	m_data_name=prefix.toUri();
 }
 
