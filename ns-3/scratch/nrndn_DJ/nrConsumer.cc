@@ -38,6 +38,10 @@ TypeId nrConsumer::GetTypeId()
 		    .SetGroupName ("Nrndn")
 		    .SetParent<ConsumerCbr> ()
 		    .AddConstructor<nrConsumer> ()
+		    .AddAttribute ("Prefix","Prefix, for which consumer has the data",
+		    			                    StringValue ("/"),
+		    			                    MakeNameAccessor (&nrConsumer::m_prefix),
+		    			                    MakeNameChecker ())
 //		    .AddAttribute("sensor", "The vehicle sensor used by the nrConsumer.",
 //		    	   	    		PointerValue (),
 //		    	   	    		MakePointerAccessor (&nrConsumer::m_sensor),
@@ -46,6 +50,7 @@ TypeId nrConsumer::GetTypeId()
 		    		            UintegerValue (1024),
 		    	                MakeUintegerAccessor (&nrConsumer::m_virtualPayloadSize),
 		    		            MakeUintegerChecker<uint32_t> ())
+
 		    ;
 		  return tid;
 }
@@ -109,8 +114,17 @@ void nrConsumer::ScheduleNextPacket()
 	//3. Schedule next packet
 	//ConsumerCbr::ScheduleNextPacket();
 
+	if(m_firstTime&&fib->Find(m_interestName)!=0){
+		 m_sendEvent = Simulator::Schedule (Seconds (0.0),
+			                                         &nrConsumer::SendPacket, this);
+		 m_firtTime=false;
+	}
+	else if(m_firstTime&&fib->Find(m_interestName)==0){
+		m_sendEvent = Simulator::Schedule (
 
-		doConsumerCbrScheduleNextPacket();
+				(m_random == 0) ?Seconds(10.0 / m_frequency):Seconds(m_random->GetValue ()),
+						&nrConsumer::SendPacket, this);
+	}
 }
 //question by DJ Dec 23,2015: according to FIB,there is no route?
 /*std::vector<std::string> nrConsumer::GetCurrentInterest()
@@ -146,28 +160,7 @@ void nrConsumer::ScheduleNextPacket()
 	return result;
 }*/
 
-void nrConsumer::doConsumerCbrScheduleNextPacket()
-{
-	  if (m_firstTime)
-	    {
-		  //modify by DJ on Dec 24,2015:Seconds(double t),t should be delay time to send the Interest銆�
-		  m_sendEvent = Simulator::Schedule (Seconds (0.0),
-	                                         &nrConsumer::SendPacket, this);
-	      m_firstTime = false;
-	    }
 
-	  //modify by DJ on Dec 24,2015:鍙渶瑕佸彂涓�鐨勮瘽锛屽氨鍙湪绗竴娆″彂鍏磋叮鍖呫�
-
-
-	  else if (!m_sendEvent.IsRunning ())
-	    m_sendEvent = Simulator::Schedule (
-	                                       (m_random == 0) ?
-	                                         Seconds(10.0 / m_frequency)
-	                                       :
-	                                         Seconds(m_random->GetValue ()),
-	                                       &nrConsumer::SendPacket, this);
-
-}
 
 void nrConsumer::SendPacket()
 {

@@ -69,7 +69,7 @@ protected:
 	   * @brief It will do the similar action like ConsumerCbr::ScheduleNextPacket do
 	   * 		However, I change some details of it, so use this function to replace it.
 	   */
-	  void  doConsumerCbrScheduleNextPacket();
+	  //void  doConsumerCbrScheduleNextPacket();
 
 	  /**
 	   * @brief Actually send packet, it will take place in Consumer::SendPacket
@@ -99,7 +99,7 @@ private:
 	  Ptr<fw::nrndn::NavigationRouteHeuristic>		m_forwardingStrategy;
 
 	  uint32_t m_virtualPayloadSize;
-
+	  Name m_prefix;
 	  Ptr<ndn::pit::nrndn::NrPitImpl> pit;
 	  Ptr<ndn::fib::nrndn::NrFibImpl> fib;
 	  //Ptr<ForwardingStrategy>		m_forwardingStrategy;
