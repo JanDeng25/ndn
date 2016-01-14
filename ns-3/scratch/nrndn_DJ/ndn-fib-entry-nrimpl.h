@@ -36,7 +36,7 @@ class EntryNrImpl : public Entry
 public:
 	typedef Entry super;
 
-	EntryNrImpl(Ptr<Fib> fib, Ptr<const Name> &prefix, Time cleanInterval);
+	EntryNrImpl(Ptr<Fib> fib, const Ptr<const Name> &prefix, Time cleanInterval);
 	virtual ~EntryNrImpl();
 	
 	/**
