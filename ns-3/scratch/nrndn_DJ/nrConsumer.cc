@@ -95,7 +95,7 @@ void nrConsumer::ScheduleNextPacket()
 	//std::cout<<prefix<<std::endl;
 	if(prefix=="")
 	{
-		std::cout<<"ID:"<<GetNode()->GetId()<<" Prefix为空"<<std::endl;
+		std::cout<<"ID:"<<GetNode()->GetId()<<" Prefix涓虹┖"<<std::endl;
 		return;
 	}
 
@@ -109,7 +109,7 @@ void nrConsumer::ScheduleNextPacket()
 	//3. Schedule next packet
 	//ConsumerCbr::ScheduleNextPacket();
 
-	if(fib->Find(m_interestName)==0)
+
 		doConsumerCbrScheduleNextPacket();
 }
 //question by DJ Dec 23,2015: according to FIB,there is no route?
@@ -132,8 +132,7 @@ void nrConsumer::ScheduleNextPacket()
 		std::cout<<std::endl;
 	}
 
-	//遍历，寻找和当前道路相同的道路，把剩余的道路加入兴趣list中
-	for(it=route.begin();it!=route.end();++it)
+	//閬嶅巻锛屽鎵惧拰褰撳墠閬撹矾鐩稿悓鐨勯亾璺紝鎶婂墿浣欑殑閬撹矾鍔犲叆鍏磋叮list涓�	for(it=route.begin();it!=route.end();++it)
 	{
 		//std::cout<<this->GetNode()->GetId()<<" "<<*it <<"\t"<<currentLane.data() <<std::endl;
 		if(*it==currentLane)
@@ -151,14 +150,13 @@ void nrConsumer::doConsumerCbrScheduleNextPacket()
 {
 	  if (m_firstTime)
 	    {
-		  //modify by DJ on Dec 24,2015:Seconds(double t),t should be delay time to send the Interest。
-
+		  //modify by DJ on Dec 24,2015:Seconds(double t),t should be delay time to send the Interest銆�
 		  m_sendEvent = Simulator::Schedule (Seconds (0.0),
 	                                         &nrConsumer::SendPacket, this);
 	      m_firstTime = false;
 	    }
 
-	  //modify by DJ on Dec 24,2015:只需要发一次的话，就只在第一次发兴趣包。
+	  //modify by DJ on Dec 24,2015:鍙渶瑕佸彂涓�鐨勮瘽锛屽氨鍙湪绗竴娆″彂鍏磋叮鍖呫�
 
 
 	  else if (!m_sendEvent.IsRunning ())
@@ -230,9 +228,9 @@ void nrConsumer::SendPacket()
 
 	  m_transmittedInterests (interest, this, m_face);
 	  m_face->ReceiveInterest (interest);
-	  //std::cout<<"准备出错\n";
+	  //std::cout<<"鍑嗗鍑洪敊\n";
 	  ScheduleNextPacket ();
-	//  std::cout<<"已经出错\n";
+	//  std::cout<<"宸茬粡鍑洪敊\n";
 
 	  //std::cout<<"ScheduleNextPacket \n";
 }
