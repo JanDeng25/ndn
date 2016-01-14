@@ -68,7 +68,7 @@ NrPitImpl::NotifyNewAggregate ()
 		m_forwardingStrategy = GetObject<ForwardingStrategy>();
 	}
 
-	if (m_sensor == 0)
+	/*if (m_sensor == 0)
 	{
 		m_sensor = GetObject<ndn::nrndn::NodeSensor>();
 		// Setup Lane change action
@@ -80,7 +80,7 @@ NrPitImpl::NotifyNewAggregate ()
 			//NrPitEntry needs m_sensor. Initialize immediately after m_sensor is aggregated
 			InitializeNrPitEntry();
 		}
-	}
+	}*/
 
   Pit::NotifyNewAggregate ();
 }
@@ -329,7 +329,7 @@ std::string NrPitImpl::uriConvertToString(std::string str)
 
 
 //laneChange means sending packet back to neighbors in last hop whether forward its data packets or not?
-void NrPitImpl::laneChange(std::string oldLane, std::string newLane)
+/*void NrPitImpl::laneChange(std::string oldLane, std::string newLane)
 {
 	if (oldLane.empty()
 			|| (ndn::nrndn::NodeSensor::emptyLane == oldLane
@@ -400,7 +400,7 @@ void NrPitImpl::laneChange(std::string oldLane, std::string newLane)
 		return;
 	}
 
-}
+}*/
 
 void NrPitImpl::DoInitialize(void)
 {

@@ -111,7 +111,7 @@ public:
   //add by DJ on Jan 4,2016:update pit
   bool RemovePitEntry(const Name& name);
 
-  void laneChange(std::string oldLane, std::string newLane);
+  //void laneChange(std::string oldLane, std::string newLane);
 
   //灏忛敓娣诲姞锛�015-8-23
   std::string uriConvertToString(std::string str);
