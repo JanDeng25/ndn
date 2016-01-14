@@ -69,7 +69,7 @@ NrFibImpl::NotifyNewAggregate ()
 		m_forwardingStrategy = GetObject<ForwardingStrategy>();
 	}
 
-	if (m_sensor == 0)
+	/*if (m_sensor == 0)
 	{
 		m_sensor = GetObject<ndn::nrndn::NodeSensor>();
 		// Setup Lane change action
@@ -81,7 +81,7 @@ NrFibImpl::NotifyNewAggregate ()
 			//NrFibEntry needs m_sensor. Initialize immediately after m_sensor is aggregated
 			InitializeNrFibEntry();
 		}
-	}
+	}*/
 
   Fib::NotifyNewAggregate ();
 }
@@ -105,7 +105,7 @@ NrFibImpl::AddFibEntry (const Name &prefix, std::string lane,uint32_t ttl){
 
 	//if not,insert it to the container;
 
-	Ptr<Entry> entry = ns3::Create<EntryNrImpl>(*this,prefix,m_cleanInterval);
+	Ptr<Entry> entry = ns3::Create<EntryNrImpl>(this,prefix,m_cleanInterval);
 	m_fibContainer.push_back(entry);
 
 }
