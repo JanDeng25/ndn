@@ -76,8 +76,8 @@ public:
   Create (Ptr<const Interest> header);
 
   //replace NrPitImpl::Create
-  bool
-  InitializeNrPitEntry ();
+ // bool
+  //InitializeNrPitEntry ();
 
   //abandon
   virtual void
@@ -113,7 +113,7 @@ public:
 
   void laneChange(std::string oldLane, std::string newLane);
 
-  //小锟添加，2015-8-23
+  //灏忛敓娣诲姞锛�015-8-23
   std::string uriConvertToString(std::string str);
 protected:
   // inherited from Object class
