@@ -166,6 +166,10 @@ NrCsImpl::InitializeNrFibEntry()
 	return true;
 }*/
   
+Ptr<Data>
+Lookup (Ptr<const Interest> interest){
+   return 0;
+}
 
 void
 NrCsImpl::MarkErased (Ptr<Entry> item)

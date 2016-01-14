@@ -72,6 +72,9 @@ public:
   //bool
   //InitializeNrFibEntry ();
 
+  virtual Ptr<Data>
+    Lookup (Ptr<const Interest> interest);
+
   //abandon
   virtual void
   MarkErased (Ptr<Entry> entry);
