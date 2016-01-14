@@ -74,7 +74,7 @@ public:
 
   //abandon
   virtual Ptr<Entry>
-  Create (Ptr<const Interest> header);
+  Create (Ptr<const Data> header);
 
   //replace NrFibImpl::Create
   //bool
