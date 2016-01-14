@@ -53,7 +53,7 @@ EntryNrImpl::AddIncomingNeighbors(std::string lane,uint32_t ttl)
 		{
 			incomingnb++;
 		}
-		m_incomingnbs.insert(incomingnb,std::pair(lane,ttl));
+		m_incomingnbs.insert(incomingnb,std::pair<std::string,uint32_t>(lane,ttl));
 		return incomingnb;
 	}
 	else

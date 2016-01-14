@@ -94,7 +94,7 @@ bool NrCsImpl::Add (Ptr<const Data> data)
 	if(Find(data->GetName())){
 		return false;
 	}
-    Ptr<Entry> csEntry=ns3::Create<NrCsImpl>(this,data) ;
+    Ptr<Entry> csEntry = ns3::Create<Entry>(this,data) ;
     m_csContainer.push_back(csEntry);
 	return true;
 }
