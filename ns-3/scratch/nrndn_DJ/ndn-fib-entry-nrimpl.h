@@ -11,7 +11,7 @@
 
 #include "ns3/ndn-fib-entry.h"
 //#include "ns3/ndn-fib-entry-incoming-face.h"
-#include "name.h"
+#include "ns3/ndn-name.h"
 
 #include <string>
 #include <unordered_map>
