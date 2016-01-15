@@ -58,16 +58,39 @@ public:
   virtual ~NrFibImpl();
 
   // inherited from Fib
+  /**
+   * \brief Perform longest prefix match
+   *
+   * \todo Implement exclude filters
+   *
+   * \param interest Interest packet header
+   * \returns If entry found a valid iterator (Ptr<fib::Entry>) will be returned, otherwise End () (==0)
+   */
+  virtual Ptr<fib::Entry>
+  LongestPrefixMatch (const Interest &interest);
+
 
 
   //This prefix is different from the format of data's name
   virtual Ptr<Entry>
   Find (const Name &prefix);
 
+  virtual Ptr<fib::Entry>
+  Add (const Name &prefix, Ptr<Face> face, int32_t metric);
 
-  //Jan 10,2016: add a fib entry
-  void
-  AddFibEntry (const Name &prefix, std::string lane, uint32_t ttl);
+  virtual Ptr<fib::Entry>
+  Add (const Ptr<const Name> &prefix, Ptr<Face> face, int32_t metric);
+
+  /**
+     * @brief Invalidate all FIB entries
+     */
+  virtual void
+  InvalidateAll();
+
+  virtual void
+    RemoveFromAll (Ptr<Face> face);
+
+
 
   virtual void
   Remove (const Ptr<const Name> &prefix);
@@ -87,11 +110,20 @@ public:
   virtual uint32_t
   GetSize () const;
 
+  virtual Ptr<const fib::Entry>
+    Begin () const;
+
   virtual Ptr<Entry>
   Begin ();
 
+  virtual Ptr<const fib::Entry>
+    End () const ;
+
   virtual Ptr<Entry>
   End ();
+
+  virtual Ptr<const fib::Entry>
+    Next (Ptr<const fib::Entry>) const ;
 
   virtual Ptr<Entry>
   Next (Ptr<Entry>);
@@ -108,6 +140,11 @@ public:
 
   //灏忛敓娣诲姞锛�015-8-23
   std::string uriConvertToString(std::string str);
+
+  //Jan 10,2016: add a fib entry
+   void
+   AddFibEntry (const Name &prefix, std::string lane, uint32_t ttl);
+
 protected:
   // inherited from Object class
   virtual void NotifyNewAggregate (); ///< @brief Even when object is aggregated to another Object

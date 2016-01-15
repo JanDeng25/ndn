@@ -69,21 +69,46 @@ NrFibImpl::NotifyNewAggregate ()
 		m_forwardingStrategy = GetObject<ForwardingStrategy>();
 	}
 
-	/*if (m_sensor == 0)
+	if (m_sensor == 0)
 	{
 		m_sensor = GetObject<ndn::nrndn::NodeSensor>();
 		// Setup Lane change action
-		if (m_sensor != NULL)
+		/*if (m_sensor != NULL)
 		{
 			m_sensor->TraceConnectWithoutContext("LaneChange",
 					MakeCallback(&NrFibImpl::laneChange, this));
 
 			//NrFibEntry needs m_sensor. Initialize immediately after m_sensor is aggregated
 			InitializeNrFibEntry();
-		}
-	}*/
+		}*/
+	}
 
   Fib::NotifyNewAggregate ();
+}
+
+Ptr<fib::Entry>
+NrFibImpl::LongestPrefixMatch (const Interest &interest){
+	return 0;
+}
+
+Ptr<fib::Entry>
+NrFibImpl::Add (const Name &prefix, Ptr<Face> face, int32_t metric)
+{
+	return 0;
+}
+
+Ptr<fib::Entry>
+NrFibImpl::Add (const Ptr<const Name> &prefix, Ptr<Face> face, int32_t metric){
+	return 0;
+}
+void
+NrFibImpl::InvalidateAll(){
+
+}
+
+void
+NrFibImpl::RemoveFromAll (Ptr<Face> face){
+
 }
 
 void
@@ -234,6 +259,11 @@ NrFibImpl::GetSize () const
 	return m_fibContainer.size ();
 }
   
+Ptr<const fib::Entry>
+NrFibImpl::Begin () const{
+	return 0;
+}
+
 Ptr<Entry>
 NrFibImpl::Begin ()
 {
@@ -245,6 +275,12 @@ NrFibImpl::Begin ()
 		return *(m_fibContainer.begin());
 }
 
+Ptr<const fib::Entry>
+NrFibImpl::End () const{
+	return 0;
+}
+
+
 Ptr<Entry>
 NrFibImpl::End ()
 {
@@ -252,6 +288,12 @@ NrFibImpl::End ()
 	return 0;
 }
   
+Ptr<const fib::Entry>
+NrFibImpl::Next (Ptr<const fib::Entry>) const{
+
+	return 0;
+}
+
 Ptr<Entry>
 NrFibImpl::Next (Ptr<Entry> from)
 {
