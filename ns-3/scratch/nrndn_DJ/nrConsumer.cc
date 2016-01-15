@@ -208,7 +208,9 @@ void nrConsumer::SendPacket()
       nrheader.setX(m_sensor->getX());
       nrheader.setY(m_sensor->getY());
       std::string lane = m_sensor->getLane();
-      Ptr<ndn::fib::nrndn::EntryNrImpl> fibEntry = DynamicCast<ndn::fib::nrndn::EntryNrImpl>(m_fib->Find(m_interestName));
+      Ptr<ndn::fib::nrndn::EntryNrImpl> fibEntry = GetObject<ndn::fib::nrndn::EntryNrImpl>();
+      fibEntry = DynamicCast<ndn::fib::nrndn::EntryNrImpl>(m_fib->Find(m_interestName));
+
       //set lane according to fib table
       nrheader.setCurrentLane(fibEntry->getIncomingnbs().begin()->first);
       nrheader.setPreLane(lane);
