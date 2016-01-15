@@ -130,7 +130,7 @@ NrFibImpl::AddFibEntry (const Name &prefix, std::string lane,uint32_t ttl){
 
 	//if not,insert it to the container;
 
-	Ptr<EntryNrImpl> entry = ns3::Create<EntryNrImpl>(this,prefix,m_cleanInterval);
+	Ptr<EntryNrImpl> entry = ns3::Create<EntryNrImpl>(this,*prefix,m_cleanInterval);
 	Ptr<Entry> fibEntry = DynamicCast<Entry>(entry);
 	m_fibContainer.push_back(fibEntry);
 
