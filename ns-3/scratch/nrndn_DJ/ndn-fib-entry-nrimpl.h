@@ -38,6 +38,7 @@ public:
 	EntryNrImpl(Ptr<Fib> fib, const Ptr<const Name> &prefix, Time cleanInterval);
 	virtual ~EntryNrImpl();
 	
+	static TypeId GetTypeId ();
 	/**
 	 * @brief Remove all the timeout event in the timeout event list
 	 *

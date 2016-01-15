@@ -37,6 +37,21 @@ EntryNrImpl::~EntryNrImpl ()
   
 }
 
+TypeId
+EntryNrImpl::GetTypeId (){
+	  static TypeId tid = TypeId ("ns3::ndn::fib::nrndn::EntryNrImpl")
+	    .SetGroupName ("Ndn")
+	    .SetParent<Entry> ()
+	    .AddConstructor< EntryNrImpl > ()
+	    .AddAttribute ("CleanInterval", "cleaning interval of the timeout incoming faces of FIB entry",
+	   			                    TimeValue (Seconds (10)),
+	   			                    MakeTimeAccessor (&EntryNrImpl::m_infaceTimeout),
+	   			                    MakeTimeChecker ())
+	    ;
+
+	  return tid;
+}
+
 std::unordered_map<std::string,uint32_t  >::iterator
 EntryNrImpl::AddIncomingNeighbors(std::string lane,uint32_t ttl)
 {
