@@ -51,6 +51,14 @@ TypeId nrConsumer::GetTypeId()
 		    	                MakeUintegerAccessor (&nrConsumer::m_virtualPayloadSize),
 		    		            MakeUintegerChecker<uint32_t> ())
 
+		    .AddAttribute ("Pit","pit of consumer",
+		    		             PointerValue (),
+		    		             MakePointerAccessor (&nrConsumer::m_pit),
+		    		             MakePointerChecker<ns3::ndn::pit::nrndn::NrPitImpl> ())
+		    .AddAttribute ("Fib","fib of consumer",
+		    		 		     PointerValue (),
+		    		 		     MakePointerAccessor (&nrConsumer::m_fib),
+		    		 		     MakePointerChecker<ns3::ndn::fib::nrndn::NrFibImpl> ())
 		    ;
 		  return tid;
 }
@@ -114,12 +122,12 @@ void nrConsumer::ScheduleNextPacket()
 	//3. Schedule next packet
 	//ConsumerCbr::ScheduleNextPacket();
 
-	if(m_firstTime&&fib->Find(m_interestName)!=0){
+	if(m_firstTime&&m_fib->Find(m_interestName)!=0){
 		 m_sendEvent = Simulator::Schedule (Seconds (0.0),
 			                                         &nrConsumer::SendPacket, this);
-		 m_firtTime=false;
+		 m_firstTime=false;
 	}
-	else if(m_firstTime&&fib->Find(m_interestName)==0){
+	else if(m_firstTime&&m_fib->Find(m_interestName)==0){
 		m_sendEvent = Simulator::Schedule (
 
 				(m_random == 0) ?Seconds(10.0 / m_frequency):Seconds(m_random->GetValue ()),
@@ -200,7 +208,7 @@ void nrConsumer::SendPacket()
       nrheader.setX(m_sensor->getX());
       nrheader.setY(m_sensor->getY());
       std::string lane = m_sensor->getLane();
-      Ptr<ndn::fib::nrndn::EntryNrImpl> fibEntry = DynamicCast<ndn::fib::nrndn::EntryNrImpl>(fib->Find(m_interestName));
+      Ptr<ndn::fib::nrndn::EntryNrImpl> fibEntry = DynamicCast<ndn::fib::nrndn::EntryNrImpl>(m_fib->Find(m_interestName));
       //set lane according to fib table
       nrheader.setCurrentLane(fibEntry->getIncomingnbs().begin()->first);
       nrheader.setPreLane(lane);
@@ -211,7 +219,7 @@ void nrConsumer::SendPacket()
       newPayload->AddHeader(nrheader);
 
       interest->SetPayload(newPayload);
-      if(fib->Find(m_interestName)!=0){
+      if(m_fib->Find(m_interestName)!=0){
     	  PacketTypeTag typeTag(INTEREST_PACKET);
       }
       else{
@@ -325,7 +333,7 @@ bool nrConsumer::IsInterestData(const Name& name)
 	//it2=std::find(it,route.end(),name.get(0).toUri());
 
 	//return (it2!=route.end());
-	return (pit->Find(name)!=0);
+	return (m_pit->Find(name)!=0);
 }
 
 } /* namespace nrndn */
