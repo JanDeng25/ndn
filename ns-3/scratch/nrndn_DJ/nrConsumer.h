@@ -100,8 +100,8 @@ private:
 
 	  uint32_t m_virtualPayloadSize;
 	  Name m_prefix;
-	  Ptr<ndn::pit::nrndn::NrPitImpl> pit;
-	  Ptr<ndn::fib::nrndn::NrFibImpl> fib;
+	  Ptr<ndn::pit::nrndn::NrPitImpl> m_pit;
+	  Ptr<ndn::fib::nrndn::NrFibImpl> m_fib;
 	  //Ptr<ForwardingStrategy>		m_forwardingStrategy;
 };
 
