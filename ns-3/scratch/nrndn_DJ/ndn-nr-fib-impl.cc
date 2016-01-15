@@ -119,7 +119,7 @@ NrFibImpl::AddFibEntry (const Ptr<const Name> &prefix, std::string lane,uint32_t
 			Ptr<EntryNrImpl> fibEntry = DynamicCast<EntryNrImpl>(*fib);
 			//const name::Component &fibName=(*fib)->GetInterest()->GetName().get(0);
             //when find source name
-			if(fibEntry->getEntryName() == prefix.toUri())
+			if(fibEntry->getEntryName() == prefix->toUri())
 			{
 
 				fibEntry->AddIncomingNeighbors(lane,ttl);
