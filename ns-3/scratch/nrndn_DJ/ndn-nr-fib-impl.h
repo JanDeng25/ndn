@@ -144,7 +144,7 @@ public:
 
   //Jan 10,2016: add a fib entry
    void
-   AddFibEntry (const Name &prefix, std::string lane, uint32_t ttl);
+   AddFibEntry (const Ptr<const Name> &prefix, std::string lane, uint32_t ttl);
 
 protected:
   // inherited from Object class
