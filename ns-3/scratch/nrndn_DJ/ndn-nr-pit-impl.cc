@@ -136,7 +136,7 @@ bool NrPitImpl::UpdatePit(std::string lane,Ptr<const Interest> interest)
 		//const name::Component &pitName=(*pit)->GetInterest()->GetName().get(0);
 		if(pitEntry->getEntryName() == interest->GetName().toUri())
 		{
-			std::unordered_set< std::string >::iterator it = pitEntry->getIncomingnbs().find(lane);
+			std::unordered_set< std::string >::const_iterator it = pitEntry->getIncomingnbs().find(lane);
 			if(it==pitEntry->getIncomingnbs().end())
 				pitEntry->AddIncomingNeighbors(lane);
 			//os<<(*pit)->GetInterest()->GetName().toUri()<<" add Neighbor "<<id<<' ';
