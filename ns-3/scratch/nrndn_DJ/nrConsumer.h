@@ -14,6 +14,7 @@
 
 #include "ndn-nr-pit-impl.h"
 #include "ndn-nr-fib-impl.h"
+#include "ndn-fib-entry-nrimph.h"
 
 
 namespace ns3
