@@ -226,7 +226,7 @@ void nrConsumer::SendPacket()
       else{
     	  PacketTypeTag typeTag(DETECT_PACKET);
       }
-	  interest->GetPayload ()->AddPacketTag (typeTage);
+	  interest->GetPayload ()->AddPacketTag (typeTag);
 
 	  m_transmittedInterests (interest, this, m_face);
 	  m_face->ReceiveInterest (interest);
