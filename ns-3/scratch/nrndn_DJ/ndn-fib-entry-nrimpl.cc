@@ -21,7 +21,7 @@ class Fib;
 
 namespace fib {
 namespace nrndn{
-EntryNrImpl::EntryNrImpl(Ptr<Fib> fib, const Ptr<const Name> &prefix,Time cleanInterval)
+EntryNrImpl::EntryNrImpl(Ptr<Fib> fib, const Ptr<const NameComponents> &prefix,Time cleanInterval)
 	:Entry(fib,prefix),
 	 m_infaceTimeout(cleanInterval)
 {

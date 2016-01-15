@@ -11,7 +11,6 @@
 
 #include "ns3/ndn-fib-entry.h"
 //#include "ns3/ndn-fib-entry-incoming-face.h"
-#include "ns3/ndn-name.h"
 
 #include <string>
 #include <unordered_map>
@@ -36,7 +35,7 @@ class EntryNrImpl : public Entry
 public:
 	typedef Entry super;
 
-	EntryNrImpl(Ptr<Fib> fib, const Ptr<const Name> &prefix, Time cleanInterval);
+	EntryNrImpl(Ptr<Fib> fib, const Ptr<const NameComponents> &prefix, Time cleanInterval);
 	virtual ~EntryNrImpl();
 	
 	/**
