@@ -15,6 +15,7 @@
 #include "ndn-nr-pit-impl.h"
 #include "ndn-nr-fib-impl.h"
 #include "ndn-fib-entry-nrimpl.h"
+#include "ndn-packet-type-tag.h"
 
 
 namespace ns3

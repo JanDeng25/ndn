@@ -19,7 +19,7 @@
 #include "nrHeader.h"
 #include "nrndn-Header.h"
 #include "nrUtils.h"
-#include "ndn-packet-type-tag.h"
+
 
 NS_LOG_COMPONENT_DEFINE ("ndn.nrndn.nrConsumer");
 
@@ -220,13 +220,16 @@ void nrConsumer::SendPacket()
       newPayload->AddHeader(nrheader);
 
       interest->SetPayload(newPayload);
+      PacketTypeTag typeTag(0);
       if(m_fib->Find(m_interestName)!=0){
     	  PacketTypeTag typeTag(INTEREST_PACKET);
+    	  interest->GetPayload ()->AddPacketTag (typeTag);
       }
       else{
     	  PacketTypeTag typeTag(DETECT_PACKET);
+    	  interest->GetPayload ()->AddPacketTag (typeTag);
       }
-	  interest->GetPayload ()->AddPacketTag (typeTag);
+
 
 	  m_transmittedInterests (interest, this, m_face);
 	  m_face->ReceiveInterest (interest);
