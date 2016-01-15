@@ -68,19 +68,19 @@ NrPitImpl::NotifyNewAggregate ()
 		m_forwardingStrategy = GetObject<ForwardingStrategy>();
 	}
 
-	/*if (m_sensor == 0)
+	if (m_sensor == 0)
 	{
 		m_sensor = GetObject<ndn::nrndn::NodeSensor>();
 		// Setup Lane change action
-		if (m_sensor != NULL)
+		/*if (m_sensor != NULL)
 		{
 			m_sensor->TraceConnectWithoutContext("LaneChange",
 					MakeCallback(&NrPitImpl::laneChange, this));
 
 			//NrPitEntry needs m_sensor. Initialize immediately after m_sensor is aggregated
 			InitializeNrPitEntry();
-		}
-	}*/
+		}*/
+	}
 
   Pit::NotifyNewAggregate ();
 }
