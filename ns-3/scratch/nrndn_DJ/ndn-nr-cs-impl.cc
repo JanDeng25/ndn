@@ -167,7 +167,7 @@ NrCsImpl::InitializeNrFibEntry()
 }*/
   
 Ptr<Data>
-Lookup (Ptr<const Interest> interest){
+NrCsImpl::Lookup (Ptr<const Interest> interest){
    return 0;
 }
 
