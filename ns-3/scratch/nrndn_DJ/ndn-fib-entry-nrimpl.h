@@ -10,6 +10,7 @@
 #define NDN_FIB_ENTRY_NRIMPL_H_
 
 #include "ns3/ndn-fib-entry.h"
+#include "ns3/ndn-fib.h"
 //#include "ns3/ndn-fib-entry-incoming-face.h"
 
 #include <string>
@@ -19,7 +20,7 @@
 namespace ns3 {
 namespace ndn {
 
-class Fib;
+//class Fib;
 
 namespace fib {
 namespace nrndn{

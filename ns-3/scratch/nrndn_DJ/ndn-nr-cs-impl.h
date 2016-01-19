@@ -63,9 +63,9 @@ public:
   Find (const Name &prefix);
 
   //abandon
-  virtual Ptr<Entry>
+ /* virtual Ptr<Entry>
   Create (Ptr<const Interest> header);
-
+*/
 
   //question by DJ on Jan 2,2016:cs need to be modified?
   //replace NrFibImpl::Create
