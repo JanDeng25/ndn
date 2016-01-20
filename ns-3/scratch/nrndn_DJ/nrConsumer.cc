@@ -97,7 +97,7 @@ void nrConsumer::ScheduleNextPacket()
 	//1. Reflash the Interest
 	 //std::vector<std::string> interest=GetCurrentInterest();
 
-	 uint64_t num=GetNode()->GetId() % 3 + 1;
+	 uint64_t num=12345;
 	 m_prefix.appendNumber(num);
 	 /*std::vector<std::string>::reverse_iterator it;
 	 for(it=interest.rbegin();it!=interest.rend();++it)
