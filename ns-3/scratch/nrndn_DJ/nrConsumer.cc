@@ -39,7 +39,7 @@ TypeId nrConsumer::GetTypeId()
 		    .SetParent<ConsumerCbr> ()
 		    .AddConstructor<nrConsumer> ()
 		    .AddAttribute ("sPrefix","Prefix, for which consumer has the data",
-		    			                    StringValue (""),
+		    			                    StringValue (" "),
 		    			                    MakeNameAccessor (&nrConsumer::m_prefix),
 		    			                    MakeNameChecker ())
 //		    .AddAttribute("sensor", "The vehicle sensor used by the nrConsumer.",
