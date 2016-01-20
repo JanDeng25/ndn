@@ -96,7 +96,7 @@ void nrConsumer::ScheduleNextPacket()
 	 //std::vector<std::string> interest=GetCurrentInterest();
 
 	 uint32_t num=GetNode()->GetId() % 3 + 1;
-	 m_prefix.appendNumer(num);
+	 m_prefix.appendNumber(num);
 	 /*std::vector<std::string>::reverse_iterator it;
 	 for(it=interest.rbegin();it!=interest.rend();++it)
 	 {
@@ -112,7 +112,7 @@ void nrConsumer::ScheduleNextPacket()
 	//set the name of interest packet
 	this->Consumer::SetAttribute("Prefix", StringValue(m_prefix.toUri()));
 	//std::cout<<"test2\n";
-	NS_LOG_INFO ("Node "<<GetNode()->GetId()<<" now is interestd on "<<prefix.data());
+	//NS_LOG_INFO ("Node "<<GetNode()->GetId()<<" now is interestd on "<<prefix.data());
 	std::cout<<GetNode()->GetId()<<" ";
 	//std::cout<<"test3\n";
 	//3. Schedule next packet
