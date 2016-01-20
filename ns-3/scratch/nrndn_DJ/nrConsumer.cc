@@ -109,6 +109,7 @@ void nrConsumer::ScheduleNextPacket()
 	if(prefix=="")
 	{
 		std::cout<<"num:"<<num<<endl;
+		std::cout<<"prefix:"<<prefix<<endl;
 		std::cout<<"ID:"<<GetNode()->GetId()<<" Prefix为空"<<std::endl;
 		return;
 	}
