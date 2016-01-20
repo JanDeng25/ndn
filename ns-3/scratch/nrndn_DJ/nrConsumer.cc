@@ -38,7 +38,7 @@ TypeId nrConsumer::GetTypeId()
 		    .SetGroupName ("Nrndn")
 		    .SetParent<ConsumerCbr> ()
 		    .AddConstructor<nrConsumer> ()
-		    .AddAttribute ("Prefix","Prefix, for which consumer has the data",
+		    .AddAttribute ("sPrefix","Prefix, for which consumer has the data",
 		    			                    StringValue ("/"),
 		    			                    MakeNameAccessor (&nrConsumer::m_prefix),
 		    			                    MakeNameChecker ())
@@ -114,7 +114,7 @@ void nrConsumer::ScheduleNextPacket()
 
     //add by DJ on Jan 10,2016
 	//set the name of interest packet
-	this->Consumer::SetAttribute("Prefix", StringValue(prefix));
+	this->Consumer::SetAttribute("sPrefix", StringValue(prefix));
 	//std::cout<<"test2\n";
 	NS_LOG_INFO ("Node "<<GetNode()->GetId()<<" now is interestd on "<<prefix.data());
 	std::cout<<GetNode()->GetId()<<" ";
