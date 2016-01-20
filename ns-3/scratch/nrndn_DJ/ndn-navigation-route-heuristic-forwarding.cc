@@ -304,7 +304,9 @@ void NavigationRouteHeuristic::OnInterest(Ptr<Face> face,
 							ExtractRouteFromName(interest->GetName());
 
 		// Update the PIT here
-		m_nrpit->UpdatePit(remoteRoute, nodeId);
+
+		//m_nrpit->UpdatePit(remoteRoute, nodeId);
+
 		// Update finish
 
 		//evaluate whether receiver's id is in sender's priority list
@@ -508,14 +510,14 @@ void NavigationRouteHeuristic::OnData(Ptr<Face> face, Ptr<Data> data)
 				// 3. Is there any interested nodes behind?
 				Ptr<pit::nrndn::EntryNrImpl> entry = DynamicCast<
 						pit::nrndn::EntryNrImpl>(Will);
-				const std::unordered_set<uint32_t>& interestNodes =
+				/*const std::unordered_set<uint32_t>& interestNodes =
 						entry->getIncomingnbs();
 				if (interestNodes.empty())
 				{
 					BroadcastStopMessage(data);
 					return;
 				}
-				newPriorityList = GetPriorityListOfDataForwarderInterestd(interestNodes,pri);
+				newPriorityList = GetPriorityListOfDataForwarderInterestd(interestNodes,pri);*/
 			}
 
 			if(newPriorityList.empty())
@@ -886,7 +888,7 @@ std::vector<uint32_t> NavigationRouteHeuristic::GetPriorityListOfDataSource(cons
 	Ptr<pit::nrndn::EntryNrImpl> entry = DynamicCast<pit::nrndn::EntryNrImpl>(m_nrpit->Find(dataName));
 	NS_ASSERT_MSG(entry!=0," entry not find, NodeID:"<<m_node->GetId()<<" At time:"<<Simulator::Now().GetSeconds()
 			<<" Current dataName:"<<dataName.toUri());
-	const std::unordered_set<uint32_t>& interestNodes = entry->getIncomingnbs();
+	/*const std::unordered_set<uint32_t>& interestNodes = entry->getIncomingnbs();
 	const vector<string>& route  = m_sensor->getNavigationRoute();
 	if(!interestNodes.empty())// There is interested nodes behind
 	{
@@ -930,7 +932,7 @@ std::vector<uint32_t> NavigationRouteHeuristic::GetPriorityListOfDataSource(cons
 		//step 2. push the not interested nodes
 		for(it = sortNotInterest.begin();it!=sortNotInterest.end();++it)
 			priorityList.push_back(it->second);
-	}
+	}*/
 	return priorityList;
 }
 
