@@ -110,7 +110,7 @@ void nrConsumer::ScheduleNextPacket()
 
     //add by DJ on Jan 10,2016
 	//set the name of interest packet
-	this->Consumer::SetAttribute("sPrefix", StringValue(prefix));
+	this->Consumer::SetAttribute("Prefix", StringValue(m_prefix.toUri()));
 	//std::cout<<"test2\n";
 	NS_LOG_INFO ("Node "<<GetNode()->GetId()<<" now is interestd on "<<prefix.data());
 	std::cout<<GetNode()->GetId()<<" ";
