@@ -38,10 +38,10 @@ TypeId nrConsumer::GetTypeId()
 		    .SetGroupName ("Nrndn")
 		    .SetParent<ConsumerCbr> ()
 		    .AddConstructor<nrConsumer> ()
-		    .AddAttribute ("Prefix","Prefix, for which consumer has the data",
+		   /* .AddAttribute ("Prefix","Prefix, for which consumer has the data",
 		    			                    StringValue ("/"),
 		    			                    MakeNameAccessor (&nrConsumer::m_prefix),
-		    			                    MakeNameChecker ())
+		    			                    MakeNameChecker ())*/
 //		    .AddAttribute("sensor", "The vehicle sensor used by the nrConsumer.",
 //		    	   	    		PointerValue (),
 //		    	   	    		MakePointerAccessor (&nrConsumer::m_sensor),
@@ -123,14 +123,13 @@ void nrConsumer::ScheduleNextPacket()
 	//ConsumerCbr::ScheduleNextPacket();
 
 	if(m_firstTime&&m_fib->Find(m_interestName)!=0){
-		 m_sendEvent = Simulator::Schedule (Seconds (0.0),
+		 m_sendEvent = Simulator::Schedule (Seconds (10.0),
 			                                         &nrConsumer::SendPacket, this);
 		 m_firstTime=false;
 	}
 	else if(m_firstTime&&m_fib->Find(m_interestName)==0){
 		m_sendEvent = Simulator::Schedule (
-
-				(m_random == 0) ?Seconds(10.0 / m_frequency):Seconds(m_random->GetValue ()),
+				Seconds(0.0),
 						&nrConsumer::SendPacket, this);
 	}
 }
