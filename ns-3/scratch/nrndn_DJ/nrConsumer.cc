@@ -38,10 +38,10 @@ TypeId nrConsumer::GetTypeId()
 		    .SetGroupName ("Nrndn")
 		    .SetParent<ConsumerCbr> ()
 		    .AddConstructor<nrConsumer> ()
-		   /* .AddAttribute ("Prefix","Prefix, for which consumer has the data",
+		    .AddAttribute ("Prefix","Prefix, for which consumer has the data",
 		    			                    StringValue ("/"),
 		    			                    MakeNameAccessor (&nrConsumer::m_prefix),
-		    			                    MakeNameChecker ())*/
+		    			                    MakeNameChecker ())
 //		    .AddAttribute("sensor", "The vehicle sensor used by the nrConsumer.",
 //		    	   	    		PointerValue (),
 //		    	   	    		MakePointerAccessor (&nrConsumer::m_sensor),
@@ -96,7 +96,8 @@ void nrConsumer::ScheduleNextPacket()
 	 //std::vector<std::string> interest=GetCurrentInterest();
 
 	 uint32_t num=GetNode()->GetId() % 3 + 1;
-	 std::string prefix="/"+num;
+	 Name prefix;
+	 prefix.appendNumber(num);
 	 /*std::vector<std::string>::reverse_iterator it;
 	 for(it=interest.rbegin();it!=interest.rend();++it)
 	 {
