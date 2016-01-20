@@ -39,7 +39,7 @@ TypeId nrConsumer::GetTypeId()
 		    .SetParent<ConsumerCbr> ()
 		    .AddConstructor<nrConsumer> ()
 		    .AddAttribute ("sPrefix","Prefix, for which consumer has the data",
-		    			                    StringValue ("/"),
+		    			                    StringValue (""),
 		    			                    MakeNameAccessor (&nrConsumer::m_prefix),
 		    			                    MakeNameChecker ())
 //		    .AddAttribute("sensor", "The vehicle sensor used by the nrConsumer.",
@@ -106,6 +106,7 @@ void nrConsumer::ScheduleNextPacket()
 
 	 //2. set the Interest (reverse of  the residual navigation route)
 	//std::cout<<prefix<<std::endl;
+	    std::cout<<"num:"<<num<<std::endl;
 		std::cout<<"ID:"<<GetNode()->GetId()<<" prefix:"<<m_prefix.toUri()<<std::endl;
 
     //add by DJ on Jan 10,2016
