@@ -108,7 +108,7 @@ void nrConsumer::ScheduleNextPacket()
 	//std::cout<<prefix<<std::endl;
 	if(prefix=="")
 	{
-		std::cout<<"ID:"<<GetNode()->GetId()<<" Prefix涓虹┖"<<std::endl;
+		std::cout<<"ID:"<<GetNode()->GetId()<<" Prefix为空"<<std::endl;
 		return;
 	}
 
@@ -154,12 +154,14 @@ void nrConsumer::ScheduleNextPacket()
 		std::cout<<std::endl;
 	}
 
-	//閬嶅巻锛屽鎵惧拰褰撳墠閬撹矾鐩稿悓鐨勯亾璺紝鎶婂墿浣欑殑閬撹矾鍔犲叆鍏磋叮list涓�	for(it=route.begin();it!=route.end();++it)
+	////遍历，寻找和当前道路相同的道路，把剩余的道路加入兴趣list中
+	 * for(it=route.begin();it!=route.end();++it)
 	{
 		//std::cout<<this->GetNode()->GetId()<<" "<<*it <<"\t"<<currentLane.data() <<std::endl;
-		if(*it==currentLane)
+		if(*it==currentLane)//一直遍历寻找到当前道路，然后把后面的压紧容器返回
 			break;
 	}
+	//int routeSum=0;//2015.9.25  小锟添加，只对未来的10条道路有兴趣。结论：没什么作用，兴趣包数量大，主要是由于转发次数过多造成
 	for(;it!=route.end();++it)
 	{
 		str=prefix+(*it);
@@ -233,9 +235,10 @@ void nrConsumer::SendPacket()
 
 	  m_transmittedInterests (interest, this, m_face);
 	  m_face->ReceiveInterest (interest);
-	  //std::cout<<"鍑嗗鍑洪敊\n";
+	  //std::cout<<"准备出错\n";
 	  ScheduleNextPacket ();
-	//  std::cout<<"宸茬粡鍑洪敊\n";
+	  //  std::cout<<"已经出错\n";
+
 
 	  //std::cout<<"ScheduleNextPacket \n";
 }
