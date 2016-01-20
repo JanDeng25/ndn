@@ -95,6 +95,7 @@ void nrConsumer::ScheduleNextPacket()
 		std::cout<<"ID:"<<GetNode()->GetId()<<" Prefix为空"<<std::endl;
 		return;
 	}
+	std::cout<<"ID:"<<GetNode()->GetId()<<prefix<<std::endl
 	this->Consumer::SetAttribute("Prefix", StringValue(prefix));
 	//std::cout<<"test2\n";
 	NS_LOG_INFO ("Node "<<GetNode()->GetId()<<" now is interestd on "<<prefix.data());
