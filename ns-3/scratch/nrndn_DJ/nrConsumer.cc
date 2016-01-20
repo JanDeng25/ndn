@@ -128,7 +128,7 @@ void nrConsumer::ScheduleNextPacket()
 	}
 	else if(m_firstTime&&m_fib->Find(m_interestName)==0){
 		m_sendEvent = Simulator::Schedule (
-				Seconds(0.0),
+				(m_random == 0) ? Seconds(1.0 / m_frequency):Seconds(m_random->GetValue ()),
 						&nrConsumer::SendPacket, this);
 	}
 }
