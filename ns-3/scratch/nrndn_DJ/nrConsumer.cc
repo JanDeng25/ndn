@@ -106,12 +106,12 @@ void nrConsumer::ScheduleNextPacket()
 
 	 //2. set the Interest (reverse of  the residual navigation route)
 	//std::cout<<prefix<<std::endl;
-		std::cout<<"ID:"<<GetNode()->GetId()<<m_prefix.toUri()<<std::endl;
+		std::cout<<"ID:"<<GetNode()->GetId()<<" prefix:"<<m_prefix.toUri()<<std::endl;
 
     //add by DJ on Jan 10,2016
 	//set the name of interest packet
 	this->Consumer::SetAttribute("Prefix", StringValue(m_prefix.toUri()));
-	//std::cout<<"test2\n";
+	std::cout<<"test2\n";
 	//NS_LOG_INFO ("Node "<<GetNode()->GetId()<<" now is interestd on "<<prefix.data());
 	std::cout<<GetNode()->GetId()<<" ";
 	//std::cout<<"test3\n";
