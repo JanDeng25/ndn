@@ -96,7 +96,7 @@ void nrConsumer::ScheduleNextPacket()
 	 //std::vector<std::string> interest=GetCurrentInterest();
 
 	 uint32_t num=GetNode()->GetId() % 3 + 1;
-	 std::string prefix="/"+num;
+	 m_prefix.appendNumer(num);
 	 /*std::vector<std::string>::reverse_iterator it;
 	 for(it=interest.rbegin();it!=interest.rend();++it)
 	 {
@@ -106,13 +106,7 @@ void nrConsumer::ScheduleNextPacket()
 
 	 //2. set the Interest (reverse of  the residual navigation route)
 	//std::cout<<prefix<<std::endl;
-	if(prefix=="")
-	{
-		std::cout<<"num:"<<num<<endl;
-		std::cout<<"prefix:"<<prefix<<endl;
-		std::cout<<"ID:"<<GetNode()->GetId()<<" Prefix为空"<<std::endl;
-		return;
-	}
+		std::cout<<"ID:"<<GetNode()->GetId()<<m_prefix.toUri()<<std::endl;
 
     //add by DJ on Jan 10,2016
 	//set the name of interest packet
