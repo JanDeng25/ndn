@@ -96,8 +96,7 @@ void nrConsumer::ScheduleNextPacket()
 	 //std::vector<std::string> interest=GetCurrentInterest();
 
 	 uint32_t num=GetNode()->GetId() % 3 + 1;
-	 Name prefix;
-	 prefix.appendNumber(num);
+	 std::string prefix="/"+num;
 	 /*std::vector<std::string>::reverse_iterator it;
 	 for(it=interest.rbegin();it!=interest.rend();++it)
 	 {
