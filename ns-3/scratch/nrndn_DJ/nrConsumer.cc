@@ -88,6 +88,8 @@ void nrConsumer::StopApplication()
 	NS_LOG_FUNCTION_NOARGS ();
 	m_forwardingStrategy->Stop();
 	super::StopApplication();
+
+
 }
 
 void nrConsumer::ScheduleNextPacket()
