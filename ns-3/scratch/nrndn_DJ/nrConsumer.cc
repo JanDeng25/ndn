@@ -333,8 +333,8 @@ void nrConsumer::DoInitialize(void)
 			std::cout<<"fib"<<endl;
 			m_fib =  DynamicCast<ndn::fib::nrndn::NrFibImpl>(fib);
 		}*/
-		std::cout<<(m_fib==0)<<endl;
-		std::cout<<"4234"<<endl;
+		//std::cout<<(m_fib==0)<<endl;
+		//std::cout<<"4234"<<endl;
 		NS_ASSERT_MSG(m_fib,"nrConsumer::DoInitialize cannot find ns3::ndn::fib::nrndn::NrFibImpl");
 	}
 
