@@ -126,7 +126,7 @@ void nrConsumer::ScheduleNextPacket()
 	//std::cout<<"test3\n";
 	//3. Schedule next packet
 	//ConsumerCbr::ScheduleNextPacket();
-
+	std::cout<<m_fib->Find(m_interestName)<<" "<<endl;
 	if(m_firstTime&&m_fib->Find(m_interestName)!=0){
 		 m_sendEvent = Simulator::Schedule (Seconds (10.0),
 			                                         &nrConsumer::SendPacket, this);
