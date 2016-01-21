@@ -330,7 +330,7 @@ void nrConsumer::DoInitialize(void)
 		std::cout<<(fib==0)<<endl;
 		if(fib){
 			std::cout<<"fib"<<endl;
-			m_fib =  DynamicCast<fib::nrndn::NrFibImpl>(fib);
+			m_fib =  DynamicCast<ndn::fib::nrndn::NrFibImpl>(fib);
 		}
 		std::cout<<(m_fib==0)<<endl;
 		std::cout<<"4234"<<endl;
