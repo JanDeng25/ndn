@@ -330,6 +330,7 @@ void nrConsumer::DoInitialize(void)
 	{
 		std::cout<<"3234"<<endl;
 		m_fib =  m_node->GetObject<ndn::fib::nrndn::NrFibImpl>();
+		std::cout<<(m_fib==0)<<endl;
 		std::cout<<"4234"<<endl;
 		NS_ASSERT_MSG(m_fib,"nrConsumer::DoInitialize cannot find ns3::ndn::fib::nrndn::NrFibImpl");
 	}
