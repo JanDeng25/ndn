@@ -120,13 +120,14 @@ void nrConsumer::ScheduleNextPacket()
     //add by DJ on Jan 10,2016
 	//set the name of interest packet
 	this->Consumer::SetAttribute("Prefix", StringValue(prefix));
+	std::cout<<m_fib->Find(m_interestName)<<" "<<endl;
 	std::cout<<"test2\n";
 	//NS_LOG_INFO ("Node "<<GetNode()->GetId()<<" now is interestd on "<<prefix.data());
 	std::cout<<GetNode()->GetId()<<" ";
 	//std::cout<<"test3\n";
 	//3. Schedule next packet
 	//ConsumerCbr::ScheduleNextPacket();
-	std::cout<<m_fib->Find(m_interestName)<<" "<<endl;
+
 	if(m_firstTime&&m_fib->Find(m_interestName)!=0){
 		 m_sendEvent = Simulator::Schedule (Seconds (10.0),
 			                                         &nrConsumer::SendPacket, this);
