@@ -326,7 +326,7 @@ void nrConsumer::DoInitialize(void)
 	}
 	if (m_fib==0)
 	{
-		m_fib =  m_node->GetObject<ndn::fib::nrndn::NrPitImpl>();
+		m_fib =  m_node->GetObject<ndn::fib::nrndn::NrFibImpl>();
 		NS_ASSERT_MSG(m_fib,"nrConsumer::DoInitialize cannot find ns3::dn::fib::nrndn::NrPitImpl");
 	}
 
