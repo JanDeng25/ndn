@@ -329,7 +329,7 @@ void nrConsumer::DoInitialize(void)
 		Ptr<Fib> fib = GetObject<Fib>();
 		std::cout<<(fib==0)<<endl;
 		if(fib){
-			std::cout<<"fib"<<endl
+			std::cout<<"fib"<<endl;
 			m_fib =  DynamicCast<fib::nrndn::NrFibImpl>(fib);
 		}
 		std::cout<<(m_fib==0)<<endl;
