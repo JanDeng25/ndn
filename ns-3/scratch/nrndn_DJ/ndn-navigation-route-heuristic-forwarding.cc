@@ -267,6 +267,7 @@ void NavigationRouteHeuristic::OnInterest(Ptr<Face> face,
 	uint32_t nodeId;
 	uint32_t seq;
 	ndn::nrndn::nrHeader nrheader;
+	nrheader.Print(cout);
 	nrPayload->PeekHeader( nrheader);
 	nodeId=nrheader.getSourceId();
 	seq=interest->GetNonce();
