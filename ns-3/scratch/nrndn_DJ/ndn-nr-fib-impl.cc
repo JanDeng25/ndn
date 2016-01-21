@@ -196,7 +196,7 @@ NrFibImpl::Find (const Name &prefix)
 	//NS_ASSERT_MSG(false,"In NrFibImpl,NrFibImpl::Find (const Name &prefix) should not be invoked");
 	 NS_LOG_INFO ("Finding prefix"<<prefix.toUri());
 	 std::vector<Ptr<Entry> >::iterator it;
-	 NS_ASSERT_MSG(m_fibContainer.size()!=0,"Empty fib container. No initialization?");
+	 //NS_ASSERT_MSG(m_fibContainer.size()!=0,"Empty fib container. No initialization?");
 	 for(it=m_fibContainer.begin();it!=m_fibContainer.end();++it)
 	 {
 		 if((*it)->GetPrefix()==prefix)
