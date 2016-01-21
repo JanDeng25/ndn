@@ -318,6 +318,18 @@ void nrConsumer::DoInitialize(void)
 		m_sensor =  m_node->GetObject<ndn::nrndn::NodeSensor>();
 		NS_ASSERT_MSG(m_sensor,"nrConsumer::DoInitialize cannot find ns3::ndn::nrndn::NodeSensor");
 	}
+	if (m_pit==0)
+	{
+		m_pit =  m_node->GetObject<ndn::pit::nrndn::NrPitImpl>();
+		NS_ASSERT_MSG(m_pit,"nrConsumer::DoInitialize cannot find ns3::dn::pit::nrndn::NrPitImpl");
+
+	}
+	if (m_fib==0)
+	{
+		m_fib =  m_node->GetObject<ndn::fib::nrndn::NrPitImpl>();
+		NS_ASSERT_MSG(m_fib,"nrConsumer::DoInitialize cannot find ns3::dn::fib::nrndn::NrPitImpl");
+	}
+
 	super::DoInitialize();
 }
 
