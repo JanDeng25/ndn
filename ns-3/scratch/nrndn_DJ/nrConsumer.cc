@@ -327,8 +327,11 @@ void nrConsumer::DoInitialize(void)
 	if (m_fib==0)
 	{
 		Ptr<Fib> fib = GetObject<Fib>();
-		if(fib)
+		std::cout<<(fib==0)<<endl;
+		if(fib){
+			std::cout<<"fib"<<endl
 			m_fib =  DynamicCast<fib::nrndn::NrFibImpl>(fib);
+		}
 		std::cout<<(m_fib==0)<<endl;
 		std::cout<<"4234"<<endl;
 		NS_ASSERT_MSG(m_fib,"nrConsumer::DoInitialize cannot find ns3::ndn::fib::nrndn::NrFibImpl");
