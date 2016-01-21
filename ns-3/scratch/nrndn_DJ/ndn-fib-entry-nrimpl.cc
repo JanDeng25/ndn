@@ -68,7 +68,7 @@ void EntryNrImpl::Print(std::ostream& os) const
 	os<<"nrnddnEntryNrImpl content: "
 			<<" data name="<<m_data_name;
 	for(std::unordered_map< std::string,uint32_t >::const_iterator it = m_incomingnbs.begin(); it != m_incomingnbs.end(); ++it)
-		os<<(*it)->first<<" "<<(*it)->second;
+		os<<(*it).first<<" "<<(*it).second;
 	os<<std::endl;
 }
 
