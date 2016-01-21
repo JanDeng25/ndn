@@ -320,14 +320,18 @@ void nrConsumer::DoInitialize(void)
 	}
 	if (m_pit==0)
 	{
+		std::cout<<"1234"<<endl;
 		m_pit =  m_node->GetObject<ndn::pit::nrndn::NrPitImpl>();
-		NS_ASSERT_MSG(m_pit,"nrConsumer::DoInitialize cannot find ns3::dn::pit::nrndn::NrPitImpl");
+		std::cout<<"2234"<<endl;
+		NS_ASSERT_MSG(m_pit,"nrConsumer::DoInitialize cannot find ns3::ndn::pit::nrndn::NrPitImpl");
 
 	}
 	if (m_fib==0)
 	{
+		std::cout<<"3234"<<endl;
 		m_fib =  m_node->GetObject<ndn::fib::nrndn::NrFibImpl>();
-		NS_ASSERT_MSG(m_fib,"nrConsumer::DoInitialize cannot find ns3::dn::fib::nrndn::NrPitImpl");
+		std::cout<<"4234"<<endl;
+		NS_ASSERT_MSG(m_fib,"nrConsumer::DoInitialize cannot find ns3::ndn::fib::nrndn::NrFibImpl");
 	}
 
 	super::DoInitialize();
