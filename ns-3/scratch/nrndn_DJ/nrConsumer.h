@@ -31,14 +31,17 @@ public:
 	//add by DJ Dec 23,2015
 	// If the interest packet is detecting packet, its scope will be set as HELLO_MESSAGE = 3;
 	enum
-	{
-		RESOURCE_PACKET = 1,
-		DATA_PACKET = 2,
-		DETECT_PACKET = 3,
-		INTEREST_PACKET = 4,
-		CONFIRM_PACKET = 5,
-		HELLO_MESSAGE = 6,
-	};
+		{
+	  		RESOURCE_PACKET = 1,        //资源包，data packet
+	  		DATA_PACKET = 2,                   //数据包，data packet
+	  		DETECT_PACKET = 3,              //探测包，interest packet
+	  		INTEREST_PACKET = 4,          //兴趣包，interest packet
+	  		CONFIRM_PACKET = 5,         //确认包，data packet
+	  		HELLO_MESSAGE = 6,            //心跳包，interest packet
+	  		MOVE_TO_NEW_LANE = 7,   //消费者移动到新路段，通知上一跳是否转发数据包，interest packet
+	  		ASK_FOR_TABLE = 8,               //车辆移动到新路段，向邻居请求表格，interest packet
+	  		TABLE_PACKET = 9,                  //回复新到的车辆本路段表格，data packet
+		};
 	static TypeId GetTypeId ();
 
 	nrConsumer();
