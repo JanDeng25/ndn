@@ -131,14 +131,14 @@ void nrConsumer::ScheduleNextPacket()
 	if(m_firstTime&&m_fib->Find(m_interestName)!=0){
 		 m_sendEvent = Simulator::Schedule (Seconds (10.0),
 			                                         &nrConsumer::SendPacket, this);
-		 std::cout<<"test2\n";
+		 //std::cout<<"test2\n";
 		 m_firstTime=false;
 	}
 	else if(m_firstTime&&m_fib->Find(m_interestName)==0){
 		m_sendEvent = Simulator::Schedule (
 				(m_random == 0) ? Seconds(1.0 / m_frequency):Seconds(m_random->GetValue ()),
 						&nrConsumer::SendPacket, this);
-		std::cout<<"test1\n";
+		//std::cout<<"test1\n";
 	}
 }
 //question by DJ Dec 23,2015: according to FIB,there is no route?
