@@ -38,10 +38,10 @@ TypeId nrConsumer::GetTypeId()
 		    .SetGroupName ("Nrndn")
 		    .SetParent<ConsumerCbr> ()
 		    .AddConstructor<nrConsumer> ()
-		    .AddAttribute ("sPrefix","Prefix, for which consumer has the data",
-		    			                    StringValue ("/"),
-		    			                    MakeNameAccessor (&nrConsumer::m_prefix),
-		    			                    MakeNameChecker ())
+		    .AddAttribute ("iPrefix","Prefix, for which consumer has the data",
+   			                           StringValue ("/"),
+	    			                    MakeNameAccessor (&nrConsumer::m_prefix),
+	    			                    MakeNameChecker ())
 //		    .AddAttribute("sensor", "The vehicle sensor used by the nrConsumer.",
 //		    	   	    		PointerValue (),
 //		    	   	    		MakePointerAccessor (&nrConsumer::m_sensor),
@@ -51,19 +51,20 @@ TypeId nrConsumer::GetTypeId()
 		    	                MakeUintegerAccessor (&nrConsumer::m_virtualPayloadSize),
 		    		            MakeUintegerChecker<uint32_t> ())
 
-		    .AddAttribute ("Pit","pit of consumer",
-		    		             PointerValue (),
-		    		             MakePointerAccessor (&nrConsumer::m_pit),
-		    		             MakePointerChecker<ns3::ndn::pit::nrndn::NrPitImpl> ())
-		    .AddAttribute ("Fib","fib of consumer",
-		    		 		     PointerValue (),
-		    		 		     MakePointerAccessor (&nrConsumer::m_fib),
-		    		 		     MakePointerChecker<ns3::ndn::fib::nrndn::NrFibImpl> ())
+//		    .AddAttribute ("Pit","pit of consumer",
+	//	    		             PointerValue (),
+//		    		             MakePointerAccessor (&nrConsumer::m_pit),
+//		    		             MakePointerChecker<ns3::ndn::pit::nrndn::NrPitImpl> ())
+//		    .AddAttribute ("Fib","fib of consumer",
+//		    		 		     PointerValue (),
+//		    		 		     MakePointerAccessor (&nrConsumer::m_fib),
+//		    		 		     MakePointerChecker<ns3::ndn::fib::nrndn::NrFibImpl> ())
 		    ;
 		  return tid;
 }
 
 nrConsumer::nrConsumer():
+		m_rand (0, std::numeric_limits<uint32_t>::max ()),
 		m_virtualPayloadSize(1024)
 {
 	// TODO Auto-generated constructor stub
@@ -88,193 +89,50 @@ void nrConsumer::StopApplication()
 	NS_LOG_FUNCTION_NOARGS ();
 	m_forwardingStrategy->Stop();
 	super::StopApplication();
-
-
 }
 
 void nrConsumer::ScheduleNextPacket()
 {
-	//1. Reflash the Interest
-	 std::vector<std::string> interest=GetCurrentInterest();
-	 std::string prefix="";
+	if(GetNode()->GetId() > 30)
+		return;
 
-	 //uint64_t num=2;
-	 //m_prefix.appendNumber(num);
-	 std::vector<std::string>::reverse_iterator it;
-	 for(it=interest.rbegin();it!=interest.rend();++it)
-	 {
-		 prefix+=*it;
-	 }
-	//	std::cout<<"test\n";
+	double delay =( GetNode()->GetId() - 9 ) * 5 + 20;
 
-	 //2. set the Interest (reverse of  the residual navigation route)
-	//std::cout<<prefix<<std::endl;
-	 if(prefix=="")
-	 	{//兴趣为空，直接返回
-	 		std::cout<<"ID:"<<GetNode()->GetId()<<" Prefix为空"<<std::endl;
-	 		return;
-	 	}
-	    //std::cout<<"num:"<<num<<std::endl;
-		//std::cout<<"ID:"<<GetNode()->GetId()<<" prefix:"<<m_prefix.toUri()<<std::endl;
-
-    //add by DJ on Jan 10,2016
-	//set the name of interest packet
-	this->Consumer::SetAttribute("Prefix", StringValue(prefix));
-	//std::cout<<m_fib->Find(m_interestName)<<" "<<endl;
-	std::cout<<"test2\n";
-	//NS_LOG_INFO ("Node "<<GetNode()->GetId()<<" now is interestd on "<<prefix.data());
-	std::cout<<GetNode()->GetId()<<" "<<endl;
-	//std::cout<<"test3\n";
-	//3. Schedule next packet
-	//ConsumerCbr::ScheduleNextPacket();
-
-	if(m_firstTime&&m_fib->Find(m_interestName)!=0){
-		 m_sendEvent = Simulator::Schedule (Seconds (10.0),
-			                                         &nrConsumer::SendPacket, this);
-		 std::cout<<"test2\n";
-		 m_firstTime=false;
-	}
-	else if(m_firstTime&&m_fib->Find(m_interestName)==0){
-		m_sendEvent = Simulator::Schedule (
-				(m_random == 0) ? Seconds(1.0 / m_frequency):Seconds(m_random->GetValue ()),
-						&nrConsumer::SendPacket, this);
-		std::cout<<"test1\n";
-	}
+	Simulator::Schedule (Seconds (delay), & nrConsumer::SendPacket, this);
 }
-//question by DJ Dec 23,2015: according to FIB,there is no route?
-std::vector<std::string> nrConsumer::GetCurrentInterest()
-{
-	std::string prefix = "/";
-	std::string str;
-	std::vector<std::string> result;
-	Ptr<NodeSensor> sensor = this->GetNode()->GetObject<NodeSensor>();
-	const std::string& currentLane = sensor->getLane();
-	std::vector<std::string>::const_iterator it;
-	const std::vector<std::string>& route = sensor->getNavigationRoute();
-	if(0&&GetNode()->GetId()==11)
-	{
-		std::cout<<currentLane<<std::endl;
-		for(unsigned int i=0;i<route.size();i++)
-		{
-			std::cout<<route[i]<<" ";
-		}
-		std::cout<<std::endl;
-	}
-
-	////遍历，寻找和当前道路相同的道路，把剩余的道路加入兴趣list中
-	  for(it=route.begin();it!=route.end();++it)
-	{
-		//std::cout<<this->GetNode()->GetId()<<" "<<*it <<"\t"<<currentLane.data() <<std::endl;
-		if(*it==currentLane)//一直遍历寻找到当前道路，然后把后面的压紧容器返回
-			break;
-	}
-	//int routeSum=0;//2015.9.25  小锟添加，只对未来的10条道路有兴趣。结论：没什么作用，兴趣包数量大，主要是由于转发次数过多造成
-	for(;it!=route.end();++it)
-	{
-		str=prefix+(*it);
-		result.push_back(str);
-	}
-	return result;
-}
-
-
 
 void nrConsumer::SendPacket()
 {
 	  if (!m_active) return;
 
-	  NS_LOG_FUNCTION_NOARGS ();
+	  uint32_t num = GetNode()->GetId() % 3 + 1;
+	  m_prefix.appendNumber(num);
 
-	  uint32_t seq=std::numeric_limits<uint32_t>::max (); //invalid
-
-	  if (m_seqMax != std::numeric_limits<uint32_t>::max())
-	  {
-		if (m_seq >= m_seqMax)
-		{
-			return; // we are totally done
-		}
-	  }
-
-	  seq = m_seq++;
-
-	  Ptr<Name> nameWithSequence = Create<Name> (m_interestName);
-	  nameWithSequence->appendSeqNum (seq);
-
-	  Ptr<Interest> interest = Create<Interest> ();
-	  interest->SetNonce               (m_rand.GetValue ());
-	  interest->SetName                (nameWithSequence);
+	  Ptr<Interest> interest = Create<Interest> (Create<Packet>(m_virtualPayloadSize));
+	  Ptr<Name> interestName = Create<Name> (m_prefix);
+	  interest->SetName(interestName);
+	  interest->SetNonce(m_rand.GetValue());//just generate a random number
 	  interest->SetInterestLifetime    (m_interestLifeTime);
 
-	  // NS_LOG_INFO ("Requesting Interest: \n" << *interest);
-	  NS_LOG_INFO ("> Interest for " <<nameWithSequence->toUri()<<" seq "<< seq);
+	  	 //add header;
+	  	 ndn::nrndn::nrndnHeader nrheader;
+	  	 nrheader.setSourceId(GetNode()->GetId());
+	  	 nrheader.setX(m_sensor->getX());
+	  	 nrheader.setY(m_sensor->getY());
+	  	 std::string lane = m_sensor->getLane();
+	  	 nrheader.setPreLane(lane);
 
-	  //WillSendOutInterest (seq);
+	  	 Ptr<Packet> newPayload = Create<Packet> ();
+	  	 newPayload->AddHeader(nrheader);
+	  	 interest->SetPayload(newPayload);
 
-
-	  //add header;
-	  ndn::nrndn::nrndnHeader nrheader;
-	  nrheader.setSourceId(GetNode()->GetId());
-      nrheader.setX(m_sensor->getX());
-      nrheader.setY(m_sensor->getY());
-      std::string lane = m_sensor->getLane();
-      Ptr<ndn::fib::nrndn::EntryNrImpl> fibEntry = DynamicCast<ndn::fib::nrndn::EntryNrImpl>(m_fib->Find(m_interestName));
-
-      //set lane according to fib table
-      nrheader.setCurrentLane(fibEntry->getIncomingnbs().begin()->first);
-      nrheader.setPreLane(lane);
-
-      //setNextLane???
-
-      Ptr<Packet> newPayload = Create<Packet> ();
-      newPayload->AddHeader(nrheader);
-
-      interest->SetPayload(newPayload);
-      PacketTypeTag typeTag(0);
-      if(m_fib->Find(m_interestName)!=0){
-    	  PacketTypeTag typeTag(INTEREST_PACKET);
-    	  interest->GetPayload ()->AddPacketTag (typeTag);
-      }
-      else{
-    	  PacketTypeTag typeTag(DETECT_PACKET);
-    	  interest->GetPayload ()->AddPacketTag (typeTag);
-      }
-
-
-	  m_transmittedInterests (interest, this, m_face);
-	  m_face->ReceiveInterest (interest);
-	  //std::cout<<"准备出错\n";
-	  ScheduleNextPacket ();
-	  //  std::cout<<"已经出错\n";
-
-
-	  //std::cout<<"ScheduleNextPacket \n";
+	    m_transmittedInterests (interest, this, m_face);
+	    m_face->ReceiveInterest (interest);
 }
-
-
-/*
-Ptr<Packet> nrConsumer::GetNrPayload()
-{
-	Ptr<Packet> nrPayload	= Create<Packet> ();
-	Ptr<Node> node			= GetNode();
-	Ptr<NodeSensor> sensor	= node->GetObject<NodeSensor>();
-	Ptr<ns3::ndn::fw::nrndn::NavigationRouteHeuristic> fwStrategy
-							= node->GetObject<ns3::ndn::fw::nrndn::NavigationRouteHeuristic>();
-     NS_ASSERT_MSG (fwStrategy!=0,"nrConsumer::GetNrPayload: "
-    		 "ns3::ndn::fw::NavigationRouteHeuristic should be installed to a node "
-    		 "while using ns3::ndn::nrndn::nrConsumer");
-
-	double position			= sensor->getPos();
-	std::string lane 		= sensor->getLane();
-	std::vector<uint32_t> priorityList=fwStrategy->GetPriorityList();
-
-	nrHeader nrheader(node->GetId(),position,lane,priorityList);
-	nrPayload->AddHeader(nrheader);
-	return nrPayload;
-}
-*/
 
 void nrConsumer::OnData(Ptr<const Data> data)
 {
+	/*
 	NS_LOG_FUNCTION (this);
 	Ptr<Packet> nrPayload	= data->GetPayload()->Copy();
 	const Name& name = data->GetName();
@@ -297,6 +155,8 @@ void nrConsumer::OnData(Ptr<const Data> data)
 	else
 		nrUtils::IncreaseDisinterestedNodeCounter(nodeId,signature);
 	//NS_LOG_UNCOND("At time "<<Simulator::Now().GetSeconds()<<":"<<m_node->GetId()<<"\treceived data "<<name.toUri()<<" from "<<nodeId<<"\tSignature "<<signature);
+	 **/
+
 }
 
 void nrConsumer::NotifyNewAggregate()
@@ -318,26 +178,6 @@ void nrConsumer::DoInitialize(void)
 		m_sensor =  m_node->GetObject<ndn::nrndn::NodeSensor>();
 		NS_ASSERT_MSG(m_sensor,"nrConsumer::DoInitialize cannot find ns3::ndn::nrndn::NodeSensor");
 	}
-	if (m_pit==0)
-	{
-		m_pit =  m_node->GetObject<ndn::pit::nrndn::NrPitImpl>();
-		NS_ASSERT_MSG(m_pit,"nrConsumer::DoInitialize cannot find ns3::ndn::pit::nrndn::NrPitImpl");
-
-	}
-	if (m_fib==0)
-	{
-		m_fib = ns3::Create<ndn::fib::nrndn::NrFibImpl>();
-		/*Ptr<Fib> fib = m_node->GetObject<Fib>();
-		std::cout<<(fib==0)<<endl;
-		if(fib){
-			std::cout<<"fib"<<endl;
-			m_fib =  DynamicCast<ndn::fib::nrndn::NrFibImpl>(fib);
-		}*/
-		//std::cout<<(m_fib==0)<<endl;
-		//std::cout<<"4234"<<endl;
-		NS_ASSERT_MSG(m_fib,"nrConsumer::DoInitialize cannot find ns3::ndn::fib::nrndn::NrFibImpl");
-	}
-
 	super::DoInitialize();
 }
 
@@ -351,24 +191,13 @@ void nrConsumer::OnInterest(Ptr<const Interest> interest)
 	NS_ASSERT_MSG(false,"nrConsumer should not be supposed to "
 			"receive Interest Packet!!");
 }
-
+/*
 //modify by DJ on Jan 8,2016
 bool nrConsumer::IsInterestData(const Name& name)
 {
-	//std::vector<std::string> result;
-	//Ptr<NodeSensor> sensor = this->GetNode()->GetObject<NodeSensor>();
-	//const std::string& currentLane = sensor->getLane();
-	//std::vector<std::string>::const_iterator it;
-	//std::vector<std::string>::const_iterator it2;
-	//const std::vector<std::string>& route = sensor->getNavigationRoute();
-
-	//it =std::find(route.begin(),route.end(),currentLane);
-
-	//it2=std::find(it,route.end(),name.get(0).toUri());
-
-	//return (it2!=route.end());
 	return (m_pit->Find(name)!=0);
 }
+*/
 
 } /* namespace nrndn */
 } /* namespace ndn */
