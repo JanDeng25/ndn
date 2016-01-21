@@ -106,10 +106,10 @@ void EntryNrImpl::RemoveIncomingNeighbors(std::string name){
 
 void EntryNrImpl::Print(std::ostream& os) const
 {
-	os<<"nrnddnEntryNrImpl content: "
-			<<" data name="<<m_data_name;
-	for(std::unordered_map< std::string,uint32_t >::const_iterator it = m_incomingnbs.begin(); it != m_incomingnbs.end(); ++it)
-		os<<(*it).first<<" "<<(*it).second;
+	os<<"nrndnEntryNrImpl content: "
+			<<" interest name="<<m_interest_name;
+	for(std::unordered_set< std::string >::const_iterator it = m_incomingnbs.begin(); it != m_incomingnbs.end(); ++it)
+		os<<(*it)<<" ";
 	os<<std::endl;
 }
 
