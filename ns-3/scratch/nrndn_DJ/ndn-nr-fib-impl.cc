@@ -315,10 +315,10 @@ NrFibImpl::Next (Ptr<Entry> from)
 	}
 }
 
-//灏忛敓娣诲姞锛�015-8-23
+//小锟添加，2015-8-23
 std::string NrFibImpl::uriConvertToString(std::string str)
 {
-	//鍥犱负鑾峰彇鍏磋叮鏃朵娇鐢╰oUri锛岄伩鍏嶅嚭鐜扮被浼糩]鐨勭鍙凤紝杩涜缂栫爜杞崲
+	//因为获取兴趣时使用toUri，避免出现类似[]的符号，进行编码转换
 	std::string ret="";
 	for(uint32_t i=0;i<str.size();i++)
 	{
@@ -343,73 +343,77 @@ std::string NrFibImpl::uriConvertToString(std::string str)
 	return ret;
 }
 
-//杩涘叆涓�釜鏂扮殑璺鍚庣殑fib琛ㄦ牸鍙樺寲锛�void NrFibImpl::laneChange(std::string oldLane, std::string newLane)
-/*void laneChange(std::string oldLane, std::string newLane){
+/*void NrPitImpl::laneChange(std::string oldLane, std::string newLane)
+{
 	if (oldLane.empty()
 			|| (ndn::nrndn::NodeSensor::emptyLane == oldLane
 					&& ndn::nrndn::NodeSensor::emptyLane != newLane))
 		return;
-	NS_LOG_INFO ("Deleting old lane fib entry of "<<oldLane);
+	NS_LOG_INFO ("Deleting old lane pit entry of "<<oldLane);
 
 	std::vector<Ptr<Entry> >::iterator it;
-	it =m_fibContainer.begin();
+	it =m_pitContainer.begin();
 
-	bool IsOldLaneAtFibBegin =(  uriConvertToString((*it)->GetInterest()->GetName().get(0).toUri())==(oldLane));
+	bool IsOldLaneAtPitBegin =(  uriConvertToString((*it)->GetInterest()->GetName().get(0).toUri())==(oldLane));
 
-	if(!IsOldLaneAtFibBegin)
+	if(!IsOldLaneAtPitBegin)
 	{
-		std::cout<<"鏃ц矾娈典笉鍦ㄥご閮�"<<"oldLane:"<<(oldLane)<<" newLane:"<<uriConvertToString((*it)->GetInterest()->GetName().get(0).toUri())<<std::endl;
+		std::cout<<"旧路段不在头部:"<<"oldLane:"<<(oldLane)<<" newLane:"<<uriConvertToString((*it)->GetInterest()->GetName().get(0).toUri())<<std::endl;
 
-		//閬嶅巻鏁翠釜Fib
+		//遍历整个Pit
 		std::vector<Ptr<Entry> >::iterator itTraversal;
-		itTraversal =m_fibContainer.begin();
+		itTraversal =m_pitContainer.begin();
 		bool findOldLane=false;
-		std::cout<<"瀵绘壘oldLane涓�..\n";
-		for(;itTraversal!=m_fibContainer.end();itTraversal++)
-		{//閬嶅巻鏁翠釜FIB琛紝瀵绘壘oldLane鏄惁鍦ㄨ〃涓�			if( uriConvertToString((*itTraversal)->GetInterest()->GetName().get(0).toUri()) == (oldLane) )
-			{//濡傛灉鎵惧埌鍒欑洿鎺ヨ烦鍑�				findOldLane=true;
+		std::cout<<"寻找oldLane中...\n";
+		for(;itTraversal!=m_pitContainer.end();itTraversal++)
+		{//遍历整个PIT表，寻找oldLane是否在表中
+			if( uriConvertToString((*itTraversal)->GetInterest()->GetName().get(0).toUri()) == (oldLane) )
+			{//如果找到则直接跳出
+				findOldLane=true;
 				break;
 			}
 		}
 		if(findOldLane)
 		{
-			it =m_fibContainer.begin();
+			it =m_pitContainer.begin();
 			int a=0;
 			while(  uriConvertToString((*it)->GetInterest()->GetName().get(0).toUri())!=(oldLane)
-					&&it!=m_fibContainer.end())
+					&&it!=m_pitContainer.end())
 			{
-				std::cout<<a<<"閬嶅巻鍒犻櫎涓細"<<uriConvertToString( (*it)->GetInterest()->GetName().get(0).toUri())<<" OLd:"<<(oldLane)<<std::endl;
+				std::cout<<a<<"遍历删除中："<<uriConvertToString( (*it)->GetInterest()->GetName().get(0).toUri())<<" OLd:"<<(oldLane)<<std::endl;
 				a++;
 				DynamicCast<EntryNrImpl>(*it)->RemoveAllTimeoutEvent();
-				m_fibContainer.erase(it);
-				it =m_fibContainer.begin();
+				m_pitContainer.erase(it);
+				it =m_pitContainer.begin();
 			}
-			if(it<=m_fibContainer.end())
+			if(it<=m_pitContainer.end())
 			{
-				std::cout<<"鏈�悗閬嶅巻鍒犻櫎涓細"<<uriConvertToString( (*it)->GetInterest()->GetName().get(0).toUri())<<" OLd:"<<(oldLane)<<std::endl;
+				std::cout<<"最后遍历删除中："<<uriConvertToString( (*it)->GetInterest()->GetName().get(0).toUri())<<" OLd:"<<(oldLane)<<std::endl;
 				//1. Befor erase it, cancel all the counting Timer fore the neighbor to expire
 				DynamicCast<EntryNrImpl>(*it)->RemoveAllTimeoutEvent();
 				//2. erase it
-				m_fibContainer.erase(it);
-				std::cout<<"鍒犻櫎瀹屾瘯\n";
+				m_pitContainer.erase(it);
+				std::cout<<"删除完毕\n";
 			}
 			else
-				std::cout<<"鍒犻櫎瀹屾瘯锛氳凯浠ｅ櫒涓虹┖\n";
+				std::cout<<"删除完毕：迭代器为空\n";
 
 		}
 		else
 		{
-			std::cout<<"娌℃壘鍒�..\n";
+			std::cout<<"没找到...\n";
 		}
 	}
 	else
-	{//鏃ц矾娈靛湪fib澶撮儴鎵嶈繘琛屽垹闄�
-			//鎶ラ敊锛�		//NS_ASSERT_MSG(IsOldLaneAtFibBegin,"The old lane should at the beginning of the fibContainer. Please Check~");
+	{//旧路段在pit头部才进行删除
+
+			//报错？
+		//NS_ASSERT_MSG(IsOldLaneAtPitBegin,"The old lane should at the beginning of the pitContainer. Please Check~");
 		//1. Befor erase it, cancel all the counting Timer fore the neighbor to expire
 		DynamicCast<EntryNrImpl>(*it)->RemoveAllTimeoutEvent();
 
 		//2. erase it
-		m_fibContainer.erase(it);
+		m_pitContainer.erase(it);
 		//std::cout<<"erase OK!"<<std::endl;
 		return;
 	}

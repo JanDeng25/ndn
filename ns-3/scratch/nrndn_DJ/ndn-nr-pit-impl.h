@@ -113,7 +113,7 @@ public:
 
   //void laneChange(std::string oldLane, std::string newLane);
 
-  //灏忛敓娣诲姞锛�015-8-23
+  //小锟添加，2015-8-23
   std::string uriConvertToString(std::string str);
 protected:
   // inherited from Object class
