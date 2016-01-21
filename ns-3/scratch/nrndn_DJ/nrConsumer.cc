@@ -123,7 +123,7 @@ void nrConsumer::ScheduleNextPacket()
 	//std::cout<<m_fib->Find(m_interestName)<<" "<<endl;
 	std::cout<<"test2\n";
 	//NS_LOG_INFO ("Node "<<GetNode()->GetId()<<" now is interestd on "<<prefix.data());
-	std::cout<<GetNode()->GetId()<<" ";
+	std::cout<<GetNode()->GetId()<<" "<<endl;
 	//std::cout<<"test3\n";
 	//3. Schedule next packet
 	//ConsumerCbr::ScheduleNextPacket();
