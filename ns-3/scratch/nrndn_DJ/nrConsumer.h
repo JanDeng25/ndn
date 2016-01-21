@@ -67,8 +67,8 @@ protected:
 	  /**
 	   * \brief get the current route for the interests
 	   */
-	  //std::vector<std::string>
-	 // GetCurrentInterest();
+	  std::vector<std::string>
+	  GetCurrentInterest();
 
 	  /**
 	   * @brief It will do the similar action like ConsumerCbr::ScheduleNextPacket do
