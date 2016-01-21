@@ -326,7 +326,7 @@ void nrConsumer::DoInitialize(void)
 	}
 	if (m_fib==0)
 	{
-		Ptr<Fib> fib = GetObject<Fib>();
+		Ptr<Fib> fib = m_node->GetObject<Fib>();
 		std::cout<<(fib==0)<<endl;
 		if(fib){
 			std::cout<<"fib"<<endl;
