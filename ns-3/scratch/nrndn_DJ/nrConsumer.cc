@@ -95,25 +95,31 @@ void nrConsumer::StopApplication()
 void nrConsumer::ScheduleNextPacket()
 {
 	//1. Reflash the Interest
-	 //std::vector<std::string> interest=GetCurrentInterest();
+	 std::vector<std::string> interest=GetCurrentInterest();
+	 std::string prefix="";
 
-	 uint64_t num=2;
-	 m_prefix.appendNumber(num);
-	 /*std::vector<std::string>::reverse_iterator it;
+	 //uint64_t num=2;
+	 //m_prefix.appendNumber(num);
+	 std::vector<std::string>::reverse_iterator it;
 	 for(it=interest.rbegin();it!=interest.rend();++it)
 	 {
 		 prefix+=*it;
-	 }*/
+	 }
 	//	std::cout<<"test\n";
 
 	 //2. set the Interest (reverse of  the residual navigation route)
 	//std::cout<<prefix<<std::endl;
-	    std::cout<<"num:"<<num<<std::endl;
-		std::cout<<"ID:"<<GetNode()->GetId()<<" prefix:"<<m_prefix.toUri()<<std::endl;
+	 if(prefix=="")
+	 	{//兴趣为空，直接返回
+	 		std::cout<<"ID:"<<GetNode()->GetId()<<" Prefix为空"<<std::endl;
+	 		return;
+	 	}
+	    //std::cout<<"num:"<<num<<std::endl;
+		//std::cout<<"ID:"<<GetNode()->GetId()<<" prefix:"<<m_prefix.toUri()<<std::endl;
 
     //add by DJ on Jan 10,2016
 	//set the name of interest packet
-	this->Consumer::SetAttribute("Prefix", StringValue(m_prefix.toUri()));
+	this->Consumer::SetAttribute("Prefix", StringValue(prefix));
 	std::cout<<"test2\n";
 	//NS_LOG_INFO ("Node "<<GetNode()->GetId()<<" now is interestd on "<<prefix.data());
 	std::cout<<GetNode()->GetId()<<" ";
@@ -133,7 +139,7 @@ void nrConsumer::ScheduleNextPacket()
 	}
 }
 //question by DJ Dec 23,2015: according to FIB,there is no route?
-/*std::vector<std::string> nrConsumer::GetCurrentInterest()
+std::vector<std::string> nrConsumer::GetCurrentInterest()
 {
 	std::string prefix = "/";
 	std::string str;
@@ -153,7 +159,7 @@ void nrConsumer::ScheduleNextPacket()
 	}
 
 	////遍历，寻找和当前道路相同的道路，把剩余的道路加入兴趣list中
-	 * for(it=route.begin();it!=route.end();++it)
+	  for(it=route.begin();it!=route.end();++it)
 	{
 		//std::cout<<this->GetNode()->GetId()<<" "<<*it <<"\t"<<currentLane.data() <<std::endl;
 		if(*it==currentLane)//一直遍历寻找到当前道路，然后把后面的压紧容器返回
@@ -166,7 +172,7 @@ void nrConsumer::ScheduleNextPacket()
 		result.push_back(str);
 	}
 	return result;
-}*/
+}
 
 
 
