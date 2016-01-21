@@ -31,17 +31,18 @@ public:
 	//add by DJ Dec 23,2015
 	// If the interest packet is detecting packet, its scope will be set as HELLO_MESSAGE = 3;
 	enum
-		{
-	  		RESOURCE_PACKET = 1,        //资源包，data packet
-	  		DATA_PACKET = 2,                   //数据包，data packet
-	  		DETECT_PACKET = 3,              //探测包，interest packet
-	  		INTEREST_PACKET = 4,          //兴趣包，interest packet
-	  		CONFIRM_PACKET = 5,         //确认包，data packet
-	  		HELLO_MESSAGE = 6,            //心跳包，interest packet
-	  		MOVE_TO_NEW_LANE = 7,   //消费者移动到新路段，通知上一跳是否转发数据包，interest packet
-	  		ASK_FOR_TABLE = 8,               //车辆移动到新路段，向邻居请求表格，interest packet
-	  		TABLE_PACKET = 9,                  //回复新到的车辆本路段表格，data packet
-		};
+	{
+  		RESOURCE_PACKET = 1,        //资源包，data packet
+  		DATA_PACKET = 2,                   //数据包，data packet
+  		DETECT_PACKET = 3,              //探测包，interest packet
+  		INTEREST_PACKET = 4,          //兴趣包，interest packet
+  		CONFIRM_PACKET = 5,         //确认包，data packet
+  		HELLO_MESSAGE = 6,            //心跳包，interest packet
+  		MOVE_TO_NEW_LANE = 7,   //消费者移动到新路段，通知上一跳是否转发数据包，interest packet
+  		ASK_FOR_TABLE = 8,               //车辆移动到新路段，向邻居请求表格，interest packet
+  		TABLE_PACKET = 9,                  //回复新到的车辆本路段表格，data packet
+	};
+
 	static TypeId GetTypeId ();
 
 	nrConsumer();
@@ -67,8 +68,8 @@ protected:
 	  /**
 	   * \brief get the current route for the interests
 	   */
-	  std::vector<std::string>
-	  GetCurrentInterest();
+	  //std::vector<std::string>
+	 // GetCurrentInterest();
 
 	  /**
 	   * @brief It will do the similar action like ConsumerCbr::ScheduleNextPacket do
@@ -97,16 +98,17 @@ protected:
 	  virtual void
 	  OnInterest (Ptr<const Interest> interest);
 
-	  bool IsInterestData(const Name& name);
+	  //bool IsInterestData(const Name& name);
 private:
 	  typedef ConsumerCbr super;
 	  Ptr<NodeSensor> m_sensor;
+	  UniformVariable m_rand; ///< @brief nonce generator
 	  Ptr<fw::nrndn::NavigationRouteHeuristic>		m_forwardingStrategy;
 
 	  uint32_t m_virtualPayloadSize;
 	  Name m_prefix;
-	  Ptr<ndn::pit::nrndn::NrPitImpl> m_pit;
-	  Ptr<ndn::fib::nrndn::NrFibImpl> m_fib;
+	  //Ptr<ndn::pit::nrndn::NrPitImpl> m_pit;
+	  //Ptr<ndn::fib::nrndn::NrFibImpl> m_fib;
 	  //Ptr<ForwardingStrategy>		m_forwardingStrategy;
 };
 
