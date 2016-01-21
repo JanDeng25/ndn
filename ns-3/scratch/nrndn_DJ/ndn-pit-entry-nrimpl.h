@@ -70,6 +70,8 @@ public:
 	{
 		return m_interest_name;
 	}
+
+	void Print(std::ostream &os) const;
 private:
 	//std::unordered_map< uint32_t,EventId> m_nbTimeoutEvent;///< @brief it is a hashmap that record the timeout event of each neighbor id
 
