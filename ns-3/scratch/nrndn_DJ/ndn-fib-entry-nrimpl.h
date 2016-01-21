@@ -64,6 +64,7 @@ public:
 		return m_data_name;
 
 	}
+	void Print(std::ostream &os) const;
 
 //private:
 	//void AddNeighborTimeoutEvent(uint32_t id);
