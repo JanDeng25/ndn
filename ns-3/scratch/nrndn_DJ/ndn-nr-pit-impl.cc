@@ -115,7 +115,7 @@ bool NrPitImpl::UpdatePit(const std::vector<std::string>& route,const uint32_t& 
 }*/
 
 //add by DJ on Jan 4,2016:update pit
-bool NrPitImpl::UpdatePit(std::string lane,Ptr<const Interest> interest)
+bool NrPitImpl::UpdatePit(std::string lane,Ptr<Interest> interest)
 {
 	//std::ostringstream os;
 	std::vector<Ptr<Entry> >::iterator pit=m_pitContainer.begin();
@@ -141,7 +141,7 @@ bool NrPitImpl::UpdatePit(std::string lane,Ptr<const Interest> interest)
 				pitEntry->AddIncomingNeighbors(lane);
 			//os<<(*pit)->GetInterest()->GetName().toUri()<<" add Neighbor "<<id<<' ';
 		}
-        pitEntry->Print(cout);
+        pitEntry->Print(std::cout);
 
 	}
 	//NS_LOG_UNCOND("update pit:"<<os.str());

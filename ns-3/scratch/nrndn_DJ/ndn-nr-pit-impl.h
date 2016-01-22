@@ -106,9 +106,9 @@ public:
   //bool UpdatePit(const std::vector<std::string>& route,const uint32_t& id);
 
   //add by DJ on Jan 4,2016:update pit
-  bool UpdatePit(std::string lane,Ptr<const Interest> interest);
+  bool UpdatePit(std::string lane,Ptr<Interest> interest);
 
-  //add by DJ on Jan 4,2016:update pit
+  //add by DJ on Jan 4,2016:remove pit
   bool RemovePitEntry(const Name& name);
 
   //void laneChange(std::string oldLane, std::string newLane);
