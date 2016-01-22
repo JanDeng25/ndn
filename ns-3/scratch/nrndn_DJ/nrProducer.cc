@@ -292,16 +292,15 @@ void nrProducer::OnSendingTrafficData()
 	}
 
 
-	Name temp;
+
 	//test pit
-	uint32_t num = GetNode()->GetId() % 3 + 1;
-		  temp.appendNumber(num);
+
 
 		  Ptr<Interest> interest = Create<Interest> (Create<Packet>(m_virtualPayloadSize));
-		  Ptr<Name> interestName = Create<Name> (temp);
+		  Ptr<Name> interestName = Create<Name> (m_prefix);
 		  interest->SetName(interestName);
 		  interest->SetNonce(m_rand.GetValue());//just generate a random number
-		  //interest->SetInterestLifetime    (m_interestLifeTime);
+		  interest->SetInterestLifetime    (Seconds (10000));
 
 		  m_nrpit->UpdatePit("lane1",interest);
 
