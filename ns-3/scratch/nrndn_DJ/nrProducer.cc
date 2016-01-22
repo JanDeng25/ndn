@@ -234,7 +234,7 @@ void nrProducer::DoInitialize(void)
 			{
 		       Ptr<Fib> pit=GetObject<Fib>();
 			  if(pit)
-				  m_nrpit = DynamicCast<fib::nrndn::NrFibImpl>(pit);
+				  m_nrfib = DynamicCast<fib::nrndn::NrFibImpl>(pit);
 
 				NS_ASSERT_MSG(m_nrfib,"nrProducer::DoInitialize cannot find ns3::ndn::nrndn::NodeSensor");
 				// Setup Lane change action
@@ -243,7 +243,7 @@ void nrProducer::DoInitialize(void)
 			{
 		              Ptr<ContentStore> pit=GetObject<ContentStore>();
 					  if(pit)
-						  m_nrpit = DynamicCast<cs::nrndn::NrCsImpl>(pit);
+						  m_nrcs = DynamicCast<cs::nrndn::NrCsImpl>(pit);
 
 
 				NS_ASSERT_MSG(m_nrcs,"nrProducer::DoInitialize cannot find ns3::ndn::nrndn::NodeSensor");
