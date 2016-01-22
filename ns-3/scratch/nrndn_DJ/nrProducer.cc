@@ -225,14 +225,14 @@ void nrProducer::DoInitialize(void)
 
 	if (m_nrpit == 0)
 		{
-		m_nrpit = m_node->GetObject<ndn::pit::nrndn::NrPitImpl>();
+		m_nrpit = m_node->Create<ndn::pit::nrndn::NrPitImpl>();
 
 			NS_ASSERT_MSG(m_nrpit,"nrProducer::DoInitialize cannot find ns3::ndn::nrndn::NodeSensor");
 			// Setup Lane change action
 		}
 	if (m_nrfib == 0)
 			{
-			m_nrfib = m_node->GetObject<ndn::fib::nrndn::NrFibImpl>();
+			m_nrfib = m_node->Create<ndn::fib::nrndn::NrFibImpl>();
 
 				NS_ASSERT_MSG(m_nrfib,"nrProducer::DoInitialize cannot find ns3::ndn::nrndn::NodeSensor");
 				// Setup Lane change action
