@@ -306,7 +306,7 @@ void NavigationRouteHeuristic::OnInterest(Ptr<Face> face,
 
 		// Update the PIT here
 
-		//m_nrpit->UpdatePit(remoteRoute, nodeId);
+		m_nrpit->UpdatePit(remoteRoute, interest);
 
 		// Update finish
 
