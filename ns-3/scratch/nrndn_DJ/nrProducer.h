@@ -19,6 +19,10 @@
 #include "distance-based-forwarding.h"
 #include "NodeSensor.h"
 
+#include "ndn-nr-pit-impl.h"
+#include "ndn-nr-fib-impl.h"
+#include "ndn-nr-cs-impl.h"
+
 #include <string>
 
 namespace ns3
@@ -105,6 +109,9 @@ private:
 	Ptr<fw::nrndn::DistanceBasedForwarding>		m_DistanceForwarding;
 	Ptr<NodeSensor>	m_sensor;
 
+	Ptr<ndn::pit::nrndn::NrPitImpl> m_nrpit;
+	Ptr<ndn::fib::nrndn::NrFibImpl> m_nrfib;
+	Ptr<ndn::cs::nrndn::NrCsImpl> m_nrcs;
 	//A list indicates that when it will broadcast an accident message(aka, traffic data)
 	std::set<double> m_accidentList;
 };
