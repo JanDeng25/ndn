@@ -301,7 +301,7 @@ void nrProducer::OnSendingTrafficData()
 		  Ptr<Name> interestName = Create<Name> (temp);
 		  interest->SetName(interestName);
 		  interest->SetNonce(m_rand.GetValue());//just generate a random number
-		  interest->SetInterestLifetime    (m_interestLifeTime);
+		  //interest->SetInterestLifetime    (m_interestLifeTime);
 
 		  m_nrpit->UpdatePit("lane1",interest);
 
