@@ -141,7 +141,7 @@ bool NrPitImpl::UpdatePit(std::string lane,Ptr<const Interest> interest)
 				pitEntry->AddIncomingNeighbors(lane);
 			//os<<(*pit)->GetInterest()->GetName().toUri()<<" add Neighbor "<<id<<' ';
 		}
-
+        pitEntry->Print(cout);
 
 	}
 	//NS_LOG_UNCOND("update pit:"<<os.str());
