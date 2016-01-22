@@ -72,14 +72,14 @@ NrPitImpl::NotifyNewAggregate ()
 	{
 		m_sensor = GetObject<ndn::nrndn::NodeSensor>();
 		// Setup Lane change action
-		/*if (m_sensor != NULL)
+		if (m_sensor != NULL)
 		{
-			m_sensor->TraceConnectWithoutContext("LaneChange",
-					MakeCallback(&NrPitImpl::laneChange, this));
+			//m_sensor->TraceConnectWithoutContext("LaneChange",
+				//	MakeCallback(&NrPitImpl::laneChange, this));
 
 			//NrPitEntry needs m_sensor. Initialize immediately after m_sensor is aggregated
 			InitializeNrPitEntry();
-		}*/
+		}
 	}
 
   Pit::NotifyNewAggregate ();
@@ -216,8 +216,9 @@ NrPitImpl::Create (Ptr<const Interest> header)
 	return 0;
 }
 
-//need to modify:how to initialize?
-/*bool
+// need to modify:how to initialize?
+//test pit
+bool
 NrPitImpl::InitializeNrPitEntry()
 {
 	NS_LOG_FUNCTION (this);
@@ -233,12 +234,13 @@ NrPitImpl::InitializeNrPitEntry()
 		//Create a fake FIB entry(if not ,L3Protocol::RemoveFace will have problem when using pitEntry->GetFibEntry)
 		Ptr<fib::Entry> fibEntry=ns3::Create<fib::Entry>(Ptr<Fib>(0),Ptr<Name>(0));
 
-		Ptr<Entry> entry = ns3::Create<EntryNrImpl>(*this,interest,fibEntry,m_cleanInterval) ;
+		Ptr<Entry> entry = ns3::Create<EntryNrImpl>(*this,interest,fibEntry) ;
+
 		m_pitContainer.push_back(entry);
 		NS_LOG_DEBUG("Initialize pit:Push_back"<<name->toUri());
 	}
 	return true;
-}*/
+}
   
 
 void

@@ -76,8 +76,8 @@ public:
   Create (Ptr<const Interest> header);
 
   //replace NrPitImpl::Create
- // bool
-  //InitializeNrPitEntry ();
+  bool
+  InitializeNrPitEntry ();
 
   //abandon
   virtual void
