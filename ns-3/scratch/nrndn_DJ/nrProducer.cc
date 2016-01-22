@@ -222,6 +222,30 @@ void nrProducer::DoInitialize(void)
 
 		}
 	}
+
+	if (m_nrpit == 0)
+		{
+		m_nrpit = m_node->GetObject<ndn::pit::nrndn::NrPitImpl>();
+
+			NS_ASSERT_MSG(m_nrpit,"nrProducer::DoInitialize cannot find ns3::ndn::nrndn::NodeSensor");
+			// Setup Lane change action
+		}
+	if (m_nrfib == 0)
+			{
+			m_nrfib = m_node->GetObject<ndn::pit::nrndn::NrPitImpl>();
+
+				NS_ASSERT_MSG(m_nrfib,"nrProducer::DoInitialize cannot find ns3::ndn::nrndn::NodeSensor");
+				// Setup Lane change action
+			}
+	if (m_nrcs == 0)
+			{
+			m_nrcs = m_node->GetObject<ndn::pit::nrndn::NrPitImpl>();
+
+				NS_ASSERT_MSG(m_nrcs,"nrProducer::DoInitialize cannot find ns3::ndn::nrndn::NodeSensor");
+				// Setup Lane change action
+			}
+
+
 	super::DoInitialize();
 }
 
