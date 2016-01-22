@@ -303,10 +303,11 @@ void NavigationRouteHeuristic::OnInterest(Ptr<Face> face,
 		NS_LOG_DEBUG("Get interest packet from nodes behind");
 		const vector<string> remoteRoute=
 							ExtractRouteFromName(interest->GetName());
+		std::string lane="itsalane";
 
 		// Update the PIT here
 
-		m_nrpit->UpdatePit(remoteRoute, interest);
+		m_nrpit->UpdatePit(lane, interest);
 
 		// Update finish
 
