@@ -230,7 +230,7 @@ void nrProducer::DoInitialize(void)
 			NS_ASSERT_MSG(m_nrpit,"nrProducer::DoInitialize cannot find ns3::ndn::nrndn::NodeSensor");
 			// Setup Lane change action
 		}
-	if (m_nrfib == 0)
+	/*if (m_nrfib == 0)
 			{
 		       Ptr<Fib> pit=GetObject<Fib>();
 		       std::cout<<(pit==0)<<std::endl;
@@ -239,7 +239,7 @@ void nrProducer::DoInitialize(void)
                std::cout<<(m_nrfib==0)<<std::endl;
 				NS_ASSERT_MSG(m_nrfib,"nrProducer::DoInitialize cannot find ns3::ndn::nrndn::NodeSensor");
 				// Setup Lane change action
-			}
+			}*/
 	/*if (m_nrcs == 0)
 			{
 		              Ptr<ContentStore> pit=GetObject<ContentStore>();
@@ -290,6 +290,20 @@ void nrProducer::OnSendingTrafficData()
 	{
 		data->SetKeyLocator(Create<Name>(m_keyLocator));
 	}
+
+
+	Name temp;
+	//test pit
+	uint32_t num = GetNode()->GetId() % 3 + 1;
+		  temp.appendNumber(num);
+
+		  Ptr<Interest> interest = Create<Interest> (Create<Packet>(m_virtualPayloadSize));
+		  Ptr<Name> interestName = Create<Name> (temp);
+		  interest->SetName(interestName);
+		  interest->SetNonce(m_rand.GetValue());//just generate a random number
+		  interest->SetInterestLifetime    (m_interestLifeTime);
+
+		  m_nrpit->UpdatePit("lane1",interest);
 
 	NS_LOG_DEBUG(
 			"node("<< GetNode()->GetId() <<")\t sending Traffic Data: " << data->GetName ()<<" \tsignature:"<<data->GetSignature());
