@@ -22,6 +22,12 @@
 #include "ndn-nr-pit-impl.h"
 #include "ndn-nr-fib-impl.h"
 #include "ndn-nr-cs-impl.h"
+#include "ns3/core-module.h"
+#include "ns3/ptr.h"
+#include "ns3/ndn-interest.h"
+#include "ns3/log.h"
+#include "ns3/object.h"
+#include "ns3/node.h"
 
 #include <string>
 
