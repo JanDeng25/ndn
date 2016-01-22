@@ -123,7 +123,7 @@ NrFibImpl::AddFibEntry (const Ptr<const Name> &prefix, std::string lane,uint32_t
 			{
 
 				fibEntry->AddIncomingNeighbors(lane,ttl);
-
+                return;
 			}
 
 		}
@@ -134,7 +134,7 @@ NrFibImpl::AddFibEntry (const Ptr<const Name> &prefix, std::string lane,uint32_t
 	Ptr<EntryNrImpl> entry = ns3::Create<EntryNrImpl>(this,prefix,m_cleanInterval);
 	Ptr<Entry> fibEntry = DynamicCast<Entry>(entry);
 	m_fibContainer.push_back(fibEntry);
-
+    return;
 }
 
 void
