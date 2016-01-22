@@ -199,8 +199,8 @@ nrndnExample::nrndnExample () :
 {
 	//os =  std::cout;
 	string home         = getenv("HOME");       /////????环境变量HOME的值在哪里指定的？？？？？？？？？（值是“/home/siukwan”）
-	inputDir  = home +"/input";
-	outputDir = home +"/input";
+	inputDir  = home +"/input_v2";
+	outputDir = home +"/input_v2";
 }
 
 nrndnExample::~nrndnExample()
