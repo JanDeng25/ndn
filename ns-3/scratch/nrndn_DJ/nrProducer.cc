@@ -225,25 +225,30 @@ void nrProducer::DoInitialize(void)
 
 	if (m_nrpit == 0)
 		{
-		m_nrpit = m_node->Create<ndn::pit::nrndn::NrPitImpl>();
+		m_nrpit = Create<ndn::pit::nrndn::NrPitImpl>();
 
 			NS_ASSERT_MSG(m_nrpit,"nrProducer::DoInitialize cannot find ns3::ndn::nrndn::NodeSensor");
 			// Setup Lane change action
 		}
 	if (m_nrfib == 0)
 			{
-			m_nrfib = m_node->Create<ndn::fib::nrndn::NrFibImpl>();
+		       Ptr<Fib> pit=GetObject<Fib>();
+			  if(pit)
+				  m_nrpit = DynamicCast<fib::nrndn::NrFibImpl>(pit);
 
 				NS_ASSERT_MSG(m_nrfib,"nrProducer::DoInitialize cannot find ns3::ndn::nrndn::NodeSensor");
 				// Setup Lane change action
 			}
-	if (m_nrcs == 0)
+	/*if (m_nrcs == 0)
 			{
-			m_nrcs = m_node->GetObject<ndn::cs::nrndn::NrCsImpl>();
+		              Ptr<ContentStore> pit=GetObject<ContentStore>();
+					  if(pit)
+						  m_nrpit = DynamicCast<cs::nrndn::NrCsImpl>(pit);
+
 
 				NS_ASSERT_MSG(m_nrcs,"nrProducer::DoInitialize cannot find ns3::ndn::nrndn::NodeSensor");
 				// Setup Lane change action
-			}
+			}*/
 
 
 	super::DoInitialize();
