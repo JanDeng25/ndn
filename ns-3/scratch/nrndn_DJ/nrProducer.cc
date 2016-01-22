@@ -232,14 +232,14 @@ void nrProducer::DoInitialize(void)
 		}
 	if (m_nrfib == 0)
 			{
-			m_nrfib = m_node->GetObject<ndn::pit::nrndn::NrPitImpl>();
+			m_nrfib = m_node->GetObject<ndn::fib::nrndn::NrFibImpl>();
 
 				NS_ASSERT_MSG(m_nrfib,"nrProducer::DoInitialize cannot find ns3::ndn::nrndn::NodeSensor");
 				// Setup Lane change action
 			}
 	if (m_nrcs == 0)
 			{
-			m_nrcs = m_node->GetObject<ndn::pit::nrndn::NrPitImpl>();
+			m_nrcs = m_node->GetObject<ndn::cs::nrndn::NrCsImpl>();
 
 				NS_ASSERT_MSG(m_nrcs,"nrProducer::DoInitialize cannot find ns3::ndn::nrndn::NodeSensor");
 				// Setup Lane change action
