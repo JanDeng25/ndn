@@ -233,10 +233,10 @@ void nrProducer::DoInitialize(void)
 	if (m_nrfib == 0)
 			{
 		       Ptr<Fib> pit=GetObject<Fib>();
-		       std::cout<<pit==0<<std::endl;
+		       std::cout<<(pit==0)<<std::endl;
 			  if(pit)
 				  m_nrfib = DynamicCast<fib::nrndn::NrFibImpl>(pit);
-               std::cout<<m_nrfib==0<<std::endl;
+               std::cout<<(m_nrfib==0)<<std::endl;
 				NS_ASSERT_MSG(m_nrfib,"nrProducer::DoInitialize cannot find ns3::ndn::nrndn::NodeSensor");
 				// Setup Lane change action
 			}
