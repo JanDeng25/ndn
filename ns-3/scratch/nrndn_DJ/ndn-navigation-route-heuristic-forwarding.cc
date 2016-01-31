@@ -776,7 +776,7 @@ void NavigationRouteHeuristic::ForwardDataPacket(Ptr<Data> src)
 		SendDataPacket(data);
 
 		ndn::nrndn::nrUtils::IncreaseForwardCounter(nrheader.getSourceId(), data->GetSignature());
-		ndn::nrndn::nrUtils::IncreaseDataForwardCounter(nrheader.getSourceId(), data->GetSignature());
+		//ndn::nrndn::nrUtils::IncreaseDataForwardCounter(nrheader.getSourceId(), data->GetSignature());
 }
 
 void NavigationRouteHeuristic::ForwardDetectPacket(Ptr<Interest> src)

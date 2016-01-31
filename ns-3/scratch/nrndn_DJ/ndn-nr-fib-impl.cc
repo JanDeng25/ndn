@@ -112,7 +112,7 @@ NrFibImpl::RemoveFromAll (Ptr<Face> face){
 }
 
 void
-NrFibImpl::AddFibEntry (const Ptr<const Name> &prefix, std::string lane,uint32_t ttl){
+NrFibImpl::AddFibEntry (const Name &prefix, std::string lane,uint32_t ttl){
 	std::vector<Ptr<Entry> >::iterator fib=m_fibContainer.begin();
 	for(;fib!=m_fibContainer.end();++fib)
 		{
