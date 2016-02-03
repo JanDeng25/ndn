@@ -452,9 +452,9 @@ void NavigationRouteHeuristic::OnData(Ptr<Face> face, Ptr<Data> data)
 			cout<<"node: "<<m_node->GetId()<<" receive resource packet from "<<nodeId<<endl;
 
 			if(m_sensor->getLane() == currentLane)
-				m_fib-> AddFibEntry(data->GetName(),preLane, hopCountTag.Get() );
+				m_fib-> AddFibEntry(data->GetNamePtr(),preLane, hopCountTag.Get() );
 			else
-				m_fib-> AddFibEntry(data->GetName(),currentLane, hopCountTag.Get() );
+				m_fib-> AddFibEntry(data->GetNamePtr(),currentLane, hopCountTag.Get() );
 
 			Time sendInterval = (MilliSeconds(interval) + m_gap * m_timeSlot);
 			m_sendingDataEvent[nodeId][signature]=
