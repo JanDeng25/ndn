@@ -274,7 +274,7 @@ void NavigationRouteHeuristic::OnInterest(Ptr<Face> face,
 	uint32_t nodeId=nrheader.getSourceId();
 	uint32_t seq = interest->GetNonce();
 	std::string currentLane = nrheader.getCurrentLane();
-	std:string preLane = nrheader.getPreLane();
+	std::string preLane = nrheader.getPreLane();
 	std::vector<std::string> laneList = nrheader.getLaneList();
 
 	double disX = ( x - m_sensor->getX()) > 0 ? (x - m_sensor->getX()) : (m_sensor->getX() - x);
@@ -437,7 +437,7 @@ void NavigationRouteHeuristic::OnData(Ptr<Face> face, Ptr<Data> data)
 
 	uint32_t signature=data->GetSignature();
 	std::string currentLane = nrheader.getCurrentLane();
-	std:string preLane = nrheader.getPreLane();
+	std::string preLane = nrheader.getPreLane();
 	std::vector<std::string> laneList = nrheader.getLaneList();
 
 	double disX = ( x - m_sensor->getX()) > 0 ? (x - m_sensor->getX()) : (m_sensor->getX() - x);
