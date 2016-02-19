@@ -249,8 +249,11 @@ void NavigationRouteHeuristic::OnInterest(Ptr<Face> face,
 			PrepareInterestPacket(interest);
 		    cout<<2<<endl;
 		}
-		else
+		else{
+			cout<<3<<endl;
 			PrepareDetectPacket(interest);
+			cout<<4<<endl;
+		}
 
 		return;
 	}
