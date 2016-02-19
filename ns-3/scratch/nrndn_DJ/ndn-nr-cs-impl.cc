@@ -94,8 +94,10 @@ bool NrCsImpl::Add (Ptr<const Data> data)
 	if(Find(data->GetName())){
 		return false;
 	}
+	//NS_LOG_UNCOND ("Hello Simulator");
     Ptr<Entry> csEntry = ns3::Create<Entry>(this,data) ;
     m_csContainer.push_back(csEntry);
+    NS_LOG_UNCOND ("Hello Simulator");
 	return true;
 }
 
