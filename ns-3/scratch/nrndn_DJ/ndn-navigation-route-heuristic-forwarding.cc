@@ -243,14 +243,17 @@ void NavigationRouteHeuristic::OnInterest(Ptr<Face> face,
 		NS_LOG_DEBUG("Get interest packet from APPLICATION");
 
 		cout<<"node: "<<m_node->GetId()<<" receive interest in forwarder"<<endl;
-
+		cout<<"bad bug"<<endl;
 		if(m_fib->Find(interest->GetName())){
 			cout<<1<<endl;
 			PrepareInterestPacket(interest);
 		    cout<<2<<endl;
 		}
-		else
+		else{
+			cout<<3<<endl;
 			PrepareDetectPacket(interest);
+			cout<<4<<endl;
+		}
 
 		return;
 	}
