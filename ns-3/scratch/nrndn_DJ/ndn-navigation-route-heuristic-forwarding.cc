@@ -148,7 +148,7 @@ void NavigationRouteHeuristic::Start()
 		dataName->appendNumber(num);
 		Ptr<Data> data = Create<Data>(Create<Packet>(m_virtualPayloadSize));
 		data->SetName(dataName);
-		//m_cs->Add(data);
+		m_cs->Add(data);
 	}
 }
 
