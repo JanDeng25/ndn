@@ -91,6 +91,7 @@ NrCsImpl::NotifyNewAggregate ()
 
 bool NrCsImpl::Add (Ptr<const Data> data)
 {
+	std::cout<<"before find"<<std::endl;
 	if(Find(data->GetName())){
 		return false;
 	}
@@ -121,7 +122,7 @@ NrCsImpl::Find (const Name &prefix)
 	//NS_ASSERT_MSG(false,"In NrCsImpl,NrCsImpl::Find (const Name &prefix) should not be invoked");
 	 NS_LOG_INFO ("Finding prefix"<<prefix.toUri());
 	 std::vector<Ptr<Entry> >::iterator it;
-	 NS_ASSERT_MSG(m_csContainer.size()!=0,"Empty fib container. No initialization?");
+	 NS_ASSERT_MSG(m_csContainer.size()!=0,"Empty cs container. No initialization?");
 	 for(it=m_csContainer.begin();it!=m_csContainer.end();++it)
 	 {
 		 if((*it)->GetName()==prefix)
