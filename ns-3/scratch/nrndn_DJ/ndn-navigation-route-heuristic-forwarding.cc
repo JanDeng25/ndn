@@ -1128,9 +1128,9 @@ void NavigationRouteHeuristic::NotifyNewAggregate()
 
   if (m_cs == 0)
   {
-   	  Ptr<cs::nrndn::NrCsImpl> cs=GetObject<cs::nrndn::NrCsImpl>();
-   	  if(cs)
-   		  m_cs = DynamicCast<cs::nrndn::NrCsImpl>(cs);
+   	  //Ptr<ContentStore> cs=GetObject<ContentStore>();
+   	  //if(cs)
+   		  m_cs = GetObject<cs::nrndn::NrCsImpl>();
    }
 
   if(m_node==0)
