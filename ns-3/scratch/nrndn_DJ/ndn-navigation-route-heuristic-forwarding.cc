@@ -1122,8 +1122,10 @@ void NavigationRouteHeuristic::NotifyNewAggregate()
   if (m_fib == 0)
    {
  	  Ptr<Fib> fib=GetObject<Fib>();
- 	  if(fib)
+ 	  if(fib){
+ 		 cout<<"fib"<<endl;
  		 m_fib = DynamicCast<fib::nrndn::NrFibImpl>(fib);
+ 	  }
    }
 
   if (m_cs == 0)
