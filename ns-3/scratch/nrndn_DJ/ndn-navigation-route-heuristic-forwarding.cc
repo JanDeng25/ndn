@@ -1123,7 +1123,7 @@ void NavigationRouteHeuristic::NotifyNewAggregate()
    {
  	  Ptr<Fib> fib=GetObject<Fib>();
  	  if(fib){
- 		 cout<<"fib"<<endl;
+ 		 //cout<<"fib"<<endl;
  		 m_fib = DynamicCast<fib::nrndn::NrFibImpl>(fib);
  	  }
    }
@@ -1132,7 +1132,7 @@ void NavigationRouteHeuristic::NotifyNewAggregate()
   {
    	  Ptr<ContentStore> cs=GetObject<ContentStore>();
    	  if(cs){
-   		  cout<<"cs"<<endl;
+   		  //cout<<"cs"<<endl;
    		  m_cs = DynamicCast<cs::nrndn::NrCsImpl>(cs);
    	  }
    }
