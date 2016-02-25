@@ -608,7 +608,7 @@ nrndnExample::InstallNrndnApplications ()
 
 void nrndnExample::InstallTraffics()
 {
-	SeedManager::SetSeed(1234);
+	/*SeedManager::SetSeed(1234);
 	UniformVariable rnd(0,nodes.GetN());
 	std::cout<<"插入事件："<<accidentNum<<endl;
 	for(uint32_t i=0;i<accidentNum;++i)
@@ -620,7 +620,7 @@ void nrndnExample::InstallTraffics()
 		producer->addAccident();
 	}
 	std::cout<<"插入事件：完毕"<<endl;
-
+*/
 	/*
 	uint32_t InsertIndex=10;//for debug only
 	Ptr<ns3::ndn::nrndn::nrProducer> p= DynamicCast<ns3::ndn::nrndn::nrProducer>(
