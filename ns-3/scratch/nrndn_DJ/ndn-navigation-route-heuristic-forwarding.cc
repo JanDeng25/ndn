@@ -1134,6 +1134,7 @@ void NavigationRouteHeuristic::NotifyNewAggregate()
    	  if(cs){
    		  //cout<<"cs"<<endl;
    		  m_cs = DynamicCast<cs::nrndn::NrCsImpl>(cs);
+   		cout<<"cs"<<endl;
    	  }
    }
 
