@@ -146,6 +146,9 @@ public:
    void
    AddFibEntry (const Ptr<const Name> &prefix, std::string lane, uint32_t ttl);
 
+   std::vector<Ptr<Entry> > getFIB(){
+	   return m_fibContainer;
+   }
 protected:
   // inherited from Object class
   virtual void NotifyNewAggregate (); ///< @brief Even when object is aggregated to another Object
