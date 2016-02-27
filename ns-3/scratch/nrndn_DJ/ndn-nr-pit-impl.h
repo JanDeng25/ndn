@@ -115,6 +115,10 @@ public:
 
   //小锟添加，2015-8-23
   std::string uriConvertToString(std::string str);
+
+  std::vector<Ptr<Entry> > getPIT(){
+  	   return m_pitContainer;
+     }
 protected:
   // inherited from Object class
   virtual void NotifyNewAggregate (); ///< @brief Even when object is aggregated to another Object
