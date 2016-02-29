@@ -756,10 +756,8 @@ void NavigationRouteHeuristic::NotifyNewAggregate()
   if (m_nrpit == 0)
   {
 	  Ptr<Pit> pit=GetObject<Pit>();
-	  if(pit){
-		  1
+	  if(pit)
 		  m_nrpit = DynamicCast<pit::nrndn::NrPitImpl>(pit);
-	  }
   }
   if(m_node==0)
   {
