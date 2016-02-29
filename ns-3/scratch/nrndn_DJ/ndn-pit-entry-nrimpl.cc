@@ -113,6 +113,10 @@ void EntryNrImpl::Print(std::ostream& os) const
 	os<<std::endl;
 }
 
+void EntryNrImpl::setInterestName(std::string name){
+	m_interest_name = name;
+}
+
 /*
 void EntryNrImpl::RemoveAllTimeoutEvent()
 {
