@@ -1131,7 +1131,7 @@ void NavigationRouteHeuristic::NotifyNewAggregate()
   if (m_cs == 0)
   {
    	  Ptr<ContentStore> cs=GetObject<ContentStore>();
-   	  if(cs){
+   	  if(cs!=0){
    		  //cout<<"cs"<<endl;
    		  m_cs = DynamicCast<cs::nrndn::NrCsImpl>(cs);
    		cout<<"cs"<<endl;
