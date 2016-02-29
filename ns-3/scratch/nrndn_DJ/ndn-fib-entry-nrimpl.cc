@@ -71,6 +71,9 @@ void EntryNrImpl::Print(std::ostream& os) const
 		os<<(*it).first<<" "<<(*it).second;
 	os<<std::endl;
 }
+void EntryNrImpl::setDataName(std::string name){
+	m_data_name = name;
+}
 
 /*void EntryNrImpl::RemoveEntry()
 {

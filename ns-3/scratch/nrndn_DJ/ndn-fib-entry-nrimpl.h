@@ -65,7 +65,7 @@ public:
 
 	}
 	void Print(std::ostream &os) const;
-
+	void setDataName(std::string name);
 //private:
 	//void AddNeighborTimeoutEvent(uint32_t id);
 
