@@ -72,14 +72,14 @@ NrPitImpl::NotifyNewAggregate ()
 	{
 		m_sensor = GetObject<ndn::nrndn::NodeSensor>();
 		// Setup Lane change action
-		if (m_sensor != NULL)
+		/*if (m_sensor != NULL)
 		{
 			//m_sensor->TraceConnectWithoutContext("LaneChange",
 				//	MakeCallback(&NrPitImpl::laneChange, this));
 
 			//NrPitEntry needs m_sensor. Initialize immediately after m_sensor is aggregated
 			InitializeNrPitEntry();
-		}
+		}*/
 	}
 
   Pit::NotifyNewAggregate ();
@@ -225,7 +225,7 @@ NrPitImpl::Create (Ptr<const Interest> header)
 
 // need to modify:how to initialize?
 //test pit
-bool
+/*bool
 NrPitImpl::InitializeNrPitEntry()
 {
 	NS_LOG_FUNCTION (this);
@@ -248,7 +248,7 @@ NrPitImpl::InitializeNrPitEntry()
 	}
 	return true;
 }
-  
+  */
 
 void
 NrPitImpl::MarkErased (Ptr<Entry> item)
