@@ -524,8 +524,10 @@ nrndnExample::InstallNrNdnStack()
 	pitCleanIntervalStr<<pitCleanInterval;
 	cout<<"pitInterval="<<pitCleanIntervalStr.str()<<endl;
 	ndnHelper.SetForwardingStrategy ("ns3::ndn::fw::nrndn::NavigationRouteHeuristic","HelloLogEnable",str,"NoFwStop",noFwStopStr,"TTLMax",TTLMaxStr.str());
-	ndnHelper.SetContentStore ("ns3::ndn::cs::Lru", "MaxSize", "1000");
+	//ndnHelper.SetContentStore ("ns3::ndn::cs::Lru", "MaxSize", "1000");
 	ndnHelper.SetPit("ns3::ndn::pit::nrndn::NrPitImpl","CleanInterval",pitCleanIntervalStr.str());
+	ndnHelper.SetFib("ns3::ndn::fib::nrndn::NrFibImpl","CleanInterval",pitCleanIntervalStr.str());
+	ndnHelper.SetContentStore("ns3::ndn::cs::nrndn::NrCsImpl");
 	//ndnHelper.SetFib( ???????????????????????? );
 
 	ndnHelper.SetDefaultRoutes (true);
