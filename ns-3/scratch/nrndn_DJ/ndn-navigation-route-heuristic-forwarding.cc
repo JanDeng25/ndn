@@ -148,9 +148,9 @@ void NavigationRouteHeuristic::Start()
 		dataName->appendNumber(num);
 		Ptr<Data> data = Create<Data>(Create<Packet>(m_virtualPayloadSize));
 		data->SetName(dataName);
-		cout<<"before add"<<endl;
+		//cout<<"before add"<<endl;
 		m_cs->Add(data);
-		cout<<"after add"<<endl;
+		//cout<<"after add"<<endl;
 	}
 }
 
@@ -245,7 +245,7 @@ void NavigationRouteHeuristic::OnInterest(Ptr<Face> face,
 		NS_LOG_DEBUG("Get interest packet from APPLICATION");
 
 		cout<<"node: "<<m_node->GetId()<<" receive interest in forwarder"<<endl;
-		cout<<"bad bug"<<endl;
+		//cout<<"bad bug"<<endl;
 		if(m_fib->Find(interest->GetName())){
 			cout<<1<<endl;
 			PrepareInterestPacket(interest);
