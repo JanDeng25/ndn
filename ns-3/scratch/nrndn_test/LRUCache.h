@@ -93,6 +93,7 @@ private:
     }
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     // 将结点插入头部
 =======
     // 灏嗙粨鐐规彃鍏ュご閮�
@@ -103,6 +104,9 @@ private:
 >>>>>>> f47b4dc25b11da36020524c8488aaec4f6a30b7f
 =======
 >>>>>>> 5b907806dec8d4eefe18d02fc815a1a7d6ab9516
+=======
+    // 将结点插入头部
+>>>>>>> 19fd9af93d9bbf183a127ba2c91311a8cef777c7
     void attach(Node<K,T>* node){
         node->prev = head_;
         node->next = head_->next;
