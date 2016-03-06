@@ -108,10 +108,10 @@ private:
     // 将结点插入头部
 >>>>>>> 19fd9af93d9bbf183a127ba2c91311a8cef777c7
     void attach(Node<K,T>* node){
-        node->prev = head_;
-        node->next = head_->next;
-        head_->next = node;
-        node->next->prev = node;
+    	node->prev = head_;
+    	node->next = head_->next;
+    	head_->next = node;
+    	node->next->prev = node;
     }
 private:
     std::unordered_map<K,Node<K,T>*> hashmap_;
