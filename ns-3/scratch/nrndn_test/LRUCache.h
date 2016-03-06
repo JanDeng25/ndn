@@ -91,7 +91,6 @@ private:
         node->prev->next = node->next;
         node->next->prev = node->prev;
     }
-    // 将结点插入头部
     void attach(Node<K,T>* node){
         node->prev = head_;
         node->next = head_->next;
