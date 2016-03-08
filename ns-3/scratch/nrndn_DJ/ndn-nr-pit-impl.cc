@@ -117,6 +117,13 @@ bool NrPitImpl::UpdatePit(const std::vector<std::string>& route,const uint32_t& 
 //add by DJ on Jan 4,2016:update pit
 bool NrPitImpl::UpdatePit(std::string lane,Ptr<Interest> interest)
 {
+	if(m_pitContainer.empty()){
+		Ptr<fib::Entry> fibEntry=ns3::Create<fib::Entry>(Ptr<Fib>(0),Ptr<Name>(0));
+		Ptr<EntryNrImpl> fentry = ns3::Create<EntryNrImpl>(*this,interest,fibEntry);
+		Ptr<Entry> pitEntry = DynamicCast<Entry>(fentry);
+		m_pitContainer.push_back(pitEntry);
+		}
+	else{
 	//std::ostringstream os;
 	std::vector<Ptr<Entry> >::iterator pit=m_pitContainer.begin();
 	Ptr<Entry> entry = *pit;
@@ -139,11 +146,12 @@ bool NrPitImpl::UpdatePit(std::string lane,Ptr<Interest> interest)
 			std::unordered_set< std::string >::const_iterator it = pitEntry->getIncomingnbs().find(lane);
 			if(it==pitEntry->getIncomingnbs().end()){
 				pitEntry->AddIncomingNeighbors(lane);
-				return true;
+
 			}
 			//os<<(*pit)->GetInterest()->GetName().toUri()<<" add Neighbor "<<id<<' ';
 		}
         pitEntry->Print(std::cout);
+        return true;
 
 	}
 	    Ptr<fib::Entry> fibEntry=ns3::Create<fib::Entry>(Ptr<Fib>(0),Ptr<Name>(0));
@@ -151,6 +159,7 @@ bool NrPitImpl::UpdatePit(std::string lane,Ptr<Interest> interest)
 		Ptr<Entry> pitEntry = DynamicCast<Entry>(fentry);
 		m_pitContainer.push_back(pitEntry);
 
+	}
 	//NS_LOG_UNCOND("update pit:"<<os.str());
 	//NS_LOG_DEBUG("update pit:"<<os.str());
 	return true;

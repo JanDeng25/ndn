@@ -40,6 +40,10 @@ EntryNrImpl::~EntryNrImpl ()
 std::unordered_set< std::string  >::iterator
 EntryNrImpl::AddIncomingNeighbors(std::string lane)
 {
+	if(m_incomingnbs.empty()){
+			m_incomingnbs.insert(lane);
+			return m_incomingnbs.begin();
+		}
 	//AddNeighborTimeoutEvent(id);
 	std::unordered_set< std::string >::iterator incomingnb = m_incomingnbs.find(lane);
 

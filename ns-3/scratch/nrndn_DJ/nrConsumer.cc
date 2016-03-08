@@ -104,7 +104,7 @@ void nrConsumer::ScheduleNextPacket()
 void nrConsumer::SendPacket()
 {
 	  if (!m_active) return;
-
+      Name m_prefix;
 	  uint32_t num = GetNode()->GetId() % 3 + 1;
 	  m_prefix.appendNumber(num);
 
