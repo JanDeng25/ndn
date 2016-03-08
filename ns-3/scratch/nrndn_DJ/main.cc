@@ -116,12 +116,16 @@ private:
   //hitRate: among all the interested nodes, how many are received
   double hitRate;
   //accuracyRate: among all the nodes received, how many are interested
-  double accuracyRate;
-  double arrivalRate;
-  double averageForwardTimes;
-  double averageInterestForwardTimes;
-  double averageDelay;
-  uint32_t SumForwardTimes;
+  //accuracyRate: among all the nodes received, how many are interested
+    double accuracyRate;
+    double arrivalRate;
+    uint32_t ForwardTimes;
+    double averageInterestForwardTimes;
+    double averageDataForwardTimes;
+    double averageDelay;
+    uint32_t SumForwardTimes;
+    uint32_t detectTimes;
+    uint32_t interestNum;
 
   bool noFwStop;
   uint32_t TTLMax;
@@ -358,21 +362,25 @@ void
 nrndnExample::Report ()
 {
 	NS_LOG_UNCOND ("Report data outputs here");
-	//1. get statistic first
-	getStatistic();
+		//1. get statistic first
+		getStatistic();
 
-	//2. output the result
-	os<<arrivalRate <<'\t'
-			<<accuracyRate<<'\t'
-			<<hitRate<<'\t'
-			<<averageDelay<<'\t'
-			<<averageForwardTimes<<'\t'
-			<<averageInterestForwardTimes<<'\t'
-			<<SumForwardTimes<<'\t'
-			<<nrUtils::InterestByteSent<<'\t'
-			<<nrUtils::HelloByteSent<<'\t'
-			<<nrUtils::DataByteSent<<'\t'
-			<<nrUtils::ByteSent<<endl;
+		//2. output the result
+		os//<<arrivalRate <<'\t'
+				//<<accuracyRate<<'\t'
+				<<hitRate<<'\t'
+				<<averageDelay<<'\t'
+				<<ForwardTimes<<'\t'
+				<<averageInterestForwardTimes<<'\t'
+				<<averageDataForwardTimes<<'\t'
+				<<interestNum<<'\t'
+				<<detectTimes<<'\t'
+				//<<SumForwardTimes<<'\t'
+				//<<nrUtils::InterestByteSent<<'\t'
+				//<<nrUtils::HelloByteSent<<'\t'
+				//<<nrUtils::DataByteSent<<'\t'
+				//<<nrUtils::ByteSent
+				<<endl;
 }
 
 void
