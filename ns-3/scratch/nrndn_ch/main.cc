@@ -186,7 +186,7 @@ nrndnExample::nrndnExample () :
   transRange(436),//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   HelloLogEnable(true),
   accidentNum(30),//默认3
-  method(2),
+  method(0),
   interestFrequency(0.5),//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
   hitRate(0),
   ResourceForwardTimes(0),
