@@ -165,7 +165,7 @@ bool NrPitImpl::UpdatePit(std::string lane,Ptr<Interest> interest)
 	return true;
 }
 
-//add by DJ on Jan 4,2016:update pit
+//add by DJ on Jan 4,2016:remove pit
 bool NrPitImpl::RemovePitEntry(const Name& name){
 	std::vector<Ptr<Entry> >::iterator pit=m_pitContainer.begin();
 	Ptr<Entry> entry = *pit;

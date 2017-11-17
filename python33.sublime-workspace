@@ -1,0 +1,199 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/C/Users/DJ/Desktop/part4/75/ListWritable.java",
+		"/C/Users/DJ/Desktop/part4/75/KNearestNeighbour.java",
+		"/C/Users/DJ/Desktop/part4/75/Distance.java",
+		"/C/Users/DJ/Desktop/part4/75/Instance.java",
+		"/C/Users/DJ/Desktop/part4/74/74/STjoin.java",
+		"/C/Users/DJ/Desktop/part4/73/73/73_大作业代码/KMeans.java",
+		"/C/Users/DJ/Desktop/part4/73/73/73_大作业代码/Init.java",
+		"/C/Users/DJ/Desktop/part4/73/73/73_大作业代码/CenterDistance.java",
+		"/C/Users/DJ/Desktop/part4/72_v2/72_v2/KNearestNeighbour.java",
+		"/C/Users/DJ/Desktop/part4/71/71_code/src/NaiveBayesConf.java",
+		"/C/Users/DJ/Desktop/part4/71/71_code/answer.txt",
+		"/C/Users/DJ/Desktop/part4/71/71_code/result.txt",
+		"/C/Users/DJ/Desktop/part4/69/69/69_代码及输出结果/KNN0.java",
+		"/C/Users/DJ/Desktop/part4/69/69/69_代码及输出结果/test.txt",
+		"/C/Users/DJ/Desktop/part4/69/69/69_代码及输出结果/trainData.txt",
+		"/C/Users/DJ/Desktop/part4/69/69/69_代码及输出结果/output/part-r-00000",
+		"/C/Users/DJ/Desktop/part4/69/69/69_代码及输出结果/command",
+		"/C/Users/DJ/Desktop/part4/69/69/69_代码及输出结果/KNN0.class",
+		"/C/Users/DJ/Desktop/part4/69/69/69_代码及输出结果/Instance.class",
+		"/C/Users/DJ/Desktop/part4/69/69/69_代码及输出结果/Distance.class",
+		"/C/Users/DJ/Desktop/part4/68/MaxSales.java",
+		"/C/Users/DJ/Desktop/part4/68/part-r-00000",
+		"/C/Users/DJ/Desktop/part4/68/test.txt",
+		"/C/Users/DJ/Desktop/part4/67/TOPK.java",
+		"/C/Users/DJ/Desktop/part4/66/EmotionEstimate.java",
+		"/C/Users/DJ/Desktop/part4/66/input.txt",
+		"/C/Users/DJ/Desktop/part4/65/MST.java",
+		"/C/Users/DJ/Desktop/张玲华-腾讯云98/index.html",
+		"/C/Users/DJ/Desktop/张玲华-腾讯云98/yun-act.html",
+		"/C/Users/DJ/Desktop/张玲华-腾讯云98/zhuce.html",
+		"/C/Users/DJ/Desktop/作业/多媒体/16214274 邓健-HTML & JavaScript/JavaScript/JavaScript.html",
+		"/C/Users/DJ/Desktop/zlh/HTML/彪马/biaoma.html",
+		"/C/Users/DJ/Desktop/响应式/index.css",
+		"/C/Users/DJ/Desktop/响应式/media.css",
+		"/C/Users/DJ/Desktop/响应式/index.html"
+	],
+	"find":
+	{
+		"height": 34.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 23.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "python33.sublime-project",
+	"replace":
+	{
+		"height": 62.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 150.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
