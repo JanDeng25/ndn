@@ -358,10 +358,10 @@ nrndnExample::Report ()
 
 	//2. output the result
 	os//<<arrivalRate <<'\t'
-			//<<accuracyRate<<'\n'
-			<<"hit rate:"<<hitRate<<'\t'
-			<<" average delay:"<<averageDelay<<'\t'
-			<<" Resourceforward times:"<< ResourceForwardTimes<<'\t'
+			//<<accuracyRate<<'\t'
+			<<"hit rate:"<<hitRate<<'\n'
+			<<" average delay:"<<averageDelay<<'\n'
+			<<" Resourceforward times:"<< ResourceForwardTimes<<"\t\n"
 			<<" average interest forwards times:"<<averageInterestForwardTimes<<'\t'
 			<<" average data froward times:"<<averageDataForwardTimes<<'\t'
 			<<" table Sum:"<<tableSum<<'\t'
