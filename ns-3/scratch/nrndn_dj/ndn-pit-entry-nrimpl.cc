@@ -153,6 +153,10 @@ bool EntryNrImpl::isSameLane(std::string lane1, std::string lane2)
 	return false;
 }
 
+//By DJ:Dec 20, 2017
+void changeNb(std::string lane){
+	return ;
+}
 
 /*
 void EntryNrImpl::RemoveAllTimeoutEvent()
