@@ -154,12 +154,12 @@ bool EntryNrImpl::isSameLane(std::string lane1, std::string lane2)
 }
 
 //By DJ on Dec 20, 2017: find neighbor lane !!!!!!!!!!!!!!!
-bool isNeighborLane(std::string lane1, std::string lane2){
+bool EntryNrImpl::isNeighborLane(std::string lane1, std::string lane2){
 	return true;
 }
 
 //By DJ on Dec 20, 2017: Automatically change PIT
-void auto_table_change(std::string lane){
+void EntryNrImpl::auto_table_change(std::string lane){
 	std::unordered_set< std::string >::iterator it;
 	for(it = m_incomingnbs.begin(); it != m_incomingnbs.end(); ++it){
 		if(!isNeighborLane(lane, (*it)))
