@@ -164,9 +164,10 @@ void EntryNrImpl::auto_table_change(std::string lane){
 	for(it = m_incomingnbs.begin(); it != m_incomingnbs.end(); ++it){
 		if(!isNeighborLane(lane, (*it)))
 		{
-			*it = lane;
+			m_incomingnbs.erase(it); //it指针的操作，需要输出看看正确性
 		}
 	}
+	m_incomingnbs.insert(lane);
 	return ;
 }
 
