@@ -162,7 +162,7 @@ bool EntryNrImpl::is_neighbor_ane(std::string lane1, std::string lane2){
 void EntryNrImpl::auto_table_change(std::string lane){
 	std::unordered_set< std::string >::iterator it;
 	for(it = m_incomingnbs.begin(); it != m_incomingnbs.end(); ++it){
-		if(!isNeighborLane(lane, (*it)))
+		if(!is_neighbor_lane(lane, (*it)))
 		{
 			m_incomingnbs.erase(it); //it指针的操作，需要输出看看正确性
 		}

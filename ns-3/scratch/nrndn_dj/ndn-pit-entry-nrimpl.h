@@ -77,7 +77,7 @@ public:
 	bool isSameLane(std::string lane1, std::string lane2);
 	
 	//By DJ on Dec 20, 2017: find neighbor lane
-	bool is_neighbor_ane(std::string lane1, std::string lane2);
+	bool is_neighbor_lane(std::string lane1, std::string lane2);
 	
 	//By DJ on Dec 20, 2017: Automatically change PIT
 	void auto_table_change(std::string lane);
