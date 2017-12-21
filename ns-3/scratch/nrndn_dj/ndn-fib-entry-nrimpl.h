@@ -77,7 +77,7 @@ public:
 	bool is_neighbor_lane(std::string lane1, std::string lane2);
 	
 	//By DJ on Dec 21, 2017: Automatically change FIB
-	void auto_table_change(std::string lane);
+	void auto_table_change(std::string pre_lane, std::string next_lane);
 	
 //private:
 	//void AddNeighborTimeoutEvent(uint32_t id);

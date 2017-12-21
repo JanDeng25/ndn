@@ -130,18 +130,18 @@ bool EntryNrImpl::is_neighbor_lane(std::string lane1, std::string lane2){
 void EntryNrImpl::auto_table_change(std::string pre_lane, std::string next_lane){
 	std::unordered_map< std::string, std::pair<uint32_t, uint32_t > >::iterator it;
 	std::pair<uint32_t, uint32_t > temp(100, 100);    						//initialize to 100 hops
-	for(it = m_incomingnbs.begin(); it != m_incomingnbs.end(); ++it){
+	for(it = m_incomingnbs_2.begin(); it != m_incomingnbs_2.end(); ++it){
 		if(!is_neighbor_lane(next_lane, it->first)){
 			if(temp > it->second.first){
 				temp = it->second;
 			}
-			m_incomingnbs.erase(it);
+			m_incomingnbs_2.erase(it);
 		}
 	}
 	temp.first++;
 	temp.second++;
 	if(temp.second < 3)
-		m_incomingnbs.insert(std::pair<std::string,std::pair<uint32_t, uint32_t > >(pre_lane,temp));
+		m_incomingnbs_2.insert(std::pair<std::string,std::pair<uint32_t, uint32_t > >(pre_lane,temp));
 	return ;
 }
 
