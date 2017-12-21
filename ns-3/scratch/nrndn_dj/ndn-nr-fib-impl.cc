@@ -147,6 +147,18 @@ NrFibImpl::AddFibEntry (const Ptr<const Name> &prefix, std::string lane,uint32_t
     return;
 }
 
+
+//By DJ on Dec 21,2017: auto update pit
+void NrFibImpl::auto_update_fib(std::string pre_lane, std::string next_lane){
+	if(m_fibContainer.empty())
+		return;
+	std::vector<Ptr<Entry> >::iterator fib = m_fibContainer.begin();
+	for(; fib! = m_fibContainer.end(); ++fib){
+		Ptr<EntryNrImpl> fibEntry = DynamicCast<EntryNrImpl>(*fib);
+		fibEntry->auto_table_change(pre_lane, next_lane);
+	}
+}
+
 //Mar 17,2016: merge two fib table
  void
  NrFibImpl::mergeFib(std::vector<Ptr<Entry> >  fibCon){

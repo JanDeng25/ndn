@@ -106,7 +106,7 @@ public:
   //bool UpdatePit(const std::vector<std::string>& route,const uint32_t& id);
 
   //By DJ on Dec 21,2017: auto update pit
-  void auto_update_pit(std::string pre_lane, std::string next_lane, Ptr<const Interest> interest);
+  void auto_update_pit(std::string pre_lane, std::string next_lane);
   
   //add by DJ on Jan 4,2016:update pit
   bool UpdatePit(std::string lane,Ptr<const Interest> interest);

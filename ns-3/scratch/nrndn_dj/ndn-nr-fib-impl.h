@@ -139,6 +139,10 @@ public:
 
   //void laneChange(std::string oldLane, std::string newLane);
 
+  //By DJ on Dec 21,2017: auto update pit
+  void auto_update_fib(std::string pre_lane, std::string next_lane);
+  
+
   //小锟添加，2015-8-23
   std::string uriConvertToString(std::string str);
 
