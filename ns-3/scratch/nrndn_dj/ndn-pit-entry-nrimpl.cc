@@ -154,7 +154,7 @@ bool EntryNrImpl::isSameLane(std::string lane1, std::string lane2)
 }
 
 //By DJ on Dec 20, 2017: find neighbor lane !!!!!!!!!!!!!!!
-bool EntryNrImpl::is_neighbor_ane(std::string lane1, std::string lane2){
+bool EntryNrImpl::is_neighbor_lane(std::string lane1, std::string lane2){
 	return true;
 }
 
