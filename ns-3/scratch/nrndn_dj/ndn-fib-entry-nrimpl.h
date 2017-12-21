@@ -72,6 +72,13 @@ public:
 	void setDataName(std::string name);
 	void setNb(std::unordered_map< std::string,uint32_t >  nb);
 	bool isSameLane(std::string lane1, std::string lane2);
+	
+	//By DJ on Dec 21, 2017: find neighbor lane
+	bool is_neighbor_lane(std::string lane1, std::string lane2);
+	
+	//By DJ on Dec 21, 2017: Automatically change FIB
+	void auto_table_change(std::string lane);
+	
 //private:
 	//void AddNeighborTimeoutEvent(uint32_t id);
 
@@ -80,6 +87,7 @@ public:
 private:
 	//std::unordered_map< uint32_t,EventId> m_nbTimeoutEvent;///< @brief it is a hashmap that record the timeout event of each neighbor id
 	std::unordered_map< std::string,uint32_t > 		  m_incomingnbs;///< @brief container for incoming neighbors
+	std::unordered_map< std::string, std::pair<uint32_t, uint32_t > > m_incomingnbs_2;
 	std::string m_data_name;
 	Time m_infaceTimeout;
 

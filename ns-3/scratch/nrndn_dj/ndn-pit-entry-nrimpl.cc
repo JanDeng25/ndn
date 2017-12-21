@@ -159,15 +159,15 @@ bool EntryNrImpl::is_neighbor_lane(std::string lane1, std::string lane2){
 }
 
 //By DJ on Dec 20, 2017: Automatically change PIT
-void EntryNrImpl::auto_table_change(std::string lane){
+void EntryNrImpl::auto_table_change(std::string pre_lane, std::string next_lane){
 	std::unordered_set< std::string >::iterator it;
 	for(it = m_incomingnbs.begin(); it != m_incomingnbs.end(); ++it){
-		if(!is_neighbor_lane(lane, (*it)))
+		if(!is_neighbor_lane(next_lane, (*it)))
 		{
 			m_incomingnbs.erase(it); //it指针的操作，需要输出看看正确性
 		}
 	}
-	m_incomingnbs.insert(lane);
+	m_incomingnbs.insert(pre_lane);
 	return ;
 }
 
