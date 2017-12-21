@@ -132,7 +132,7 @@ void EntryNrImpl::auto_table_change(std::string pre_lane, std::string next_lane)
 	std::pair<uint32_t, uint32_t > temp(100, 100);    						//initialize to 100 hops
 	for(it = m_incomingnbs_2.begin(); it != m_incomingnbs_2.end(); ++it){
 		if(!is_neighbor_lane(next_lane, it->first)){
-			if(temp > it->second.first){
+			if(temp.first > it->second.first){
 				temp = it->second;
 			}
 			m_incomingnbs_2.erase(it);

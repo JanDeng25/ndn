@@ -87,13 +87,13 @@ NrPitImpl::NotifyNewAggregate ()
 }
 
   //By DJ on Dec 21,2017: auto update pit
- void NrPitImpl::auto_update_pit(std::string lane, Ptr<const Interest> interest){
+ void NrPitImpl::auto_update_pit((std::string pre_lane, std::string next_lane, Ptr<const Interest> interest){
  	if(m_pitContainer.empty())
  		return;
  	std::vector<Ptr<pit::Entry> >::iterator pit=m_pitContainer.begin();
  	for(; pit != m_pitContainer.end(); ++pit){
  		Ptr<EntryNrImpl> pitEntry = DynamicCast<EntryNrImpl>(*pit);
- 		pitEntry->auto_table_change(lane);
+ 		pitEntry->auto_table_change(pre_lane, next_lane);
  	}
  	return;
  }
