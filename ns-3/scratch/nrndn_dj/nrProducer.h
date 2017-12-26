@@ -124,6 +124,8 @@ private:
 
 	//A list indicates that when it will broadcast an accident message(aka, traffic data)
 	/////std::set<double> m_accidentList;
+
+	string m_oldLane;
 };
 
 } /* namespace nrndn */
