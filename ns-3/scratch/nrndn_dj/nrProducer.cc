@@ -220,7 +220,9 @@ bool nrProducer::IsActive()
 void nrProducer::laneChange(string oldLane, string newLane){
 	if (!m_active) return;
 	 //cout<<"consumer lane change"<<endl;
-	if(interestSent.empty()) return;
+
+	//By DJ on Dec 26, 2017: temporarily delete to avoid error???
+	//if(interestSent.empty()) return;
 	if(isJuction(newLane) ) return;
 	if(oldLane == m_oldLane) return;
 
