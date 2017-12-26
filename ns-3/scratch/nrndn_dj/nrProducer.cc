@@ -216,6 +216,47 @@ bool nrProducer::IsActive()
 	return m_active;
 }
 
+//By DJ on Dec 26, 2017: function name might be section change?
+void nrProducer::laneChange(string oldLane, string newLane){
+	if (!m_active) return;
+	 //cout<<"consumer lane change"<<endl;
+	if(interestSent.empty()) return;
+	if(isJuction(newLane) ) return;
+	if(oldLane == m_oldLane) return;
+
+	m_oldLane = oldLane;
+
+	  //cout<<m_node->GetId()<<" lane changed from "<<oldLane<<" to "<<newLane<<endl;
+
+	 string name = interestSent.begin()->second;
+	 Name prefix(name);
+
+	 Ptr<Interest> interest = Create<Interest> (Create<Packet>(m_virtualPayloadSize));
+	 Ptr<Name> interestName = Create<Name> (prefix);
+	 interest->SetName(interestName);
+	 interest->SetNonce(m_rand.GetValue());//just generate a random number
+	 interest->SetInterestLifetime    (m_interestLifeTime);
+	 interest->SetScope(MOVE_TO_NEW_LANE);
+
+	   //add header;
+	  ndn::nrndn::nrndnHeader nrheader;
+	  nrheader.setSourceId(GetNode()->GetId());
+	  nrheader.setX(m_sensor->getX());
+	  nrheader.setY(m_sensor->getY());
+	  std::string lane = m_sensor->getLane();
+	  nrheader.setPreLane(oldLane);
+	  nrheader.setCurrentLane(lane);
+
+	  Ptr<Packet> newPayload = Create<Packet> (m_virtualPayloadSize);
+	  newPayload->AddHeader(nrheader);
+	  interest->SetPayload(newPayload);
+
+	  //cout<<"node: "<<GetNode()->GetId()<<"  send MOVE_TO_NEW_LANE packet,name: "<<prefix.toUri()<<" in consumer"<<endl;
+
+	  m_transmittedInterests (interest, this, m_face);
+	  m_face->ReceiveInterest (interest);
+}
+
 } /* namespace nrndn */
 } /* namespace ndn */
 } /* namespace ns3 */

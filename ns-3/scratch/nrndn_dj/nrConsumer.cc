@@ -182,7 +182,7 @@ void nrConsumer::OnData(Ptr<const Data> data)
 
 void nrConsumer::laneChange(std::string oldLane, std::string newLane)
 {
-	 if (!m_active) return;
+	if (!m_active) return;
 	 //cout<<"consumer lane change"<<endl;
 	if(interestSent.empty()) return;
 	if(isJuction(newLane) ) return;

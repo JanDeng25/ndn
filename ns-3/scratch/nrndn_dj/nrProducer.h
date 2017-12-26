@@ -57,7 +57,8 @@ public:
 	 */
 	/////void OnSendingTrafficData();
 
-	/////void laneChange(std::string, std::string);
+	//By DJ on Dec 26, 2017: function name might be section change?
+	void laneChange(string, string);
 
 	/////void addAccident();
 
