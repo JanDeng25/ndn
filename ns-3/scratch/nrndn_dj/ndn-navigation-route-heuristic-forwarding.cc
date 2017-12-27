@@ -1338,7 +1338,7 @@ void NavigationRouteHeuristic::CheckTable()
 }
 
 //twice requests mechanism:first
-void first_request(std::vector<string> v){
+void NavigationRouteHeuristic::first_request(std::vector<string> v){
 	if (!m_running)  return;
 	if(isJuction(m_sensor->getLane())) return;
 	if(Simulator::Now().GetSeconds() < 50) return;
