@@ -70,8 +70,6 @@ public:
 
 	virtual void RemoveFace(Ptr<Face> face);
 
-	//void laneChange(std::string, std::string);
-
 	enum
 	{
   		RESOURCE_PACKET = 1,        //资源包，data packet
