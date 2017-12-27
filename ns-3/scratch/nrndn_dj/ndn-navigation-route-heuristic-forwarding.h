@@ -175,6 +175,9 @@ private:
 
 	void fibnum();
 
+	//By DJ on Dec 27, 2017: twice requests mechanism
+	void first_request(std::vector<string> v);
+
 	void AskForTable(std::vector<string> v);
 
 	void CheckTable();

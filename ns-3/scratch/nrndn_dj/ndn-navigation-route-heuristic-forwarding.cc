@@ -1337,6 +1337,46 @@ void NavigationRouteHeuristic::CheckTable()
 	Simulator::Schedule (Seconds (10), & NavigationRouteHeuristic::CheckTable, this);
 }
 
+//twice requests mechanism:first
+void first_request(std::vector<string> v){
+	if (!m_running)  return;
+	if(isJuction(m_sensor->getLane())) return;
+	if(Simulator::Now().GetSeconds() < 50) return;
+
+	//cout<<"into ask for table"<<endl;
+	Name name;
+	name.appendNumber(ASK_FOR_TABLE);
+	Ptr<Interest> interest = Create<Interest> (Create<Packet>(m_virtualPayloadSize));
+	Ptr<Name> interestName = Create<Name>(name);
+	interest->SetName(interestName);
+	interest->SetNonce(m_uniformRandomVariable->GetValue());//just generate a random number
+	interest->SetScope(ASK_FOR_TABLE);
+
+	ndn::nrndn::nrndnHeader nrheader;
+	nrheader.setSourceId(m_node->GetId());
+	nrheader.setX(m_sensor->getX());
+	nrheader.setY(m_sensor->getY());
+	std::string lane = m_sensor->getLane();
+	nrheader.setPreLane(m_oldLane);
+	nrheader.setCurrentLane(lane);
+	nrheader.setLaneList(sourcename);
+
+	Ptr<Packet> newPayload = Create<Packet> (m_virtualPayloadSize);
+	newPayload->AddHeader(nrheader);
+	interest->SetPayload(newPayload);
+
+	ndn::nrndn::PacketTypeTag typeTag(ASK_FOR_TABLE );
+	interest->GetPayload()->AddPacketTag(typeTag);
+
+	FwHopCountTag hopCountTag;
+	interest->GetPayload()->AddPacketTag(hopCountTag);
+
+	m_interestNonceSeen.Put(interest->GetNonce(),true);
+	//cout<<"node: "<<m_node->GetId()<<" ask for table on "<<lane<<endl;
+
+	SendInterestPacket(interest);
+}
+
 //Twice Request Mechanism should be called here? Modify……
 void NavigationRouteHeuristic::AskForTable(vector<string> sourcename)
 {
