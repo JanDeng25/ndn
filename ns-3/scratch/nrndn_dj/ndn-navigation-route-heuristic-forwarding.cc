@@ -1002,6 +1002,7 @@ void NavigationRouteHeuristic::ReplyConfirmPacket(Ptr<Interest> interest)
 	SendDataPacket(data);
 }
 
+//回复表格
 void NavigationRouteHeuristic::ReplyTablePacket(Ptr<Interest> interest)
 {
 	//将表格打包，signature和nodeid与interest相同
@@ -1359,7 +1360,7 @@ void NavigationRouteHeuristic::first_request(std::vector<string> v){
 	std::string lane = m_sensor->getLane();
 	nrheader.setPreLane(m_oldLane);
 	nrheader.setCurrentLane(lane);
-	nrheader.setLaneList(sourcename);
+	nrheader.setLaneList(v);
 
 	Ptr<Packet> newPayload = Create<Packet> (m_virtualPayloadSize);
 	newPayload->AddHeader(nrheader);
@@ -1375,6 +1376,18 @@ void NavigationRouteHeuristic::first_request(std::vector<string> v){
 	//cout<<"node: "<<m_node->GetId()<<" ask for table on "<<lane<<endl;
 
 	SendInterestPacket(interest);
+}
+
+void NavigationRouteHeuristic::first_reply(Ptr<Interest> interest){
+	
+}
+
+void second_request(std::vector<string> v){
+	
+}
+
+void second_reply(Ptr<Interest> interest){
+	
 }
 
 //Twice Request Mechanism should be called here? Modify……

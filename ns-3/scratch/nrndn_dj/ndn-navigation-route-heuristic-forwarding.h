@@ -178,6 +178,12 @@ private:
 	//By DJ on Dec 27, 2017: twice requests mechanism
 	void first_request(std::vector<string> v);
 
+	void first_reply(Ptr<Interest> interest);
+
+	void second_request(std::vector<string> v);
+
+	void second_reply(Ptr<Interest> interest);
+
 	void AskForTable(std::vector<string> v);
 
 	void CheckTable();
