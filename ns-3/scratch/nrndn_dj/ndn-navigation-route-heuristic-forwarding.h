@@ -251,9 +251,9 @@ private:
 
 	Time m_freshness;
 
-	 string m_oldLane;
+	string m_oldLane;
 
-	 set<uint32_t> resourceReceived;
+	set<uint32_t> resourceReceived;
 };
 } /* namespace nrndn */
 } /* namespace fw */
