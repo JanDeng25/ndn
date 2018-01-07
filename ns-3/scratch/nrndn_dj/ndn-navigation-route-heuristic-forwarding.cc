@@ -1382,7 +1382,7 @@ void NavigationRouteHeuristic::first_reply(Ptr<Interest> interest){
 	
 }
 
-void second_request(std::vector<string> v){
+void NavigationRouteHeuristic::second_request(std::vector<string> v){
 	if (!m_running)  return;
 	if(isJuction(m_sensor->getLane())) return;
 	if(Simulator::Now().GetSeconds() < 50) return;
@@ -1421,7 +1421,7 @@ void second_request(std::vector<string> v){
 	SendInterestPacket(interest);
 }
 
-void second_reply(Ptr<Interest> interest){
+void NavigationRouteHeuristic::second_reply(Ptr<Interest> interest){
 	
 }
 
