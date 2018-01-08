@@ -106,10 +106,12 @@ void EntryNrImpl::setDataName(std::string name)
 	m_data_name = name;
 }
 
-void EntryNrImpl::setNb(std::unordered_map< std::string,uint32_t >  nb)
+void EntryNrImpl::setNb(std::unordered_map< std::string,std::pair<uint32_t, uint32_t >  >  nb)
 {
 	m_incomingnbs = nb;
 }
+
+
 bool EntryNrImpl::isSameLane(std::string lane1, std::string lane2)
 {
 	if(lane1.length() != 8 || lane2.length() != 8)
