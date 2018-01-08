@@ -54,8 +54,14 @@ public:
 	 */
 	std::unordered_map<std::string,uint32_t  >::iterator
 	AddIncomingNeighbors(std::string lane,uint32_t ttl);
-
+	/*
 	const std::unordered_map<std::string,uint32_t>& getIncomingnbs() const
+	{
+		return m_incomingnbs;
+	}
+	*/
+
+	const std::unordered_map<std::string,std::pair<uint32_t, uint32_t > >& getIncomingnbs() const
 	{
 		return m_incomingnbs_2;
 	}
