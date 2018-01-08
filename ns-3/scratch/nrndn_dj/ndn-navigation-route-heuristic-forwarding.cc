@@ -727,7 +727,7 @@ void NavigationRouteHeuristic::ForwardResourcePacket(Ptr<Data> src)
 	SendDataPacket(data);
 
 	ndn::nrndn::nrUtils::IncreaseResourceForwardCounter();
-	cout<<"now ResourceForwardSum = "<<ndn::nrndn::nrUtils::ResourceForwardSum<<endl;
+	//cout<<"now ResourceForwardSum = "<<ndn::nrndn::nrUtils::ResourceForwardSum<<endl;
 }
 
 void NavigationRouteHeuristic::ForwardConfirmPacket(Ptr<Data> src)
