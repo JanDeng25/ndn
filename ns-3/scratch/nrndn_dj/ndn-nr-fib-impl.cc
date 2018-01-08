@@ -167,9 +167,9 @@ void NrFibImpl::auto_update_fib(std::string pre_lane, std::string next_lane){
 	 std::vector<Ptr<Entry> >::iterator fib_fibCon = fibCon.begin();
 	 for(; fib_fibCon != fibCon.end(); ++fib_fibCon){
 		 Ptr<EntryNrImpl> fib_fibConEntry = DynamicCast<EntryNrImpl>(*fib_fibCon);
-		 std::unordered_map< std::string,uint32_t >::const_iterator incomingnb = fib_fibConEntry->getIncomingnbs().begin();
+		 std::unordered_map< std::string, std::pair<uint32_t, uint32_t> >::const_iterator incomingnb = fib_fibConEntry->getIncomingnbs().begin();
 		 for(;incomingnb != fib_fibConEntry->getIncomingnbs().end(); ++incomingnb){
-			 AddFibEntry(fib_fibConEntry->GetPrefixPtr(),incomingnb->first,incomingnb->second);
+			 AddFibEntry(fib_fibConEntry->GetPrefixPtr(), incomingnb->first,incomingnb->second);
 		 }
 	 }
 	 //this->Print(std::cout);
