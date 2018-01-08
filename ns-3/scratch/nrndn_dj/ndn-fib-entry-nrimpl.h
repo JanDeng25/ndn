@@ -52,7 +52,7 @@ public:
 	 * @param ttl   ttl of data packet
 	 * @returns iterator to the added last lane
 	 */
-	std::unordered_map<std::string,uint32_t  >::iterator
+	std::unordered_map<std::string,std::pair<uint32_t, uint32_t> >::iterator
 	AddIncomingNeighbors(std::string lane, std::pair<uint32_t, uint32_t> p);
 	/*
 	//previou neighbors
