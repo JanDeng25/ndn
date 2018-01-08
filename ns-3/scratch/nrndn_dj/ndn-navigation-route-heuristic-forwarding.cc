@@ -511,7 +511,7 @@ void NavigationRouteHeuristic::OnData(Ptr<Face> face, Ptr<Data> data)
 			resourceReceived.insert(signature);
 			return;
 		}
-		if(resourceReceived.find(signature) !=resourceReceived.end() )
+		if(resourceReceived.find(signature) != resourceReceived.end() )
 		{//避免一个节点同时收到很多资源包，转发多次
 			return;
 		}
@@ -520,13 +520,13 @@ void NavigationRouteHeuristic::OnData(Ptr<Face> face, Ptr<Data> data)
 		Time sendInterval = (MilliSeconds(interval) );
 		if(isSameLane(m_sensor->getLane(),currentLane) && !m_fib->Find(data->GetName()))
 		{
-				m_fib-> AddFibEntry(data->GetNamePtr(),preLane, hopCountTag.Get() );
+				m_fib-> AddFibEntry(data->GetNamePtr(),preLane, std::pair<uint32_t, uint32_t>(hopCountTag.Get(), 0) );
 				m_sendingDataEvent[nodeId][signature]=
 								Simulator::Schedule(sendInterval, &NavigationRouteHeuristic::ForwardResourcePacket, this,data);
 		}
 		else  if(!m_fib->Find(data->GetName()) && IsConnected(m_sensor->getLane(), currentLane) && !isSameLane(m_sensor->getLane(),currentLane)&& !isSameLane(m_sensor->getLane(),preLane)  )
 		{
-				m_fib-> AddFibEntry(data->GetNamePtr(),currentLane, hopCountTag.Get() );
+				m_fib-> AddFibEntry(data->GetNamePtr(),currentLane, std::pair<uint32_t, uint32_t>(hopCountTag.Get(), 0) );
 				m_sendingDataEvent[nodeId][signature]=
 								Simulator::Schedule(sendInterval+ m_gap* m_timeSlot, &NavigationRouteHeuristic::ForwardResourcePacket, this,data);
 		}
@@ -592,7 +592,7 @@ void NavigationRouteHeuristic::OnData(Ptr<Face> face, Ptr<Data> data)
 				return;
 			}
 			//建立FIB表项
-			 m_fib-> AddFibEntry(data->GetNamePtr(),preLane, nrheader.getTTL());
+			 m_fib-> AddFibEntry(data->GetNamePtr(),preLane, std::pair<uint32_t, uint32_t>(nrheader.getTTL(), 0));
 			if(isSameLane(m_sensor->getLane(),currentLane))
 			{
 				Time sendInterval = (MilliSeconds(interval) );
@@ -980,7 +980,7 @@ void NavigationRouteHeuristic::ReplyConfirmPacket(Ptr<Interest> interest)
 	{
 		Ptr<ndn::fib::nrndn::EntryNrImpl> nexthop;
 		nexthop = DynamicCast<ndn::fib::nrndn::EntryNrImpl>(m_fib->Find(interest->GetName()));
-		ttl = (nexthop->getIncomingnbs()).begin()->second;
+		ttl = (nexthop->getIncomingnbs()).begin()->second.first;
 	}
 
 	nrheader.setTTL(ttl);
@@ -1311,7 +1311,7 @@ void NavigationRouteHeuristic::laneChange(std::string oldLane, std::string newLa
 	for(uint32_t i = 0; i < m_fib->getFIB().size(); ++i)
 	{
 		Ptr<fib::nrndn::EntryNrImpl> tempFibEntry = DynamicCast<ndn::fib::nrndn::EntryNrImpl>(m_fib->getFIB()[i]);
-		std::unordered_map< std::string,uint32_t > nexthop =tempFibEntry->getIncomingnbs() ;
+		std::unordered_map< std::string,std::pair<uint32_t, uint32_t> > nexthop =tempFibEntry->getIncomingnbs() ;
 		string hop = nexthop.begin()->first;
 		if(!IsConnected(hop, m_sensor->getLane()) && !isSameLane(hop, m_sensor->getLane()))
 		{
