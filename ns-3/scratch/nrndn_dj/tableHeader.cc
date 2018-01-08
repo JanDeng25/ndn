@@ -291,7 +291,7 @@ uint32_t tableHeader::Deserialize(Buffer::Iterator start)
 			//By DJ on Jan 8. 2018: read std::pair
 			tempttl = i.ReadNtohU32();
 			tempadd = i.ReadNtohU32();
-			tempnb.insert(make_pair(tempstring,make_pair(tempttl, tempadd)));
+			tempnb.insert(make_pair(tempstring,std::pair<uint32_t, uint32_t >(tempttl, tempadd)));
 			//std::cout<<"tempstring:"<<tempstring<<" tempttl:"<<tempttl<<std::endl;
 		}
 		temp->setNb(tempnb);
@@ -326,10 +326,10 @@ void tableHeader::Print(std::ostream& os) const
 	{
 		Ptr<fib::nrndn::EntryNrImpl>  temp = DynamicCast<fib::nrndn::EntryNrImpl>(*it2);
 		os<<"name: "<<temp->getEntryName()<<"next hop: ";
-		std::unordered_map< std::string,uint32_t > nexthop = temp->getIncomingnbs() ;
-		std::unordered_map< std::string,uint32_t >::const_iterator p = nexthop.begin();
+		std::unordered_map< std::string, std::pair<uint32_t, uint32_t > > nexthop = temp->getIncomingnbs() ;
+		std::unordered_map< std::string, std::pair<uint32_t, uint32_t > >::const_iterator p = nexthop.begin();
 		for( ; p!=nexthop.end(); ++p)
-			os<<p->first<<" "<<p->second<<"  ";
+			os<<p->first<<" "<<p->second.first<<"  " << p->second.second;
 		os<<std::endl;
 	}
 }
