@@ -97,8 +97,8 @@ void EntryNrImpl::Print(std::ostream& os) const
 		os<<",  empty"<<std::endl;
 		return;
 	}
-	for(std::unordered_map< std::string,uint32_t >::const_iterator it = m_incomingnbs.begin(); it != m_incomingnbs.end(); ++it)
-		os<<(*it).first<<"   "<<(*it).second<<"    ";
+	for(std::unordered_map< std::string,std::pair<uint32_t, uint32_t > >::const_iterator it = m_incomingnbs.begin(); it != m_incomingnbs.end(); ++it)
+		os << (*it).first << "   " << (*it).second.first <<"    " << (*it).second.second;
 	os<<std::endl;
 }
 void EntryNrImpl::setDataName(std::string name)
