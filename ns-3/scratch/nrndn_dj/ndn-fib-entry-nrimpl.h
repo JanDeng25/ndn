@@ -57,7 +57,7 @@ public:
 
 	const std::unordered_map<std::string,uint32_t>& getIncomingnbs() const
 	{
-		return m_incomingnbs;
+		return m_incomingnbs_2;
 	}
 
 	std::string getEntryName(){
