@@ -55,6 +55,7 @@ public:
 	std::unordered_map<std::string,uint32_t  >::iterator
 	AddIncomingNeighbors(std::string lane,uint32_t ttl);
 	/*
+	//previou neighbors
 	const std::unordered_map<std::string,uint32_t>& getIncomingnbs() const
 	{
 		return m_incomingnbs;
@@ -63,7 +64,7 @@ public:
 
 	const std::unordered_map<std::string,std::pair<uint32_t, uint32_t > >& getIncomingnbs() const
 	{
-		return m_incomingnbs_2;
+		return m_incomingnbs;
 	}
 
 	std::string getEntryName(){
@@ -94,8 +95,8 @@ public:
 	//void CleanExpiredIncomingNeighbors(uint32_t id);
 private:
 	//std::unordered_map< uint32_t,EventId> m_nbTimeoutEvent;///< @brief it is a hashmap that record the timeout event of each neighbor id
-	std::unordered_map< std::string,uint32_t > 		  m_incomingnbs;///< @brief container for incoming neighbors
-	std::unordered_map< std::string, std::pair<uint32_t, uint32_t > > m_incomingnbs_2;
+	//std::unordered_map< std::string,uint32_t > 		  m_incomingnbs;///< @brief container for incoming neighbors
+	std::unordered_map< std::string, std::pair<uint32_t, uint32_t > > m_incomingnbs;
 	std::string m_data_name;
 	Time m_infaceTimeout;
 

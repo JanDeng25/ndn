@@ -38,13 +38,13 @@ EntryNrImpl::~EntryNrImpl ()
 }
 
 
-std::unordered_map<std::string,uint32_t  >::iterator
-EntryNrImpl::AddIncomingNeighbors(std::string lane,uint32_t ttl)
+std::unordered_map<std::string,std::pair<uint32_t, uint32_t> >::iterator
+EntryNrImpl::AddIncomingNeighbors(std::string lane, std::pair<uint32_t, uint32_t> p)
 {
 	//std::cout<<"add FIB incomingNeighbors  name:  "<<m_data_name<<"  lane: "<<lane<<"  TTL: "<<ttl<<std::endl;
 	if(m_incomingnbs.empty())
 	{
-		m_incomingnbs.insert(m_incomingnbs.begin(),std::pair<std::string,uint32_t>(lane,ttl));
+		m_incomingnbs.insert(m_incomingnbs.begin(),std::pair<std::string,std::pair<uint32_t, uint32_t> >(lane, p));
 		//this->Print(std::cout);
 		return m_incomingnbs.begin();
 	}
@@ -52,14 +52,14 @@ EntryNrImpl::AddIncomingNeighbors(std::string lane,uint32_t ttl)
 
 	//isSamelane
 	if(lane == m_incomingnbs.begin()->first || isSameLane(lane,m_incomingnbs.begin()->first)){
-		if(m_incomingnbs.begin()->second > ttl)
+		if(m_incomingnbs.begin()->second.first > p.first)
 		{
 			m_incomingnbs.erase(m_incomingnbs.begin());
-			m_incomingnbs.insert(m_incomingnbs.begin(),std::pair<std::string,uint32_t>(lane,ttl));
+			m_incomingnbs.insert(m_incomingnbs.begin(), std::pair<std::string,std::pair<uint32_t, uint32_t> >(lane,p));
 		}
 		return m_incomingnbs.begin();
 	}
-	std::unordered_map< std::string,uint32_t >::iterator incomingnb = m_incomingnbs.find(lane);
+	std::unordered_map< std::string, std::pair<uint32_t, uint32_t> >::iterator incomingnb = m_incomingnbs.find(lane);
 
 	if(incomingnb==m_incomingnbs.end())
 	{//Not found
@@ -67,10 +67,10 @@ EntryNrImpl::AddIncomingNeighbors(std::string lane,uint32_t ttl)
 				//m_incomingnbs.insert (lane);
 		//return ret.first;
 		incomingnb = m_incomingnbs.begin();
-		if(incomingnb->second > ttl)
+		if(incomingnb->second.first > p.first)
 		{
 			m_incomingnbs.erase(m_incomingnbs.begin());
-			m_incomingnbs.insert(m_incomingnbs.begin(),std::pair<std::string,uint32_t>(lane,ttl));
+			m_incomingnbs.insert(m_incomingnbs.begin(),std::pair<std::string,std::pair<uint32_t, uint32_t> >(lane,p));
 		}
 
 		/*while(incomingnb != m_incomingnbs.end() && incomingnb->second < ttl)
@@ -132,18 +132,18 @@ bool EntryNrImpl::is_neighbor_lane(std::string lane1, std::string lane2){
 void EntryNrImpl::auto_table_change(std::string pre_lane, std::string next_lane){
 	std::unordered_map< std::string, std::pair<uint32_t, uint32_t > >::iterator it;
 	std::pair<uint32_t, uint32_t > temp(100, 100);    						//initialize to 100 hops
-	for(it = m_incomingnbs_2.begin(); it != m_incomingnbs_2.end(); ++it){
+	for(it = m_incomingnbs.begin(); it != m_incomingnbs.end(); ++it){
 		if(!is_neighbor_lane(next_lane, it->first)){
 			if(temp.first > it->second.first){
 				temp = it->second;
 			}
-			m_incomingnbs_2.erase(it);
+			m_incomingnbs.erase(it);
 		}
 	}
 	temp.first++;
 	temp.second++;
 	if(temp.second < 3)
-		m_incomingnbs_2.insert(std::pair<std::string,std::pair<uint32_t, uint32_t > >(pre_lane,temp));
+		m_incomingnbs.insert(std::pair<std::string,std::pair<uint32_t, uint32_t > >(pre_lane,temp));
 	return ;
 }
 

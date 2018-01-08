@@ -113,7 +113,7 @@ NrFibImpl::RemoveFromAll (Ptr<Face> face){
 }
 
 void
-NrFibImpl::AddFibEntry (const Ptr<const Name> &prefix, std::string lane,uint32_t ttl)
+NrFibImpl::AddFibEntry (const Ptr<const Name> &prefix, std::string lane, std::pair<uint32_t, uint32_t> p)
 {
 	//std::cout<<"add FIB Entry name:"<<prefix->toUri()<<" lane:"<<lane<<" TTL:"<<ttl<<std::endl;
 	if(m_fibContainer.empty())
@@ -165,7 +165,7 @@ void NrFibImpl::auto_update_fib(std::string pre_lane, std::string next_lane){
 	 if(fibCon.size()==0)
 		 return;
 	 std::vector<Ptr<Entry> >::iterator fib_fibCon = fibCon.begin();
-	 for(;fib_fibCon!=fibCon.end();++fib_fibCon){
+	 for(; fib_fibCon != fibCon.end(); ++fib_fibCon){
 		 Ptr<EntryNrImpl> fib_fibConEntry = DynamicCast<EntryNrImpl>(*fib_fibCon);
 		 std::unordered_map< std::string,uint32_t >::const_iterator incomingnb = fib_fibConEntry->getIncomingnbs().begin();
 		 for(;incomingnb != fib_fibConEntry->getIncomingnbs().end(); ++incomingnb){
@@ -185,7 +185,7 @@ NrFibImpl::Print (std::ostream& os) const
 	for(it=m_fibContainer.begin();it!=m_fibContainer.end();++it)
 	{
 		Ptr<ndn::fib::nrndn::EntryNrImpl>  temp = DynamicCast<ndn::fib::nrndn::EntryNrImpl>(*it);
-		os<<"name:  "<<temp->getEntryName()<<"   next lane:"<<temp->getIncomingnbs().begin()->first<<" TTL:"<<temp->getIncomingnbs().begin()->second;
+		os<<"name:  "<<temp->getEntryName()<<"   next lane:"<<temp->getIncomingnbs().begin()->first<<" TTL:"<<temp->getIncomingnbs().begin()->second.first << " ADD:" << temp->getIncomingnbs().begin()->second.second;
 		os<<std::endl;
 	}
 
