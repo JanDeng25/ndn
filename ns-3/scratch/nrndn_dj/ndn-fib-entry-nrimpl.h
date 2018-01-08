@@ -53,7 +53,7 @@ public:
 	 * @returns iterator to the added last lane
 	 */
 	std::unordered_map<std::string,uint32_t  >::iterator
-	AddIncomingNeighbors(std::string lane,uint32_t ttl);
+	AddIncomingNeighbors(std::string lane, std::pair<uint32_t, uint32_t> p);
 	/*
 	//previou neighbors
 	const std::unordered_map<std::string,uint32_t>& getIncomingnbs() const
