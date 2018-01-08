@@ -148,7 +148,7 @@ public:
 
   //Jan 10,2016: add a fib entry
    void
-   AddFibEntry (const Ptr<const Name> &prefix, std::string lane, uint32_t ttl);
+   AddFibEntry (const Ptr<const Name> &prefix, std::string lane, std::pair<uint32_t, uint32_t> p);
 
    //Mar 17,2016: merge two fib table
    void mergeFib(std::vector<Ptr<Entry> >  fibCon);

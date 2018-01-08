@@ -119,7 +119,7 @@ NrFibImpl::AddFibEntry (const Ptr<const Name> &prefix, std::string lane, std::pa
 	if(m_fibContainer.empty())
 	{
 		Ptr<EntryNrImpl> entry = ns3::Create<EntryNrImpl>(this,prefix,m_cleanInterval);
-		entry->AddIncomingNeighbors(lane, ttl);
+		entry->AddIncomingNeighbors(lane, p);
 		Ptr<Entry> fibEntry = DynamicCast<Entry>(entry);
 		m_fibContainer.push_back(fibEntry);
 		//this->Print(std::cout);
@@ -133,13 +133,13 @@ NrFibImpl::AddFibEntry (const Ptr<const Name> &prefix, std::string lane, std::pa
 			Ptr<EntryNrImpl> fibEntry = DynamicCast<EntryNrImpl>(*fib);
 			if(fibEntry->getEntryName() == prefix->toUri())
 			{
-				fibEntry->AddIncomingNeighbors(lane,ttl);
+				fibEntry->AddIncomingNeighbors(lane,p);
 				//this->Print(std::cout);
                 return;
 			}
 		}
 		Ptr<EntryNrImpl> entry = ns3::Create<EntryNrImpl>(this,prefix,m_cleanInterval);
-		entry->AddIncomingNeighbors(lane, ttl);
+		entry->AddIncomingNeighbors(lane, p);
 		Ptr<Entry> fibEntry = DynamicCast<Entry>(entry);
 		m_fibContainer.push_back(fibEntry);
 
