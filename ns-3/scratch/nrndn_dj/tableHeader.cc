@@ -119,11 +119,16 @@ uint32_t tableHeader::GetSerializedSize() const
 
 		//m_incomingnbs.size():
 		size += sizeof(uint32_t);
-		std::unordered_map<std::string, uint32_t >::const_iterator it;
+
+		//By DJ on Jan 8, 2018:structure of fib has been changed
+		std::unordered_map<std::string, std::pair<uint32_t, uint32_t > >::const_iterator it;
 		for(it = ( tempFibEntry->getIncomingnbs()).begin(); it !=  tempFibEntry->getIncomingnbs().end(); ++it)
 		{
 			size += sizeof(uint32_t);
 			size +=it->first.size();
+
+			//By DJ on Jan 8, 2018:record of pair
+			size += sizeof(uint32_t);
 			size += sizeof(uint32_t);
 		}
 	}
@@ -175,13 +180,19 @@ void tableHeader::Serialize(Buffer::Iterator start) const
 				i.Write((uint8_t*)&((tempFibEntry->getEntryName())[j]),sizeof(char));
 
 		i.WriteHtonU32(tempFibEntry->getIncomingnbs().size());
-		std::unordered_map<std::string, uint32_t >::const_iterator j;
+
+		//By DJ on Jan 8, 2018:structure of fib has been changed
+		std::unordered_map<std::string, std::pair<uint32_t, uint32_t > >::const_iterator j;
 		for(j = (tempFibEntry->getIncomingnbs()).begin(); j != tempFibEntry->getIncomingnbs().end(); ++j)
 		{
+			//By DJ on Jan 8, 2018:serialize std::string
 			i.WriteHtonU32(j->first.size());
 			for(uint32_t k = 0; k<j->first.size(); ++k)
 						i.Write((uint8_t*)&((j->first)[k]),sizeof(char));
-			i.WriteHtonU32(j->second);
+
+			//By DJ on Jan 8, 2018:serialize std::pair
+			i.WriteHtonU32(j->second.first);
+			i.WriteHtonU32(j->second.second);
 		}
 	}
 }
@@ -261,11 +272,14 @@ uint32_t tableHeader::Deserialize(Buffer::Iterator start)
 		Ptr<fib::nrndn::EntryNrImpl> temp = ns3::Create<fib::nrndn::EntryNrImpl>(m_fib,name, interval);
 		temp->setDataName(tempstring);
 		//std::cout<<"temp string:"<<tempstring<<std::endl;
-		std::unordered_map< std::string,uint32_t > tempnb;
+		std::unordered_map< std::string, std::pair<uint32_t, uint32_t > > tempnb;
 		uint32_t nbsize =  i.ReadNtohU32();
 		for(uint32_t k = 0; k < nbsize; ++k)
 		{
+			//By DJ on Jan 8. 2018: read std::pair
 			uint32_t tempttl;
+			uint32_t tempadd;
+
 			tempstring = "";
 			namesize =  i.ReadNtohU32();
 			for(uint32_t p = 0; p < namesize; ++p)
@@ -273,8 +287,11 @@ uint32_t tableHeader::Deserialize(Buffer::Iterator start)
 				i.Read((uint8_t*)&(tempchar),sizeof(char));
 				tempstring += tempchar;
 			}
-			tempttl =  i.ReadNtohU32();
-			tempnb.insert(make_pair(tempstring,tempttl));
+
+			//By DJ on Jan 8. 2018: read std::pair
+			tempttl = i.ReadNtohU32();
+			tempadd = i.ReadNtohU32();
+			tempnb.insert(make_pair(tempstring,make_pair(tempttl, tempadd)));
 			//std::cout<<"tempstring:"<<tempstring<<" tempttl:"<<tempttl<<std::endl;
 		}
 		temp->setNb(tempnb);

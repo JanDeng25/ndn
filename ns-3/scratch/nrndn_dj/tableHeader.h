@@ -113,7 +113,7 @@ private:
 	uint32_t		m_sourceId;	//\ (source)	id of source node (source)
 	uint32_t        m_signature;
 	std::string currentlane;
-	 std::vector<Ptr<pit::Entry> >			m_pitContainer;
+	std::vector<Ptr<pit::Entry> >			m_pitContainer;
 	std::vector<Ptr<fib::Entry> >		m_fibContainer;
 	Ptr<ndn::pit::nrndn::NrPitImpl> m_pit;
 	Ptr<ndn::fib::nrndn::NrFibImpl> m_fib;
