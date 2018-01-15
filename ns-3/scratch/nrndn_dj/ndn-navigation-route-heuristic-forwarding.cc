@@ -313,6 +313,7 @@ void NavigationRouteHeuristic::OnInterest(Ptr<Face> face,
 		{
 			if(m_fib->Find(interest->GetName()) || m_cs->Find(interest->GetName()))
 			{
+				cout << "into find(interest->GetName()) / DETECT_PACKET / OnInterest / forwarder" << endl;
 				Time sendInterval = MilliSeconds(distance*1.5);
 				//cout<<"detect packet  send interval: "<<sendInterval.GetSeconds()<<endl;
 				m_sendingDataEvent[nodeId][seq] = Simulator::Schedule(sendInterval,
@@ -536,7 +537,7 @@ void NavigationRouteHeuristic::OnData(Ptr<Face> face, Ptr<Data> data)
 	}//end if (RESOURCE_PACKET == packetTypeTag.Get())
 	else if (DATA_PACKET == packetTypeTag.Get())
 	{
-		cout << "into DATA_PACKET in onData in forwarder" << endl;
+		cout << "into DATA_PACKET / onData / forwarder" << endl;
 		if(!isDuplicatedData(nodeId,signature))
 		{
 			m_cs->Add(data);
@@ -549,6 +550,7 @@ void NavigationRouteHeuristic::OnData(Ptr<Face> face, Ptr<Data> data)
 			}
 			if(m_pit->Find(data->GetName()))
 			{
+				cout << "into m_pit->Find(data->GetName()) / DATA_PACKET / onData / forwarder" << endl;
 				if(OnTheWay(laneList))//在数据包应走的下一跳，可能有多个
 				{
 					Time sendInterval = MilliSeconds(interval) ;
