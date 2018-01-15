@@ -263,7 +263,7 @@ void NavigationRouteHeuristic::OnInterest(Ptr<Face> face,
 		Ptr<Interest> interest)
 {
 	if(!m_running) return;
-
+	cout << "into OnInterest in forwarder" << endl; 
 	if(Face::APPLICATION==face->GetFlags())
 	{
 		NS_LOG_DEBUG("Get interest packet from APPLICATION");
@@ -345,6 +345,7 @@ void NavigationRouteHeuristic::OnInterest(Ptr<Face> face,
 	}
 	else if(INTEREST_PACKET == interest->GetScope())
 	{
+		cout << "into INTEREST_PACKET in OnInterest in forwarder" << endl; 
 		if(!isDuplicatedInterest(nodeId,seq) )
 		{
 			if(m_cs->Find(interest->GetName()) )
@@ -402,6 +403,7 @@ void NavigationRouteHeuristic::OnInterest(Ptr<Face> face,
 	}
 	else if (MOVE_TO_NEW_LANE == interest->GetScope())
 	{
+		cout << "into MOVE_TO_NEW_LANE in OnInterest in forwarder" << endl; 
 		if(!isDuplicatedInterest(nodeId,seq) && isSameLane(m_sensor->getLane(),preLane))
 		{
 			m_pit->UpdatePit(currentLane, interest);
@@ -434,7 +436,7 @@ void NavigationRouteHeuristic::OnData(Ptr<Face> face, Ptr<Data> data)
 {
 	NS_LOG_FUNCTION (this);
 	if(!m_running) return;
-	//cout<<"into on data"<<endl;
+	cout<<"into on data"<<endl;
 	if(Face::APPLICATION & face->GetFlags())
 	{
 		NS_LOG_DEBUG("Get data packet from APPLICATION");
