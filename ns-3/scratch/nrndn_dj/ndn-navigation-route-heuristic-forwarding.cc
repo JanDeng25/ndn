@@ -158,7 +158,7 @@ void NavigationRouteHeuristic::Start()
 			m_cs->Add(data);
 		}
 	}
-	Simulator::Schedule (Seconds (50), & NavigationRouteHeuristic::fibnum, this);
+	//Simulator::Schedule (Seconds (50), & NavigationRouteHeuristic::fibnum, this);
 	Simulator::Schedule (Seconds (50), & NavigationRouteHeuristic::CheckTable, this);
 }
 
@@ -434,7 +434,7 @@ void NavigationRouteHeuristic::OnData(Ptr<Face> face, Ptr<Data> data)
 {
 	NS_LOG_FUNCTION (this);
 	if(!m_running) return;
-	//cout<<"into on data"<<endl;
+	cout<<"into on data"<<endl;
 	if(Face::APPLICATION & face->GetFlags())
 	{
 		NS_LOG_DEBUG("Get data packet from APPLICATION");
@@ -632,7 +632,7 @@ void NavigationRouteHeuristic::OnData(Ptr<Face> face, Ptr<Data> data)
 
 bool NavigationRouteHeuristic::OnTheWay(std::vector<std::string> laneList)
 {
-	//cout<<"into on the way"<<endl;
+	cout<<"into on the way"<<endl;
 	for(uint32_t i = 0; i < laneList.size(); ++i)
 		if(isSameLane(m_sensor->getLane(),laneList[i]))
 			return true;
@@ -643,7 +643,7 @@ bool NavigationRouteHeuristic::isDuplicatedInterest(
 		uint32_t id, uint32_t nonce)
 {
 	NS_LOG_FUNCTION (this);
-	//cout<<"into is duplicated interest"<<endl;
+	cout<<"into is duplicated interest"<<endl;
 	if(!m_sendingInterestEvent.count(id))
 		return false;
 	else
@@ -662,7 +662,7 @@ bool NavigationRouteHeuristic::isDuplicatedData(uint32_t id, uint32_t signature)
 
 void NavigationRouteHeuristic::ExpireInterestPacketTimer(uint32_t nodeId,uint32_t seq)
 {
-	//cout<<"into expire interest packet timer"<<endl;
+	cout<<"into expire interest packet timer"<<endl;
 	NS_LOG_FUNCTION (this<< "ExpireInterestPacketTimer id"<<nodeId<<"sequence"<<seq);
 	//1. Find the waiting timer
 	EventId& eventid = m_sendingInterestEvent[nodeId][seq];
@@ -673,7 +673,7 @@ void NavigationRouteHeuristic::ExpireInterestPacketTimer(uint32_t nodeId,uint32_
 
 void NavigationRouteHeuristic::ExpireDataPacketTimer(uint32_t nodeId,uint32_t signature)
 {
-	//cout<<"into expire data packet timery"<<endl;
+	cout<<"into expire data packet timery"<<endl;
 	//NS_ASSERT_MSG(false,"NavigationRouteHeuristic::ExpireDataPacketTimer");
 	NS_LOG_FUNCTION (this<< "ExpireDataPacketTimer id\t"<<nodeId<<"\tsignature:"<<signature);
 	//1. Find the waiting timer
@@ -685,7 +685,7 @@ void NavigationRouteHeuristic::ExpireDataPacketTimer(uint32_t nodeId,uint32_t si
 void NavigationRouteHeuristic::ForwardResourcePacket(Ptr<Data> src)
 {
 	if(!m_running) return;
-	//cout<<"into forward resource packet"<<endl;
+	cout<<"into forward resource packet"<<endl;
 	m_dataSignatureSeen.Put(src->GetSignature(),true);
 	Ptr<Packet> nrPayload=src->GetPayload()->Copy();
 	//Ptr<Packet> newPayload	= Create<Packet> ();
@@ -733,7 +733,7 @@ void NavigationRouteHeuristic::ForwardResourcePacket(Ptr<Data> src)
 void NavigationRouteHeuristic::ForwardConfirmPacket(Ptr<Data> src)
 {
 	if(!m_running) return;
-	//cout<<"into forward confirm packet"<<endl;
+	cout<<"into forward confirm packet"<<endl;
 	Ptr<Packet> nrPayload=src->GetPayload()->Copy();
 	//Ptr<Packet> newPayload	= Create<Packet> ();
 	ndn::nrndn::nrndnHeader nrheader;
@@ -846,7 +846,7 @@ void NavigationRouteHeuristic::ForwardDetectPacket(Ptr<Interest> src)
 {
 	if(!m_running) return;
 	NS_LOG_FUNCTION (this);
-	//cout<<"into forward detect packet"<<endl;
+	cout<<"into forward detect packet"<<endl;
 	// 2. prepare the interest
 	Ptr<Packet> nrPayload=src->GetPayload()->Copy();
 	ndn::nrndn::nrndnHeader nrheader;
@@ -889,7 +889,7 @@ void NavigationRouteHeuristic::ForwardMoveToNewLanePacket(Ptr<Interest> src)
 {
 	if(!m_running) return;
 	NS_LOG_FUNCTION (this);
-	//cout<<"into move to new lane packet"<<endl;
+	cout<<"into move to new lane packet"<<endl;
 	m_interestNonceSeen.Put(src->GetNonce(),true);
 	Ptr<Packet> nrPayload=src->GetPayload()->Copy();
 	ndn::nrndn::nrndnHeader nrheader;
@@ -907,7 +907,7 @@ void NavigationRouteHeuristic::ForwardInterestPacket(Ptr<Interest> src)
 {
 	if(!m_running) return;
 	NS_LOG_FUNCTION (this);
-	//cout<<"node: "<<m_node->GetId()<<" into forward interest packet"<<endl;
+	cout<<"node: "<<m_node->GetId()<<" into forward interest packet"<<endl;
 	m_interestNonceSeen.Put(src->GetNonce(),true);
 	// 2. prepare the interest
 	Ptr<Packet> nrPayload=src->GetPayload()->Copy();
@@ -948,7 +948,7 @@ void NavigationRouteHeuristic::ForwardInterestPacket(Ptr<Interest> src)
 void NavigationRouteHeuristic::ReplyConfirmPacket(Ptr<Interest> interest)
 {
 	if (!m_running)  return;
-	//cout<<"into reply confirm packet"<<endl;
+	cout<<"into reply confirm packet"<<endl;
 	Ptr<Data> data = Create<Data>(Create<Packet>(m_virtualPayloadSize));
 	Ptr<Name> dataName = Create<Name>(interest->GetName());
 	data->SetName(dataName);
@@ -1007,7 +1007,7 @@ void NavigationRouteHeuristic::ReplyTablePacket(Ptr<Interest> interest)
 {
 	//将表格打包，signature和nodeid与interest相同
 	if (!m_running)  return;
-	//cout<<"into reply table packet"<<endl;
+	cout<<"into reply table packet"<<endl;
 	Ptr<Data> data = Create<Data>(Create<Packet>(m_virtualPayloadSize));
 	Ptr<Name> dataName = Create<Name>(interest->GetName());
 	data->SetName(dataName);
@@ -1061,7 +1061,7 @@ void NavigationRouteHeuristic::ReplyTablePacket(Ptr<Interest> interest)
 void NavigationRouteHeuristic::ReplyDataPacket(Ptr<Interest> interest)
 {
 	if (!m_running)  return;
-	//cout<<"into reply data packet"<<endl;
+	cout<<"into reply data packet"<<endl;
 	Ptr<Data> data = Create<Data>(Create<Packet>(m_virtualPayloadSize));
 	Ptr<Name> dataName = Create<Name>(interest->GetName());
 	data->SetName(dataName);
@@ -1099,7 +1099,7 @@ void NavigationRouteHeuristic::PrepareInterestPacket(Ptr<Interest> interest)
 {
 	if(!m_running) return;
 	NS_LOG_FUNCTION (this);
-	//cout<<"into prepare interest packet"<<endl;
+	cout<<"into prepare interest packet"<<endl;
 	// 2. prepare the interest
 	interest->SetScope(INTEREST_PACKET);
 	interest->SetNonce(m_uniformRandomVariable->GetValue());
@@ -1138,7 +1138,7 @@ void NavigationRouteHeuristic::PrepareMoveToNewLanePacket(Ptr<Interest> interest
 {
 	if(!m_running) return;
 	NS_LOG_FUNCTION (this);
-	//cout<<"into prepare move to new lane packet"<<endl;
+	cout<<"into prepare move to new lane packet"<<endl;
 	// 2. prepare the interest
 	Ptr<Packet> nrPayload= interest->GetPayload()->Copy();
 
@@ -1165,7 +1165,7 @@ void NavigationRouteHeuristic::PrepareDetectPacket(Ptr<Interest> interest)
 {
 	if(!m_running) return;
 	NS_LOG_FUNCTION (this);
-	//cout<<"into prepare detect packet"<<endl;
+	cout<<"into prepare detect packet"<<endl;
 
 	Ptr<Packet> nrPayload= interest->GetPayload()->Copy();
 	ndn::nrndn::nrndnHeader nrheader;
@@ -1210,7 +1210,7 @@ void NavigationRouteHeuristic::PreparePacket(Ptr<Interest> interest)
 void NavigationRouteHeuristic::SendInterestPacket(Ptr<Interest> interest)
 {
 	if(!m_running) return;
-	//cout<<"into send interest packet"<<endl;
+	cout<<"into send interest packet"<<endl;
 	if(HELLO_PACKET !=interest->GetScope()||m_HelloLogEnable)
 		NS_LOG_FUNCTION (this);
 
@@ -1227,7 +1227,7 @@ void NavigationRouteHeuristic::SendInterestPacket(Ptr<Interest> interest)
 void NavigationRouteHeuristic::SendDataPacket(Ptr<Data> data)
 {
 	if(!m_running) return;
-	//cout<<"into send data packet"<<endl;
+	cout<<"into send data packet"<<endl;
 	//NS_ASSERT_MSG(false,"NavigationRouteHeuristic::SendDataPacket");
 	vector<Ptr<Face> >::iterator fit;
 	for (fit = m_outFaceList.begin(); fit != m_outFaceList.end(); ++fit)
@@ -1344,7 +1344,7 @@ void NavigationRouteHeuristic::first_request(std::vector<string> v){
 	if(isJuction(m_sensor->getLane())) return;
 	if(Simulator::Now().GetSeconds() < 50) return;
 
-	//cout<<"into ask for table"<<endl;
+	cout<<"into ask for table"<<endl;
 	Name name;
 	name.appendNumber(ASK_FOR_TABLE);
 	Ptr<Interest> interest = Create<Interest> (Create<Packet>(m_virtualPayloadSize));
@@ -1387,7 +1387,7 @@ void NavigationRouteHeuristic::second_request(std::vector<string> v){
 	if(isJuction(m_sensor->getLane())) return;
 	if(Simulator::Now().GetSeconds() < 50) return;
 
-	//cout<<"into ask for table"<<endl;
+	cout<<"into ask for table"<<endl;
 	Name name;
 	name.appendNumber(ASK_FOR_TABLE);
 	Ptr<Interest> interest = Create<Interest> (Create<Packet>(m_virtualPayloadSize));
@@ -1432,7 +1432,7 @@ void NavigationRouteHeuristic::AskForTable(vector<string> sourcename)
 	if(isJuction(m_sensor->getLane())) return;
 	if(Simulator::Now().GetSeconds() < 50) return;
 
-	//cout<<"into ask for table"<<endl;
+	cout<<"into ask for table"<<endl;
 	Name name;
 	name.appendNumber(ASK_FOR_TABLE);
 	Ptr<Interest> interest = Create<Interest> (Create<Packet>(m_virtualPayloadSize));
