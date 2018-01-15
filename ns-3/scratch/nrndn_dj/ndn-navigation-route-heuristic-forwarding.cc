@@ -1175,12 +1175,15 @@ void NavigationRouteHeuristic::PrepareDetectPacket(Ptr<Interest> interest)
 	nrheader.setLaneList(lanelist);
 	nrPayload->AddHeader(nrheader);
 
+	cout << "adding hopCountTag" << endl;
 	FwHopCountTag hopCountTag;
 	nrPayload->AddPacketTag(hopCountTag);
 
+	cout << "adding typeTag" << endl;
 	ndn::nrndn::PacketTypeTag typeTag(DETECT_PACKET);
 	nrPayload->AddPacketTag (typeTag);
 
+	cout << "after adding hopCountTag" << endl;
 	interest->SetPayload(nrPayload);
 	interest->SetScope(DETECT_PACKET);
 	interest->SetNonce(m_uniformRandomVariable->GetValue());
