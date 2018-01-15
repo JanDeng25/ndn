@@ -263,7 +263,7 @@ void NavigationRouteHeuristic::OnInterest(Ptr<Face> face,
 		Ptr<Interest> interest)
 {
 	if(!m_running) return;
-	cout << "into OnInterest in forwarder" << endl; 
+	//cout << "into OnInterest in forwarder" << endl; 
 	if(Face::APPLICATION==face->GetFlags())
 	{
 		NS_LOG_DEBUG("Get interest packet from APPLICATION");
@@ -436,7 +436,7 @@ void NavigationRouteHeuristic::OnData(Ptr<Face> face, Ptr<Data> data)
 {
 	NS_LOG_FUNCTION (this);
 	if(!m_running) return;
-	cout<<"into on data"<<endl;
+	//cout<<"into on data"<<endl;
 	if(Face::APPLICATION & face->GetFlags())
 	{
 		NS_LOG_DEBUG("Get data packet from APPLICATION");
@@ -536,6 +536,7 @@ void NavigationRouteHeuristic::OnData(Ptr<Face> face, Ptr<Data> data)
 	}//end if (RESOURCE_PACKET == packetTypeTag.Get())
 	else if (DATA_PACKET == packetTypeTag.Get())
 	{
+		cout << "into DATA_PACKET in onData in forwarder" << endl;
 		if(!isDuplicatedData(nodeId,signature))
 		{
 			m_cs->Add(data);
