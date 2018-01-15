@@ -1176,8 +1176,11 @@ void NavigationRouteHeuristic::PrepareDetectPacket(Ptr<Interest> interest)
 	nrPayload->AddHeader(nrheader);
 
 	nrPayload->PrintPacketTags(std::cout);
-	cout << "adding hopCountTag" << endl;
 	FwHopCountTag hopCountTag;
+	cout << "removing hopCountTag" << endl;
+	nrPayload->RemovePacketTag(hopCountTag);
+
+	cout << "adding hopCountTag" << endl;
 	nrPayload->AddPacketTag(hopCountTag);
 
 	cout << "adding typeTag" << endl;
