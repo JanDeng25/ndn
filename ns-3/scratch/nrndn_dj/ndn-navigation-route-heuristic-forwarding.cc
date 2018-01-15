@@ -403,7 +403,7 @@ void NavigationRouteHeuristic::OnInterest(Ptr<Face> face,
 	}
 	else if (MOVE_TO_NEW_LANE == interest->GetScope())
 	{
-		cout << "into MOVE_TO_NEW_LANE in OnInterest in forwarder" << endl; 
+		//cout << "into MOVE_TO_NEW_LANE in OnInterest in forwarder" << endl; 
 		if(!isDuplicatedInterest(nodeId,seq) && isSameLane(m_sensor->getLane(),preLane))
 		{
 			m_pit->UpdatePit(currentLane, interest);
