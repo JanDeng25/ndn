@@ -1195,7 +1195,6 @@ void NavigationRouteHeuristic::PrepareDetectPacket(Ptr<Interest> interest)
 	nrPayload->PrintPacketTags(std::cout);
 	cout << endl;
 
-	getchar();
 	interest->SetPayload(nrPayload);
 	interest->SetScope(DETECT_PACKET);
 	interest->SetNonce(m_uniformRandomVariable->GetValue());
