@@ -204,7 +204,7 @@ NrFibImpl::Find (const Name &prefix)
 	{
 		 if((*it)->GetPrefix()==prefix)
 		 {
-			 std::cout<<"Found FIB Entry name:"<< (*it)->GetPrefix().toUri() << std::endl;
+			 //std::cout<<"Found FIB Entry name:"<< (*it)->GetPrefix().toUri() << std::endl;
 			 return *it;
 		 }
 	}
