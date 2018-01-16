@@ -359,16 +359,16 @@ nrndnExample::Report ()
 	//2. output the result
 	os//<<arrivalRate <<'\t'
 			//<<accuracyRate<<'\t'
-			<<"hit rate:"<<hitRate<<'\n'
+			<<" hit rate:"<<hitRate<<'\n'
 			<<" average delay:"<<averageDelay<<'\n'
 			<<" Resourceforward times:"<< ResourceForwardTimes<<"\t\n"
-			<<" average interest forwards times:"<<averageInterestForwardTimes<<'\t'
-			<<" average data froward times:"<<averageDataForwardTimes<<'\t'
-			<<" table Sum:"<<tableSum<<'\t'
-			<<" average Detect Rate:"<<averageDetectRate<<'\t'
-			<<" average Confirm Rate:"<<averageConfirmRate<<'\t'
-			<<" average Forward Sum:"<<averageForwardSum<<'\t'
-			<<" InterestedNodeReceivedSum:"<<InterestedNodeReceivedSum<<'\t'
+			<<" average interest forwards times:"<<averageInterestForwardTimes<<"\t\n"
+			<<" average data froward times:"<<averageDataForwardTimes<<"\t\n"
+			<<" table Sum:"<<tableSum<<"\t\n"
+			<<" average Detect Rate:"<<averageDetectRate<<"\t\n"
+			<<" average Confirm Rate:"<<averageConfirmRate<<"\t\n"
+			<<" average Forward Sum:"<<averageForwardSum<<"\t\n"
+			<<" InterestedNodeReceivedSum:"<<InterestedNodeReceivedSum<<"\t\n"
 			<<endl;
 
 }
