@@ -115,7 +115,7 @@ NrFibImpl::RemoveFromAll (Ptr<Face> face){
 void
 NrFibImpl::AddFibEntry (const Ptr<const Name> &prefix, std::string lane, std::pair<uint32_t, uint32_t> p)
 {
-	std::cout<<"add FIB Entry name:"<<prefix->toUri()<<" lane:"<<lane<<" TTL:"<<p.first<< '(' << p.second << ')' <<std::endl;
+	//std::cout<<"add FIB Entry name:"<<prefix->toUri()<<" lane:"<<lane<<" TTL:"<<p.first<< '(' << p.second << ')' <<std::endl;
 	if(m_fibContainer.empty())
 	{
 		Ptr<EntryNrImpl> entry = ns3::Create<EntryNrImpl>(this,prefix,m_cleanInterval);
@@ -178,6 +178,7 @@ void NrFibImpl::auto_update_fib(std::string pre_lane, std::string next_lane){
 void
 NrFibImpl::Print (std::ostream& os) const
 {
+
 	os<<"my lane:"<<m_sensor->getLane()<<std::endl;
 	os<<"FIB content "<<std::endl;;
 	std::vector<Ptr<Entry> >::const_iterator it;
@@ -195,18 +196,18 @@ NrFibImpl::Print (std::ostream& os) const
 Ptr<Entry>
 NrFibImpl::Find (const Name &prefix)
 {
-	std::cout<<"Find FIB Entry name:"<<prefix.toUri() << std::endl;
+	//std::cout<<"Find FIB Entry name:"<<prefix.toUri() << std::endl;
 	//NS_ASSERT_MSG(false,"In NrFibImpl,NrFibImpl::Find (const Name &prefix) should not be invoked");
-	 NS_LOG_INFO ("Finding prefix"<<prefix.toUri());
-	 std::vector<Ptr<Entry> >::iterator it;
-	 //NS_ASSERT_MSG(m_fibContainer.size()!=0,"Empty fib container. No initialization?");
-	 for(it=m_fibContainer.begin(); it!=m_fibContainer.end(); ++it)
-	 {
+	NS_LOG_INFO ("Finding prefix"<<prefix.toUri());
+	std::vector<Ptr<Entry> >::iterator it;
+	//NS_ASSERT_MSG(m_fibContainer.size()!=0,"Empty fib container. No initialization?");
+	for(it=m_fibContainer.begin(); it!=m_fibContainer.end(); ++it)
+	{
 		 if((*it)->GetPrefix()==prefix)
 		 {
 			 return *it;
 		 }
-	 }
+	}
 	return 0;
 }
 

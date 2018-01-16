@@ -102,6 +102,7 @@ NrPitImpl::NotifyNewAggregate ()
 //add by DJ on Jan 4,2016:update pit
 bool NrPitImpl::UpdatePit(std::string lane,Ptr<const Interest> interest)
 {
+	cout << "PIT UpdatePit" << ":" << "lane:" << std::string lane<<endl;
 	if(m_pitContainer.empty())
 	{
 		Ptr<fib::Entry> fibEntry=ns3::Create<fib::Entry>(Ptr<Fib>(0),Ptr<Name>(0));
@@ -207,15 +208,17 @@ NrPitImpl::Lookup (const Interest &header)
 Ptr<Entry>
 NrPitImpl::Find (const Name &prefix)
 {
+	std::cout<<"Find PIT Entry name:"<<prefix.toUri() << std::endl;
 	//NS_ASSERT_MSG(false,"In NrPitImpl,NrPitImpl::Find (const Name &prefix) should not be invoked");
-	 NS_LOG_INFO ("Finding prefix"<<prefix.toUri());
-	 std::vector<Ptr<Entry> >::iterator it;
-	 //NS_ASSERT_MSG(m_pitContainer.size()!=0,"Empty pit container. No initialization?");
-	 for(it=m_pitContainer.begin();it!=m_pitContainer.end();++it)
-	 {
-		 if((*it)->GetPrefix()==prefix)
-			 return *it;
-	 }
+	NS_LOG_INFO ("Finding prefix"<<prefix.toUri());
+	 
+	std::vector<Ptr<Entry> >::iterator it;
+	//NS_ASSERT_MSG(m_pitContainer.size()!=0,"Empty pit container. No initialization?");
+	for(it=m_pitContainer.begin();it!=m_pitContainer.end();++it)
+	{
+		if((*it)->GetPrefix()==prefix)
+			return *it;
+	}
 	return 0;
 }
   

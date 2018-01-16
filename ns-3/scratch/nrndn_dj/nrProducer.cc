@@ -173,7 +173,7 @@ void nrProducer::sendResourcePacket(uint32_t n)
 
 	data->SetPayload(newPayload);
 
-	PacketTypeTag typeTag(RESOURCE_PACKET );
+	PacketTypeTag typeTag(RESOURCE_PACKET);
 	data->GetPayload()->AddPacketTag(typeTag);
 
 	FwHopCountTag hopCountTag;
