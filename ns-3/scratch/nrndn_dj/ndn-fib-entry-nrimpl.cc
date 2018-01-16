@@ -41,7 +41,7 @@ EntryNrImpl::~EntryNrImpl ()
 std::unordered_map<std::string,std::pair<uint32_t, uint32_t> >::iterator
 EntryNrImpl::AddIncomingNeighbors(std::string lane, std::pair<uint32_t, uint32_t> p)
 {
-	//std::cout<<"add FIB incomingNeighbors  name:  "<<m_data_name<<"  lane: "<<lane<<"  TTL: "<<ttl<<std::endl;
+	std::cout<<"add FIB incomingNeighbors  name:  "<<m_data_name<<"  lane: "<<lane<<"  TTL: "<<p.first<< ',' << p.second <<std::endl;
 	if(m_incomingnbs.empty())
 	{
 		m_incomingnbs.insert(m_incomingnbs.begin(),std::pair<std::string,std::pair<uint32_t, uint32_t> >(lane, p));
