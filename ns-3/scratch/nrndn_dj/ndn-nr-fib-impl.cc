@@ -195,7 +195,7 @@ NrFibImpl::Print (std::ostream& os) const
 Ptr<Entry>
 NrFibImpl::Find (const Name &prefix)
 {
-	std::cout<<"Find FIB Entry name:"<<prefix->toUri() << std::endl;
+	std::cout<<"Find FIB Entry name:"<<prefix.toUri() << std::endl;
 	//NS_ASSERT_MSG(false,"In NrFibImpl,NrFibImpl::Find (const Name &prefix) should not be invoked");
 	 NS_LOG_INFO ("Finding prefix"<<prefix.toUri());
 	 std::vector<Ptr<Entry> >::iterator it;
