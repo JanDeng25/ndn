@@ -102,7 +102,7 @@ NrPitImpl::NotifyNewAggregate ()
 //add by DJ on Jan 4,2016:update pit
 bool NrPitImpl::UpdatePit(std::string lane,Ptr<const Interest> interest)
 {
-	cout << "PIT UpdatePit" << ":" << "lane:" << std::string lane<<endl;
+	std::cout << "PIT UpdatePit" << ":" << "lane:" << lane << std::endl;
 	if(m_pitContainer.empty())
 	{
 		Ptr<fib::Entry> fibEntry=ns3::Create<fib::Entry>(Ptr<Fib>(0),Ptr<Name>(0));
@@ -110,7 +110,7 @@ bool NrPitImpl::UpdatePit(std::string lane,Ptr<const Interest> interest)
 		fentry->AddIncomingNeighbors(lane);
 		Ptr<Entry> pitEntry = DynamicCast<Entry>(fentry);
 		m_pitContainer.push_back(pitEntry);
-		//this->Print(std::cout);
+		this->Print(std::cout);
 		return true;
 	}
 	else
@@ -128,7 +128,7 @@ bool NrPitImpl::UpdatePit(std::string lane,Ptr<const Interest> interest)
 				{
 					pitEntry->AddIncomingNeighbors(lane);
 				}
-				//this->Print(std::cout);
+				this->Print(std::cout);
 				return true;
 			}
 		}
@@ -137,7 +137,7 @@ bool NrPitImpl::UpdatePit(std::string lane,Ptr<const Interest> interest)
 	    fentry->AddIncomingNeighbors(lane);
 		Ptr<Entry> pitEntry = DynamicCast<Entry>(fentry);
 		m_pitContainer.push_back(pitEntry);
-		//this->Print(std::cout);
+		this->Print(std::cout);
 	}
 	return true;
 }
