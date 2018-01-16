@@ -40,11 +40,11 @@ EntryNrImpl::~EntryNrImpl ()
 std::unordered_set< std::string  >::iterator
 EntryNrImpl::AddIncomingNeighbors(std::string lane)
 {
-	//std::cout<<"add PIT incomingNeighbors"<<std::endl;
+	std::cout<<"add PIT incomingNeighbors"<<std::endl;
 	if(m_incomingnbs.empty())
 	{
 			m_incomingnbs.insert(lane);
-			//this->Print(std::cout);
+			this->Print(std::cout);
 			return m_incomingnbs.begin();
 	}
 	//AddNeighborTimeoutEvent(id);
@@ -62,12 +62,12 @@ EntryNrImpl::AddIncomingNeighbors(std::string lane)
 			incomingnb_same++;
 		}
 		std::pair<std::unordered_set< std::string >::iterator,bool> ret = m_incomingnbs.insert (lane);
-		//this->Print(std::cout);
+		this->Print(std::cout);
 		return ret.first;
 	}
 	else
 	{
-		//this->Print(std::cout);
+		this->Print(std::cout);
 		return incomingnb;
 	}
 }
