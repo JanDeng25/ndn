@@ -141,7 +141,7 @@ void nrConsumer::SendPacket()
 	  newPayload->AddHeader(nrheader);
 	  interest->SetPayload(newPayload);
 
-	  //cout<<"node: "<<GetNode()->GetId()<<"  send interest packet,name: "<<prefix.toUri()<<" in consumer"<<endl;
+	  cout<< "consumer " << "node: "<<GetNode()->GetId()<<"  send interest packet,name: "<<prefix.toUri()<<" in consumer"<<endl;
 
 	  m_transmittedInterests (interest, this, m_face);
 	  m_face->ReceiveInterest (interest);

@@ -346,11 +346,12 @@ void NavigationRouteHeuristic::OnInterest(Ptr<Face> face,
 	}
 	else if(INTEREST_PACKET == interest->GetScope())
 	{
-		cout << "into INTEREST_PACKET in OnInterest in forwarder" << endl; 
+		cout << "into INTEREST_PACKET / OnInterest / forwarder" << endl; 
 		if(!isDuplicatedInterest(nodeId,seq) )
 		{
 			if(m_cs->Find(interest->GetName()) )
 			{
+				cout << "into cs_find / INTEREST_PACKET / OnInterest / forwarder" << endl; 
 				Time sendInterval = MilliSeconds(distance);
 				m_sendingDataEvent[nodeId][seq] = Simulator::Schedule(sendInterval,
 								&NavigationRouteHeuristic::ReplyDataPacket, this,interest);//回复的数据包，设置为此探测包的nonce和nodeid
@@ -363,12 +364,14 @@ void NavigationRouteHeuristic::OnInterest(Ptr<Face> face,
 			}
 			else if(m_pit->Find(interest->GetName()) &&isSameLane(m_sensor->getLane(),preLane))
 			{
+				cout << "into pit_find & samelane / INTEREST_PACKET / OnInterest / forwarder" << endl;
 				m_pit->UpdatePit(laneList.front(), interest);
 				m_interestNonceSeen.Put(interest->GetNonce(),true);
 				return;
 			}
 			else if(m_pit->Find(interest->GetName()) && IsConnected(m_sensor->getLane(), preLane))
 			{
+				cout << "into pit_find & connectedlane / INTEREST_PACKET / OnInterest / forwarder" << endl;
 				m_pit->UpdatePit(preLane, interest);
 				m_interestNonceSeen.Put(interest->GetNonce(),true);
 				return;
@@ -377,6 +380,7 @@ void NavigationRouteHeuristic::OnInterest(Ptr<Face> face,
 			{
 				if(m_fib->Find(interest->GetName()))
 				{
+					cout << "into fib_find / INTEREST_PACKET / OnInterest / forwarder" << endl;
 					if(isSameLane(m_sensor->getLane(),currentLane))
 					{
 						m_pit->UpdatePit(preLane, interest);
@@ -1133,7 +1137,7 @@ void NavigationRouteHeuristic::PrepareInterestPacket(Ptr<Interest> interest)
 					&NavigationRouteHeuristic::SendInterestPacket, this, interest);
 	//interest->SetNonce(m_rand.GetValue());
 	//SendInterestPacket(interest);
-	cout<<"node: "<<m_node->GetId()<<"  send interest packet,name: "<<interest->GetName().toUri()<<" current lane:"<<m_sensor->getLane()<<" next lane: "<<hop<<" scope:"<<(int)(interest->GetScope())<<endl;
+	cout<< "forwarder " << "node: "<<m_node->GetId()<<"  send interest packet,name: "<<interest->GetName().toUri()<<" current lane:"<<m_sensor->getLane()<<" next lane: "<<hop<<" scope:"<<(int)(interest->GetScope())<<endl;
 //getchar();
 	m_interestNonceSeen.Put(interest->GetNonce(),true);
 	ndn::nrndn::nrUtils::IncreaseInterestNum();
