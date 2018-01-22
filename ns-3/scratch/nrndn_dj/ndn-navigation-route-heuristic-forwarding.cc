@@ -1191,25 +1191,25 @@ void NavigationRouteHeuristic::PrepareDetectPacket(Ptr<Interest> interest)
 	nrheader.setLaneList(lanelist);
 	nrPayload->AddHeader(nrheader);
 
-	nrPayload->PrintPacketTags(std::cout);
-	cout << endl;
+	//nrPayload->PrintPacketTags(std::cout);
+	//cout << endl;
 	FwHopCountTag hopCountTag;
-	cout << "removing hopCountTag" << endl;
+	//cout << "removing hopCountTag" << endl;
 	nrPayload->RemovePacketTag(hopCountTag);
 
 	nrPayload->PrintPacketTags(std::cout);
 	cout << endl;
 
-	cout << "adding hopCountTag" << endl;
+	//cout << "adding hopCountTag" << endl;
 	nrPayload->AddPacketTag(hopCountTag);
 	
 	ndn::nrndn::PacketTypeTag typeTag(DETECT_PACKET);
-	cout << "adding typeTag" << endl;
+	//cout << "adding typeTag" << endl;
 	nrPayload->RemovePacketTag(typeTag);
 	nrPayload->AddPacketTag (typeTag);
 
-	nrPayload->PrintPacketTags(std::cout);
-	cout << endl;
+	//nrPayload->PrintPacketTags(std::cout);
+	//cout << endl;
 
 	interest->SetPayload(nrPayload);
 	interest->SetScope(DETECT_PACKET);
@@ -1229,12 +1229,18 @@ void NavigationRouteHeuristic::PrepareDetectPacket(Ptr<Interest> interest)
 void NavigationRouteHeuristic::PreparePacket(Ptr<Interest> interest)
 {
 	//cout<<"prepare packet"<<endl;
-	if(m_fib->getFIB().size() == 0)
+	if(m_fib->getFIB().size() == 0){
+		cout << "m_fib->getFIB().size() == 0" << endl;
 		Simulator::Schedule (Seconds (5.0), & NavigationRouteHeuristic::PreparePacket, this,interest);
-	else if (m_fib->Find(interest->GetName()))
-				PrepareInterestPacket(interest);
-	else
-				PrepareDetectPacket(interest);
+	}
+	else if (m_fib->Find(interest->GetName())){
+		cout << "m_fib->Find(interest->GetName())" << ":"  << interest->GetName() << endl;
+		PrepareInterestPacket(interest);
+	}
+	else{
+		cout << "No record" << endl;
+		PrepareDetectPacket(interest);
+	}
 }
 
 void NavigationRouteHeuristic::SendInterestPacket(Ptr<Interest> interest)

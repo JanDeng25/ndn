@@ -216,7 +216,7 @@ NrPitImpl::Find (const Name &prefix)
 	for(it=m_pitContainer.begin();it!=m_pitContainer.end();++it)
 	{
 		if((*it)->GetPrefix()==prefix){
-			std::cout<<"Found PIT Entry name:"<< (*it)->GetPrefix().toUri() << std::endl;
+			//std::cout<<"Found PIT Entry name:"<< (*it)->GetPrefix().toUri() << std::endl; // test
 			return *it;
 		}
 	}
