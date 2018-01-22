@@ -280,6 +280,7 @@ void NavigationRouteHeuristic::OnInterest(Ptr<Face> face,
 
 	if(HELLO_PACKET  == interest->GetScope())
 	{
+		//tested
 		//cout << "HELLO_PACKET / OnInterest / forwarder" << endl;
 		ProcessHello(interest);//处理hello包
 		return;
@@ -288,7 +289,8 @@ void NavigationRouteHeuristic::OnInterest(Ptr<Face> face,
 	//If the interest packet has already been sent, do not proceed the packet
 	if(m_interestNonceSeen.Get(interest->GetNonce()))//重复包（已发送或者已丢弃），不做处理
 	{
-		cout << "DuplicatedInterest / OnInterest / forwarder" << endl;
+		//tested
+		//cout << "DuplicatedInterest / OnInterest / forwarder" << endl;
 		NS_LOG_DEBUG("The interest packet has already been sent, do not proceed the packet of "<<interest->GetNonce());
 		return;
 	}
