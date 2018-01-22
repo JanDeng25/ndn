@@ -317,6 +317,7 @@ void NavigationRouteHeuristic::OnInterest(Ptr<Face> face,
 		cout << "DETECT_PACKET / OnInterest / forwarder" << endl;
 		if(!isDuplicatedInterest(nodeId,seq) && !isJuction(m_sensor->getLane()))//第一次收到此包
 		{
+			cout << "m_cs->Find(interest->GetName()):" << (interest->GetName()).toUri() << endl;
 			if(m_fib->Find(interest->GetName()) || m_cs->Find(interest->GetName()))
 			{
 				cout << "into find(interest->GetName()) / DETECT_PACKET / OnInterest / forwarder" << endl;
@@ -355,6 +356,7 @@ void NavigationRouteHeuristic::OnInterest(Ptr<Face> face,
 		cout << "into INTEREST_PACKET / OnInterest / forwarder" << endl; 
 		if(!isDuplicatedInterest(nodeId,seq) )
 		{
+			cout << "m_cs->Find(interest->GetName()):" << (interest->GetName()).toUri() << endl;
 			if(m_cs->Find(interest->GetName()) )
 			{
 				cout << "into cs_find / INTEREST_PACKET / OnInterest / forwarder" << endl; 
@@ -911,7 +913,7 @@ void NavigationRouteHeuristic::ForwardMoveToNewLanePacket(Ptr<Interest> src)
 	Ptr<Packet> nrPayload=src->GetPayload()->Copy();
 	ndn::nrndn::nrndnHeader nrheader;
 	nrPayload->RemoveHeader(nrheader);
-	cout<<"node: "<<m_node->GetId()<<" forward MOVE_TO_NEW_LANE packet from "<<nrheader.getSourceId()<<" new lane: "<<nrheader.getCurrentLane()<<" NONCE: "<<src->GetNonce()<<endl;
+	//cout<<"node: "<<m_node->GetId()<<" forward MOVE_TO_NEW_LANE packet from "<<nrheader.getSourceId()<<" new lane: "<<nrheader.getCurrentLane()<<" NONCE: "<<src->GetNonce()<<endl;
 
 	nrPayload->AddHeader(nrheader);
 	//Ptr<Interest> interest = Create<Interest> (*src);
@@ -989,6 +991,8 @@ void NavigationRouteHeuristic::ReplyConfirmPacket(Ptr<Interest> interest)
 	nrheader.setCurrentLane(currentlane);
 	nrheader.setPreLane(m_sensor->getLane());
 	uint32_t ttl;
+
+	cout << "m_cs->Find(interest->GetName()):" << (interest->GetName()).toUri() << endl;
 	if(m_cs->Find(interest->GetName()))
 	{
 		ttl = 0;
@@ -1168,7 +1172,7 @@ void NavigationRouteHeuristic::PrepareMoveToNewLanePacket(Ptr<Interest> interest
 	interest->SetPayload(nrPayload);
 	interest->SetScope(MOVE_TO_NEW_LANE);
 
-	cout<<"node: "<<m_node->GetId()<<"  send MOVE_TO_NEW_LANE packet in forwarder"<<endl;
+	//cout<<"node: "<<m_node->GetId()<<"  send MOVE_TO_NEW_LANE packet in forwarder"<<endl;
 
 	m_interestNonceSeen.Put(interest->GetNonce(),true);
 	ndn::nrndn::nrUtils::IncreaseTableNum();

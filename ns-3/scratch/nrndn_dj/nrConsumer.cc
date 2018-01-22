@@ -215,7 +215,7 @@ void nrConsumer::laneChange(std::string oldLane, std::string newLane)
 	newPayload->AddHeader(nrheader);
 	interest->SetPayload(newPayload);
 
-	cout<<"node: "<<GetNode()->GetId()<<"  send MOVE_TO_NEW_LANE packet,name: "<<prefix.toUri()<<" in consumer"<<endl;
+	//cout<<"node: "<<GetNode()->GetId()<<"  send MOVE_TO_NEW_LANE packet,name: "<<prefix.toUri()<<" in consumer"<<endl;
 
 	m_transmittedInterests (interest, this, m_face);
 	m_face->ReceiveInterest (interest);
