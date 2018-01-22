@@ -124,7 +124,12 @@ NrCsImpl::Find (const Name &prefix)
 	//NS_ASSERT_MSG(false,"In NrCsImpl,NrCsImpl::Find (const Name &prefix) should not be invoked");
 	NS_LOG_INFO ("Finding prefix"<<prefix.toUri());
 	std::vector<Ptr<Entry> >::iterator it;
-	NS_ASSERT_MSG(m_csContainer.size() != 0,"Empty cs container. No initialization?");
+	//NS_ASSERT_MSG(m_csContainer.size() != 0,"Empty cs container. No initialization?");
+	if(m_csContainer.size() == 0)
+	{
+		std::cout << "Empty cs container" << std::endl;
+		return 0;
+	}
 	for(it=m_csContainer.begin();it!=m_csContainer.end();++it)
 	{
 		std::cout << "(*it)->GetName():" << (*it)->GetName().toUri() << ' ' << "prefix.toUri():" << prefix.toUri() << std::endl;
