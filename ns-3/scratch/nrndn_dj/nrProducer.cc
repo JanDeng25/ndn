@@ -96,7 +96,7 @@ void nrProducer::StartApplication()
 
 	for(uint32_t i = 1; i <= 20; ++i)
 	{
-		Simulator::Schedule (Seconds (delay), &nrProducer::sendResourcePacket, this,i);
+		Simulator::Schedule (Seconds (delay), &nrProducer::sendResourcePacket, this, i);
 	}
 
 }

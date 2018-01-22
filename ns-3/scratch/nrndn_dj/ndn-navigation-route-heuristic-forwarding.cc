@@ -272,6 +272,7 @@ void NavigationRouteHeuristic::OnInterest(Ptr<Face> face,
 			PrepareMoveToNewLanePacket(interest);//发送MOVE_TO_NEW_LANE包
 			return;
 		}
+		cout << "PreparePacket / OnInterest / forwarder" << endl;
 		Simulator::Schedule(MilliSeconds(m_uniformRandomVariable->GetInteger(0, 100)),
 						&NavigationRouteHeuristic::PreparePacket, this, interest);
 		return;
@@ -279,6 +280,7 @@ void NavigationRouteHeuristic::OnInterest(Ptr<Face> face,
 
 	if(HELLO_PACKET  == interest->GetScope())
 	{
+		cout << "HELLO_PACKET / OnInterest / forwarder" << endl;
 		ProcessHello(interest);//处理hello包
 		return;
 	}
@@ -286,6 +288,7 @@ void NavigationRouteHeuristic::OnInterest(Ptr<Face> face,
 	//If the interest packet has already been sent, do not proceed the packet
 	if(m_interestNonceSeen.Get(interest->GetNonce()))//重复包（已发送或者已丢弃），不做处理
 	{
+		cout << "DuplicatedInterest / OnInterest / forwarder" << endl;
 		NS_LOG_DEBUG("The interest packet has already been sent, do not proceed the packet of "<<interest->GetNonce());
 		return;
 	}
@@ -309,6 +312,7 @@ void NavigationRouteHeuristic::OnInterest(Ptr<Face> face,
 
 	if(DETECT_PACKET == interest->GetScope())
 	{
+		cout << "DETECT_PACKET / OnInterest / forwarder" << endl;
 		if(!isDuplicatedInterest(nodeId,seq) && !isJuction(m_sensor->getLane()))//第一次收到此包
 		{
 			if(m_fib->Find(interest->GetName()) || m_cs->Find(interest->GetName()))
@@ -1191,23 +1195,14 @@ void NavigationRouteHeuristic::PrepareDetectPacket(Ptr<Interest> interest)
 	cout << "removing hopCountTag" << endl;
 	nrPayload->RemovePacketTag(hopCountTag);
 
-	//By DJ on Jan 22:if hopCountTag >= 3 return;
-	cout << "hopCountTag.Get() first: " << hopCountTag.Get() << endl;
-	if(hopCountTag.Get() >= 3)
-		return;
-
 	nrPayload->PrintPacketTags(std::cout);
 	cout << endl;
 
 	cout << "adding hopCountTag" << endl;
 	nrPayload->AddPacketTag(hopCountTag);
-
-	cout << "hopCountTag.Get() second: " << hopCountTag.Get() << endl;
-	if(hopCountTag.Get() >= 3)
-		return;
-
-	cout << "adding typeTag" << endl;
+	
 	ndn::nrndn::PacketTypeTag typeTag(DETECT_PACKET);
+	cout << "adding typeTag" << endl;
 	nrPayload->RemovePacketTag(typeTag);
 	nrPayload->AddPacketTag (typeTag);
 
