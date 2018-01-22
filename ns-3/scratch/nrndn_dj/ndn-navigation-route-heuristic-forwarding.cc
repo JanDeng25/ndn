@@ -1192,6 +1192,7 @@ void NavigationRouteHeuristic::PrepareDetectPacket(Ptr<Interest> interest)
 	nrPayload->RemovePacketTag(hopCountTag);
 
 	//By DJ on Jan 22:if hopCountTag >= 3 return;
+	cout << "hopCountTag.Get() first: " << hopCountTag.Get() << endl;
 	if(hopCountTag.Get() >= 3)
 		return;
 
@@ -1200,6 +1201,10 @@ void NavigationRouteHeuristic::PrepareDetectPacket(Ptr<Interest> interest)
 
 	cout << "adding hopCountTag" << endl;
 	nrPayload->AddPacketTag(hopCountTag);
+
+	cout << "hopCountTag.Get() second: " << hopCountTag.Get() << endl;
+	if(hopCountTag.Get() >= 3)
+		return;
 
 	cout << "adding typeTag" << endl;
 	ndn::nrndn::PacketTypeTag typeTag(DETECT_PACKET);
