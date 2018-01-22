@@ -94,13 +94,13 @@ bool NrCsImpl::Add (Ptr<const Data> data)
 	//std::cout<<"add CS Entry  name:"<<data->GetName().toUri()<<std::endl;
 	if(Find(data->GetName()))
 	{
-		//this->Print(std::cout);
+		this->Print(std::cout);
 		return true;
 	}
     Ptr<cs::Entry> csEntry = ns3::Create<cs::Entry>(this,data) ;
     m_csContainer.push_back(csEntry);
 
-    //this->Print(std::cout);
+    this->Print(std::cout);
 	return true;
 }
 
@@ -126,8 +126,10 @@ NrCsImpl::Find (const Name &prefix)
 	 //NS_ASSERT_MSG(m_csContainer.size()!=0,"Empty cs container. No initialization?");
 	 for(it=m_csContainer.begin();it!=m_csContainer.end();++it)
 	 {
-		 if((*it)->GetName()==prefix)
-			 return *it;
+		 if((*it)->GetName()==prefix){
+		 	std::cout<<"Found cs name:"<< (*it)->GetPrefix().toUri() << std::endl;
+			return *it;
+		 }
 	 }
 	return 0;
 }

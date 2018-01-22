@@ -417,7 +417,7 @@ void NavigationRouteHeuristic::OnInterest(Ptr<Face> face,
 		//cout << "into MOVE_TO_NEW_LANE in OnInterest in forwarder" << endl; 
 		if(!isDuplicatedInterest(nodeId,seq) && isSameLane(m_sensor->getLane(),preLane))
 		{
-			//By DJ on Jan 22, 2018: no update of MOVE_TO_NEW_LANE
+			//By DJ on Jan 22, 2018: no update of MOVE_TO_NEW_LANE on PIT
 			//m_pit->UpdatePit(currentLane, interest);
 			Time sendInterval = MilliSeconds( interval);
 			m_sendingInterestEvent[nodeId][seq] = Simulator::Schedule(sendInterval ,
