@@ -280,7 +280,7 @@ void NavigationRouteHeuristic::OnInterest(Ptr<Face> face,
 
 	if(HELLO_PACKET  == interest->GetScope())
 	{
-		cout << "HELLO_PACKET / OnInterest / forwarder" << endl;
+		//cout << "HELLO_PACKET / OnInterest / forwarder" << endl;
 		ProcessHello(interest);//处理hello包
 		return;
 	}
