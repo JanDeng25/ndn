@@ -190,35 +190,35 @@ void nrConsumer::laneChange(std::string oldLane, std::string newLane)
 
 	m_oldLane = oldLane;
 
-	  //cout<<m_node->GetId()<<" lane changed from "<<oldLane<<" to "<<newLane<<endl;
+	//cout<<m_node->GetId()<<" lane changed from "<<oldLane<<" to "<<newLane<<endl;
 
-	 string name = interestSent.begin()->second;
-	 Name prefix(name);
+	string name = interestSent.begin()->second;
+	Name prefix(name);
 
-	 Ptr<Interest> interest = Create<Interest> (Create<Packet>(m_virtualPayloadSize));
-	 Ptr<Name> interestName = Create<Name> (prefix);
-	 interest->SetName(interestName);
-	 interest->SetNonce(m_rand.GetValue());//just generate a random number
-	 interest->SetInterestLifetime    (m_interestLifeTime);
-	 interest->SetScope(MOVE_TO_NEW_LANE);
+	Ptr<Interest> interest = Create<Interest> (Create<Packet>(m_virtualPayloadSize));
+	Ptr<Name> interestName = Create<Name> (prefix);
+	interest->SetName(interestName);
+	interest->SetNonce(m_rand.GetValue());//just generate a random number
+	interest->SetInterestLifetime    (m_interestLifeTime);
+	interest->SetScope(MOVE_TO_NEW_LANE);
 
-	   //add header;
-	  ndn::nrndn::nrndnHeader nrheader;
-	  nrheader.setSourceId(GetNode()->GetId());
-	  nrheader.setX(m_sensor->getX());
-	  nrheader.setY(m_sensor->getY());
-	  std::string lane = m_sensor->getLane();
-	  nrheader.setPreLane(oldLane);
-	  nrheader.setCurrentLane(lane);
+	//add header;
+	ndn::nrndn::nrndnHeader nrheader;
+	nrheader.setSourceId(GetNode()->GetId());
+	nrheader.setX(m_sensor->getX());
+	nrheader.setY(m_sensor->getY());
+	std::string lane = m_sensor->getLane();
+	nrheader.setPreLane(oldLane);
+	nrheader.setCurrentLane(lane);
 
-	  Ptr<Packet> newPayload = Create<Packet> (m_virtualPayloadSize);
-	  newPayload->AddHeader(nrheader);
-	  interest->SetPayload(newPayload);
+	Ptr<Packet> newPayload = Create<Packet> (m_virtualPayloadSize);
+	newPayload->AddHeader(nrheader);
+	interest->SetPayload(newPayload);
 
-	  //cout<<"node: "<<GetNode()->GetId()<<"  send MOVE_TO_NEW_LANE packet,name: "<<prefix.toUri()<<" in consumer"<<endl;
+	cout<<"node: "<<GetNode()->GetId()<<"  send MOVE_TO_NEW_LANE packet,name: "<<prefix.toUri()<<" in consumer"<<endl;
 
-	  m_transmittedInterests (interest, this, m_face);
-	  m_face->ReceiveInterest (interest);
+	m_transmittedInterests (interest, this, m_face);
+	m_face->ReceiveInterest (interest);
 }
 
 bool nrConsumer::isJuction(std::string lane)

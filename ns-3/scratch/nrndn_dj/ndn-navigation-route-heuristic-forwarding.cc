@@ -417,7 +417,8 @@ void NavigationRouteHeuristic::OnInterest(Ptr<Face> face,
 		//cout << "into MOVE_TO_NEW_LANE in OnInterest in forwarder" << endl; 
 		if(!isDuplicatedInterest(nodeId,seq) && isSameLane(m_sensor->getLane(),preLane))
 		{
-			m_pit->UpdatePit(currentLane, interest);
+			//By DJ on Jan 22, 2018: no update of MOVE_TO_NEW_LANE
+			//m_pit->UpdatePit(currentLane, interest);
 			Time sendInterval = MilliSeconds( interval);
 			m_sendingInterestEvent[nodeId][seq] = Simulator::Schedule(sendInterval ,
 												&NavigationRouteHeuristic::ForwardMoveToNewLanePacket, this,interest);
@@ -914,9 +915,9 @@ void NavigationRouteHeuristic::ForwardMoveToNewLanePacket(Ptr<Interest> src)
 
 	nrPayload->AddHeader(nrheader);
 	//Ptr<Interest> interest = Create<Interest> (*src);
-	 src->SetPayload(nrPayload);
-	 ndn::nrndn::nrUtils::IncreaseTableNum();
-	SendInterestPacket( src);
+	src->SetPayload(nrPayload);
+	ndn::nrndn::nrUtils::IncreaseTableNum();
+	SendInterestPacket(src);
 }
 
 void NavigationRouteHeuristic::ForwardInterestPacket(Ptr<Interest> src)
@@ -1197,8 +1198,8 @@ void NavigationRouteHeuristic::PrepareDetectPacket(Ptr<Interest> interest)
 	//cout << "removing hopCountTag" << endl;
 	nrPayload->RemovePacketTag(hopCountTag);
 
-	nrPayload->PrintPacketTags(std::cout);
-	cout << endl;
+	//nrPayload->PrintPacketTags(std::cout);
+	//cout << endl;
 
 	//cout << "adding hopCountTag" << endl;
 	nrPayload->AddPacketTag(hopCountTag);
