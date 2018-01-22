@@ -126,10 +126,11 @@ NrCsImpl::Find (const Name &prefix)
 	 //NS_ASSERT_MSG(m_csContainer.size()!=0,"Empty cs container. No initialization?");
 	 for(it=m_csContainer.begin();it!=m_csContainer.end();++it)
 	 {
-		 if((*it)->GetName()==prefix){
-		 	std::cout<<"Found cs name:"<< (*it)->GetName() << std::endl;
+	 	cout << "(*it)->GetName():" << (*it)->GetName().toUri() << ' ' << "prefix.toUri():" << prefix.toUri() << endl;
+		if((*it)->GetName()==prefix){
+			std::cout<<"Found cs name:"<< (*it)->GetName() << std::endl;
 			return *it;
-		 }
+		}
 	 }
 	return 0;
 }

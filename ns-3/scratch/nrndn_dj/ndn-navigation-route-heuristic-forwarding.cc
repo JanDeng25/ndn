@@ -1239,7 +1239,7 @@ void NavigationRouteHeuristic::PreparePacket(Ptr<Interest> interest)
 		PrepareInterestPacket(interest);
 	}
 	else{
-		cout << "No record" << endl;
+		cout << "FIB No record" << endl;
 		PrepareDetectPacket(interest);
 	}
 }
