@@ -1191,6 +1191,10 @@ void NavigationRouteHeuristic::PrepareDetectPacket(Ptr<Interest> interest)
 	cout << "removing hopCountTag" << endl;
 	nrPayload->RemovePacketTag(hopCountTag);
 
+	//By DJ on Jan 22:if hopCountTag >= 3 return;
+	if(hopCountTag.get() >= 3)
+		return;
+
 	nrPayload->PrintPacketTags(std::cout);
 	cout << endl;
 
