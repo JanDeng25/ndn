@@ -127,7 +127,7 @@ NrCsImpl::Find (const Name &prefix)
 	 for(it=m_csContainer.begin();it!=m_csContainer.end();++it)
 	 {
 		 if((*it)->GetName()==prefix){
-		 	std::cout<<"Found cs name:"<< (*it)->GetPrefix().toUri() << std::endl;
+		 	std::cout<<"Found cs name:"<< (*it)->GetName() << std::endl;
 			return *it;
 		 }
 	 }
