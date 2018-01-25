@@ -475,9 +475,9 @@ void NavigationRouteHeuristic::OnData(Ptr<Face> face, Ptr<Data> data)
 
 	Ptr<Packet> nrPayload	= data->GetPayload()->Copy();
 	FwHopCountTag hopCountTag;
-	nrPayload	->PeekPacketTag(hopCountTag);
+	nrPayload->PeekPacketTag(hopCountTag);
 	ndn::nrndn::PacketTypeTag packetTypeTag;
-	nrPayload	->PeekPacketTag(packetTypeTag);
+	nrPayload->PeekPacketTag(packetTypeTag);
 
 	if(TABLE_PACKET == packetTypeTag.Get())//收到其他节点回复的table packet（非请求table的表格）
 	{
@@ -1239,11 +1239,11 @@ void NavigationRouteHeuristic::PreparePacket(Ptr<Interest> interest)
 		Simulator::Schedule (Seconds (5.0), & NavigationRouteHeuristic::PreparePacket, this,interest);
 	}
 	else if (m_fib->Find(interest->GetName())){
-		cout << "m_fib->Find(interest->GetName())" << ":"  << interest->GetName() << endl;
+		cout << "node: " << m_node->GetId() << "m_fib->Find(interest->GetName())" << ":"  << interest->GetName() << endl;
 		PrepareInterestPacket(interest);
 	}
 	else{
-		cout << "FIB No record" << endl;
+		cout << "node: " << m_node->GetId() << "FIB No record" << endl;
 		PrepareDetectPacket(interest);
 	}
 }
