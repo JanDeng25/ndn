@@ -356,7 +356,7 @@ void NavigationRouteHeuristic::OnInterest(Ptr<Face> face,
 		cout << "into INTEREST_PACKET / OnInterest / forwarder" << endl; 
 		if(!isDuplicatedInterest(nodeId,seq) )
 		{
-			cout << "m_cs->Find(interest->GetName()):" << (interest->GetName()).toUri() << endl;
+			cout << "m_cs->Find(interest->GetName()):" << (interest->GetName()).toUri() << ':' << m_cs->Find(interest->GetName()) << endl;
 			if(m_cs->Find(interest->GetName()) )
 			{
 				cout << "into cs_find / INTEREST_PACKET / OnInterest / forwarder" << endl; 
@@ -367,6 +367,7 @@ void NavigationRouteHeuristic::OnInterest(Ptr<Face> face,
 			}
 			else if(!isSameLane(m_sensor->getLane(),currentLane)&& !isSameLane(m_sensor->getLane(),preLane))
 			{
+				cout << "into isSameLane / INTEREST_PACKET / OnInterest / forwarder" << endl; 
 				m_interestNonceSeen.Put(interest->GetNonce(),true);//不做处理
 				return;
 			}
@@ -1235,15 +1236,15 @@ void NavigationRouteHeuristic::PreparePacket(Ptr<Interest> interest)
 {
 	//cout<<"prepare packet"<<endl;
 	if(m_fib->getFIB().size() == 0){
-		cout << "m_fib->getFIB().size() == 0" << endl;
+		cout << "node: " << m_node->GetId() << " m_fib->getFIB().size() == 0" << endl;
 		Simulator::Schedule (Seconds (5.0), & NavigationRouteHeuristic::PreparePacket, this,interest);
 	}
 	else if (m_fib->Find(interest->GetName())){
-		cout << "node: " << m_node->GetId() << "m_fib->Find(interest->GetName())" << ":"  << interest->GetName() << endl;
+		cout << "node: " << m_node->GetId() << " m_fib->Find(interest->GetName())" << ":"  << interest->GetName() << endl;
 		PrepareInterestPacket(interest);
 	}
 	else{
-		cout << "node: " << m_node->GetId() << "FIB No record" << endl;
+		cout << "node: " << m_node->GetId() << " FIB No record" << endl;
 		PrepareDetectPacket(interest);
 	}
 }
