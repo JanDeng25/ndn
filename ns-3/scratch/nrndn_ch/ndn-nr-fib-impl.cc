@@ -123,6 +123,7 @@ NrFibImpl::AddFibEntry (const Ptr<const Name> &prefix, std::string lane,uint32_t
 		Ptr<Entry> fibEntry = DynamicCast<Entry>(entry);
 		m_fibContainer.push_back(fibEntry);
 		this->Print(std::cout);
+		getchar();
 		return;
 	}
 	else
@@ -135,6 +136,7 @@ NrFibImpl::AddFibEntry (const Ptr<const Name> &prefix, std::string lane,uint32_t
 			{
 				fibEntry->AddIncomingNeighbors(lane,ttl);
 				this->Print(std::cout);
+				getchar();
                 return;
 			}
 		}
@@ -142,7 +144,8 @@ NrFibImpl::AddFibEntry (const Ptr<const Name> &prefix, std::string lane,uint32_t
 		entry->AddIncomingNeighbors(lane, ttl);
 		Ptr<Entry> fibEntry = DynamicCast<Entry>(entry);
 		m_fibContainer.push_back(fibEntry);
-
+		this->Print(std::cout);
+		getchar();
 	}
     return;
 }

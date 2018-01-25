@@ -601,19 +601,19 @@ void NavigationRouteHeuristic::OnData(Ptr<Face> face, Ptr<Data> data)
 		if(!isDuplicatedData(nodeId,signature))
 		{
 			//cout<<"node: "<<m_node->GetId()<<" receive confirm packet from "<<nodeId<<endl;
-			 if(isDuplicatedInterest(nodeId,signature))
-			 {
+			if(isDuplicatedInterest(nodeId,signature))
+			{
 				 ExpireInterestPacketTimer(nodeId,signature);
 				 m_interestNonceSeen.Put(signature,true);
-			 }
-			 if(m_fib->Find(data->GetName()))
+			}
+			if(m_fib->Find(data->GetName()))
 			{
 				m_dataSignatureSeen.Put(data->GetSignature(),true);
 				//ExpireDataPacketTimer(nodeId,signature);
 				return;
 			}
 			//建立FIB表项
-			 m_fib-> AddFibEntry(data->GetNamePtr(),preLane, std::pair<uint32_t, uint32_t>(nrheader.getTTL(), 0));
+			m_fib-> AddFibEntry(data->GetNamePtr(),preLane, std::pair<uint32_t, uint32_t>(nrheader.getTTL(), 0));
 			if(isSameLane(m_sensor->getLane(),currentLane))
 			{
 				Time sendInterval = (MilliSeconds(interval) );
