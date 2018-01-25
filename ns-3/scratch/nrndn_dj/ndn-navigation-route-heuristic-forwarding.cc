@@ -540,14 +540,12 @@ void NavigationRouteHeuristic::OnData(Ptr<Face> face, Ptr<Data> data)
 				m_fib-> AddFibEntry(data->GetNamePtr(),preLane, std::pair<uint32_t, uint32_t>(hopCountTag.Get(), 0) );
 				m_sendingDataEvent[nodeId][signature]=
 								Simulator::Schedule(sendInterval, &NavigationRouteHeuristic::ForwardResourcePacket, this,data);
-				getchar();
 		}
 		else  if(!m_fib->Find(data->GetName()) && IsConnected(m_sensor->getLane(), currentLane) && !isSameLane(m_sensor->getLane(),currentLane)&& !isSameLane(m_sensor->getLane(),preLane)  )
 		{
 				m_fib-> AddFibEntry(data->GetNamePtr(),currentLane, std::pair<uint32_t, uint32_t>(hopCountTag.Get(), 0) );
 				m_sendingDataEvent[nodeId][signature]=
 								Simulator::Schedule(sendInterval+ m_gap* m_timeSlot, &NavigationRouteHeuristic::ForwardResourcePacket, this,data);
-				getchar();
 		}
 			return;
 	}//end if (RESOURCE_PACKET == packetTypeTag.Get())
