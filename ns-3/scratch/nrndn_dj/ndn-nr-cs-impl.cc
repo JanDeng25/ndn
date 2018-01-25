@@ -94,13 +94,13 @@ bool NrCsImpl::Add (Ptr<const Data> data)
 	//std::cout<<"add CS Entry  name:"<<data->GetName().toUri()<<std::endl;
 	if(Find(data->GetName()))
 	{
-		this->Print(std::cout);
+		//this->Print(std::cout);
 		return true;
 	}
     Ptr<cs::Entry> csEntry = ns3::Create<cs::Entry>(this,data) ;
     m_csContainer.push_back(csEntry);
 
-    this->Print(std::cout);
+    //this->Print(std::cout);
 	return true;
 }
 
@@ -120,7 +120,7 @@ NrCsImpl::DoDispose ()
 Ptr<Entry>
 NrCsImpl::Find (const Name &prefix)
 {
-	std::cout << "into CS_FIND prefix.toUri():" << prefix.toUri() << std::endl;
+	//std::cout << "into CS_FIND prefix.toUri():" << prefix.toUri() << std::endl;
 	//NS_ASSERT_MSG(false,"In NrCsImpl,NrCsImpl::Find (const Name &prefix) should not be invoked");
 	NS_LOG_INFO ("Finding prefix"<<prefix.toUri());
 	std::vector<Ptr<Entry> >::iterator it;
@@ -132,9 +132,9 @@ NrCsImpl::Find (const Name &prefix)
 	}
 	for(it=m_csContainer.begin();it!=m_csContainer.end();++it)
 	{
-		std::cout << "(*it)->GetName():" << (*it)->GetName().toUri() << ' ' << "prefix.toUri():" << prefix.toUri() << std::endl;
+		//std::cout << "(*it)->GetName():" << (*it)->GetName().toUri() << ' ' << "prefix.toUri():" << prefix.toUri() << std::endl;
 		if((*it)->GetName()==prefix){
-			std::cout<<"Found cs name:"<< (*it)->GetName() << std::endl;
+			//std::cout<<"Found cs name:"<< (*it)->GetName() << std::endl;
 			return *it;
 		}
 	}
