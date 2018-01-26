@@ -317,7 +317,7 @@ void NavigationRouteHeuristic::OnInterest(Ptr<Face> face,
 		cout << "DETECT_PACKET / OnInterest / forwarder" << endl;
 		if(!isDuplicatedInterest(nodeId,seq) && !isJuction(m_sensor->getLane()))//第一次收到此包
 		{
-			cout << "m_cs->Find(interest->GetName()):" << (interest->GetName()).toUri() << endl;
+			cout << "!isDuplicatedInterest&!isJuction / DETECT_PACKET / OnInterest / forwarder" << endl;
 			if(m_fib->Find(interest->GetName()) || m_cs->Find(interest->GetName()))
 			{
 				cout << "into find(interest->GetName()) / DETECT_PACKET / OnInterest / forwarder" << endl;
@@ -329,6 +329,7 @@ void NavigationRouteHeuristic::OnInterest(Ptr<Face> face,
 			}
 			else if(!isSameLane(m_sensor->getLane(), currentLane) && IsConnected(m_sensor->getLane(), currentLane))
 			{
+				cout << "!isSame&IsConnected / DETECT_PACKET / OnInterest / forwarder" << endl;
 				Time sendInterval = (MilliSeconds(interval) +  m_gap * m_timeSlot);
 				//cout<<"detect packet   send interval: "<<sendInterval.GetSeconds()<<endl;
 				m_sendingInterestEvent[nodeId][seq] = Simulator::Schedule(sendInterval,
@@ -337,6 +338,7 @@ void NavigationRouteHeuristic::OnInterest(Ptr<Face> face,
 			}
 			else if(isSameLane(m_sensor->getLane(), currentLane))
 			{
+				cout << "IsConnected / DETECT_PACKET / OnInterest / forwarder" << endl;
 				Time sendInterval = (MilliSeconds(interval) +  (m_gap+5) * m_timeSlot);
 				//cout<<"detect packet   send interval: "<<sendInterval.GetSeconds()<<endl;
 				m_sendingInterestEvent[nodeId][seq] = Simulator::Schedule(sendInterval,
@@ -1201,7 +1203,7 @@ void NavigationRouteHeuristic::PrepareDetectPacket(Ptr<Interest> interest)
 	//cout << endl;
 	FwHopCountTag hopCountTag;
 	//cout << "removing hopCountTag" << endl;
-	nrPayload->RemovePacketTag(hopCountTag);
+	//nrPayload->RemovePacketTag(hopCountTag);
 
 	//nrPayload->PrintPacketTags(std::cout);
 	//cout << endl;
@@ -1211,7 +1213,7 @@ void NavigationRouteHeuristic::PrepareDetectPacket(Ptr<Interest> interest)
 	
 	ndn::nrndn::PacketTypeTag typeTag(DETECT_PACKET);
 	//cout << "adding typeTag" << endl;
-	nrPayload->RemovePacketTag(typeTag);
+	//nrPayload->RemovePacketTag(typeTag);
 	nrPayload->AddPacketTag (typeTag);
 
 	//nrPayload->PrintPacketTags(std::cout);
