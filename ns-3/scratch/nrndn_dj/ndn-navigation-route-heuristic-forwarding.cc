@@ -1211,16 +1211,20 @@ void NavigationRouteHeuristic::PrepareDetectPacket(Ptr<Interest> interest)
 	//nrPayload->PrintPacketTags(std::cout);
 	//cout << endl;
 	cout << "PeekPacketTag(hopCountTag): " << nrPayload->PeekPacketTag(hopCountTag) << endl;
-	if(!nrPayload->PeekPacketTag(hopCountTag))
+	if(!nrPayload->PeekPacketTag(hopCountTag)){
+		cout << "nrPayload->AddPacketTag(hopCountTag)" << endl;
 		nrPayload->AddPacketTag(hopCountTag);
+	}
 	
 	ndn::nrndn::PacketTypeTag typeTag(DETECT_PACKET);
 	//cout << "adding typeTag" << endl;
 	//nrPayload->RemovePacketTag(typeTag);
 
 	cout << "PeekPacketTag(typeTag): " << nrPayload->PeekPacketTag(typeTag) << endl;
-	if(!nrPayload->PeekPacketTag(typeTag))
+	if(!nrPayload->PeekPacketTag(typeTag)){
+		cout << "nrPayload->AddPacketTag(typeTag)" << endl;
 		nrPayload->AddPacketTag (typeTag);
+	}
 
 	interest->SetPayload(nrPayload);
 	interest->SetScope(DETECT_PACKET);
