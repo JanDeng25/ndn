@@ -315,6 +315,8 @@ void NavigationRouteHeuristic::OnInterest(Ptr<Face> face,
 	if(DETECT_PACKET == interest->GetScope())
 	{
 		cout << "DETECT_PACKET / OnInterest / forwarder" << endl;
+		cout << "isDuplicatedInterest: " << isDuplicatedInterest(nodeId,seq) << endl;
+		cout << "isJuction: " << isJuction(m_sensor->getLane()) << endl;
 		if(!isDuplicatedInterest(nodeId,seq) && !isJuction(m_sensor->getLane()))//第一次收到此包
 		{
 			cout << "!isDuplicatedInterest&!isJuction / DETECT_PACKET / OnInterest / forwarder" << endl;
@@ -348,6 +350,7 @@ void NavigationRouteHeuristic::OnInterest(Ptr<Face> face,
 		}
 		else//重复，准备发送时收到了其他节点转发的同样的包，则取消转发，同时m_interestNonceSeen.Put(interest->GetNonce(),true)，以后不再处理
 		{
+			cout << "isDuplicatedInterest | isJuction / DETECT_PACKET / OnInterest / forwarder" << endl;
 			m_interestNonceSeen.Put(interest->GetNonce(),true);
 			ExpireInterestPacketTimer(nodeId,seq);
 			return;
