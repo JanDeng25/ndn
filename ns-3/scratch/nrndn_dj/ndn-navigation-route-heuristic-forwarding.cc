@@ -358,7 +358,7 @@ void NavigationRouteHeuristic::OnInterest(Ptr<Face> face,
 	}
 	else if(INTEREST_PACKET == interest->GetScope())
 	{
-		cout << "into INTEREST_PACKET / OnInterest / forwarder" << endl; 
+		cout << "node: " <<m_node->GetId() << " into INTEREST_PACKET / OnInterest / forwarder" << endl; 
 		if(!isDuplicatedInterest(nodeId,seq) )
 		{
 			cout << "m_cs->Find(interest->GetName()):" << (interest->GetName()).toUri() << ':' << m_cs->Find(interest->GetName()) << endl;
@@ -999,7 +999,7 @@ void NavigationRouteHeuristic::ReplyConfirmPacket(Ptr<Interest> interest)
 	nrheader.setPreLane(m_sensor->getLane());
 	uint32_t ttl;
 
-	cout << "m_cs->Find(interest->GetName()):" << (interest->GetName()).toUri() << endl;
+	//cout << "m_cs->Find(interest->GetName()):" << (interest->GetName()).toUri() << endl;
 	if(m_cs->Find(interest->GetName()))
 	{
 		ttl = 0;
@@ -1018,7 +1018,7 @@ void NavigationRouteHeuristic::ReplyConfirmPacket(Ptr<Interest> interest)
 
 	data->SetPayload(newPayload);
 
-	ndn::nrndn::PacketTypeTag typeTag(CONFIRM_PACKET );
+	ndn::nrndn::PacketTypeTag typeTag(CONFIRM_PACKET);
 	data->GetPayload()->AddPacketTag(typeTag);
 
 	FwHopCountTag hopCountTag;

@@ -144,7 +144,7 @@ uint32_t nrUtils::GetTableSum()//表格维护的总开销：asktableNum + tableN
 double nrUtils::GetAverageHitRate()
 {
 	double AverageHitRate = InterestedNodeReceivedSum / InterestedNodeSum;
-	std::cout<<"InterestedNodeReceivedSum:"<<InterestedNodeReceivedSum<<" InterestedNodeSum:"<<InterestedNodeSum<<" nrutils::hitrate: "<<AverageHitRate<<" 15/21:"<<15.0/21<<std::endl;
+	std::cout<<"InterestedNodeReceivedSum:"<<InterestedNodeReceivedSum<<" InterestedNodeSum:"<<InterestedNodeSum<<" nrutils::hitrate: "<<AverageHitRate<<std::endl;
 	return  1.0*InterestedNodeReceivedSum /InterestedNodeSum;
 }
 double nrUtils::GetAverageDetectRate()//平均探测率：detectNum/interestedNodeSum

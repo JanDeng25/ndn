@@ -880,7 +880,7 @@ void NavigationRouteHeuristic::ForwardDetectPacket(Ptr<Interest> src)
 
 	// 3. Send the interest Packet. Already wait, so no schedule
 	m_interestNonceSeen.Put(src->GetNonce(),true);
-	cout<<"node: "<<m_node->GetId()<<" forward detect packet from "<<nrheader.getSourceId()<<" ttl:"<<hopCountTag.Get()<<endl;
+	//cout<<"node: "<<m_node->GetId()<<" forward detect packet from "<<nrheader.getSourceId()<<" ttl:"<<hopCountTag.Get()<<endl;
 	SendInterestPacket(interest);
 	ndn::nrndn::nrUtils::IncreaseDetectForwardCounter();
 }
