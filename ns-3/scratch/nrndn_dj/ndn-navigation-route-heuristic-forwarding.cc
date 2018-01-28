@@ -232,7 +232,7 @@ void NavigationRouteHeuristic::AddFace(Ptr<Face> face)
 	else
 	{
 		NS_LOG_DEBUG("Node "<<m_node->GetId()<<" add NOT application face "<<face->GetId());
-		std::cout << "Node "<<m_node->GetId()<<" add NOT application face "<<face->GetId() << endl;
+		//std::cout << "Node "<<m_node->GetId()<<" add NOT application face "<<face->GetId() << endl;
 		m_outFaceList.push_back(face);
 	}
 }
@@ -606,7 +606,7 @@ void NavigationRouteHeuristic::OnData(Ptr<Face> face, Ptr<Data> data)
 	{
 		if(!isDuplicatedData(nodeId,signature))
 		{
-			//cout<<"node: "<<m_node->GetId()<<" receive confirm packet from "<<nodeId<<endl;
+			cout<<"node: "<<m_node->GetId()<<" receive confirm packet from "<<nodeId<<endl;
 			if(isDuplicatedInterest(nodeId,signature))
 			{
 				 ExpireInterestPacketTimer(nodeId,signature);
@@ -619,6 +619,7 @@ void NavigationRouteHeuristic::OnData(Ptr<Face> face, Ptr<Data> data)
 				return;
 			}
 			//建立FIB表项
+			cout << cout<<"node: "<<m_node->GetId()<< " AddFibEntry "<<nodeId<<endl;
 			m_fib-> AddFibEntry(data->GetNamePtr(),preLane, std::pair<uint32_t, uint32_t>(nrheader.getTTL(), 0));
 			if(isSameLane(m_sensor->getLane(),currentLane))
 			{
