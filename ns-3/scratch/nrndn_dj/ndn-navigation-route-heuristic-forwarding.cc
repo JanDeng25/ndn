@@ -545,14 +545,14 @@ void NavigationRouteHeuristic::OnData(Ptr<Face> face, Ptr<Data> data)
 		Time sendInterval = (MilliSeconds(interval) );
 		if(isSameLane(m_sensor->getLane(),currentLane) && !m_fib->Find(data->GetName()))
 		{
-			cout  << "node: " << m_node->GetId() << " isSameLane & !fib->Find" << endl;
+			cout  << "node: " << m_node->GetId() << " isSameLane & !fib->Find, " << "dataname: " << data->GetName() << endl;
 			m_fib-> AddFibEntry(data->GetNamePtr(),preLane, std::pair<uint32_t, uint32_t>(hopCountTag.Get(), 0) );
 			m_sendingDataEvent[nodeId][signature]=
 				Simulator::Schedule(sendInterval, &NavigationRouteHeuristic::ForwardResourcePacket, this,data);
 		}
 		else  if(!m_fib->Find(data->GetName()) && IsConnected(m_sensor->getLane(), currentLane) && !isSameLane(m_sensor->getLane(),currentLane)&& !isSameLane(m_sensor->getLane(),preLane)  )
 		{
-			cout  << "node: " << m_node->GetId() << " !isSameLane & IsConnected & !fib->Find" << endl;
+			cout  << "node: " << m_node->GetId() << " !isSameLane & IsConnected & !fib->Find, " << "dataname: " << data->GetName() << endl;
 			m_fib-> AddFibEntry(data->GetNamePtr(),currentLane, std::pair<uint32_t, uint32_t>(hopCountTag.Get(), 0) );
 			m_sendingDataEvent[nodeId][signature]=
 				Simulator::Schedule(sendInterval+ m_gap* m_timeSlot, &NavigationRouteHeuristic::ForwardResourcePacket, this,data);
@@ -742,6 +742,7 @@ void NavigationRouteHeuristic::ForwardResourcePacket(Ptr<Data> src)
 	// 	2.2 setup FwHopCountTag
 	FwHopCountTag hopCountTag;
 	nrPayload->RemovePacketTag( hopCountTag);
+	cout << "node: " << m_node-><GetId() << " hop:" << hopCountTag.Get() << endl;
 	if(hopCountTag.Get() > 14)
 	{
 		m_dataSignatureSeen.Put(src->GetSignature(),true);
@@ -793,6 +794,7 @@ void NavigationRouteHeuristic::ForwardConfirmPacket(Ptr<Data> src)
 	// 	2.2 setup FwHopCountTag
 	FwHopCountTag hopCountTag;
 	nrPayload->RemovePacketTag( hopCountTag);
+	cout << "node: " << m_node-><GetId() << " hop:" << hopCountTag.Get() << endl;
 	if(hopCountTag.Get() > 3)
 	{
 		m_dataSignatureSeen.Put(src->GetSignature(),true);
@@ -898,6 +900,7 @@ void NavigationRouteHeuristic::ForwardDetectPacket(Ptr<Interest> src)
 
 	FwHopCountTag hopCountTag;
 	nrPayload->RemovePacketTag( hopCountTag);
+	cout << "node: " << m_node-><GetId() << " hop:" << hopCountTag.Get() << endl;
 	if(hopCountTag.Get() > 3)
 	{
 			m_interestNonceSeen.Put(src->GetNonce(),true);
