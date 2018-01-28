@@ -315,15 +315,15 @@ void NavigationRouteHeuristic::OnInterest(Ptr<Face> face,
 
 	if(DETECT_PACKET == interest->GetScope())
 	{
-		cout << "DETECT_PACKET / OnInterest / forwarder" << endl;
-		cout << "isDuplicatedInterest: " << isDuplicatedInterest(nodeId,seq) << endl;
-		cout << "isJuction: " << isJuction(m_sensor->getLane()) << endl;
+		//cout << "DETECT_PACKET / OnInterest / forwarder" << endl;
+		//cout << "isDuplicatedInterest: " << isDuplicatedInterest(nodeId,seq) << endl;
+		//cout << "isJuction: " << isJuction(m_sensor->getLane()) << endl;
 		if(!isDuplicatedInterest(nodeId,seq) && !isJuction(m_sensor->getLane()))//第一次收到此包
 		{
-			cout << "!isDuplicatedInterest&!isJuction / DETECT_PACKET / OnInterest / forwarder" << endl;
+			//cout << "!isDuplicatedInterest&!isJuction / DETECT_PACKET / OnInterest / forwarder" << endl;
 			if(m_fib->Find(interest->GetName()) || m_cs->Find(interest->GetName()))
 			{
-				cout << "into find(interest->GetName()) / DETECT_PACKET / OnInterest / forwarder" << endl;
+				//cout << "into find(interest->GetName()) / DETECT_PACKET / OnInterest / forwarder" << endl;
 				Time sendInterval = MilliSeconds(distance*1.5);
 				//cout<<"detect packet  send interval: "<<sendInterval.GetSeconds()<<endl;
 				m_sendingDataEvent[nodeId][seq] = Simulator::Schedule(sendInterval,
@@ -332,7 +332,7 @@ void NavigationRouteHeuristic::OnInterest(Ptr<Face> face,
 			}
 			else if(!isSameLane(m_sensor->getLane(), currentLane) && IsConnected(m_sensor->getLane(), currentLane))
 			{
-				cout << "!isSame&IsConnected / DETECT_PACKET / OnInterest / forwarder" << endl;
+				//cout << "!isSame&IsConnected / DETECT_PACKET / OnInterest / forwarder" << endl;
 				Time sendInterval = (MilliSeconds(interval) +  m_gap * m_timeSlot);
 				//cout<<"detect packet   send interval: "<<sendInterval.GetSeconds()<<endl;
 				m_sendingInterestEvent[nodeId][seq] = Simulator::Schedule(sendInterval,
@@ -341,7 +341,7 @@ void NavigationRouteHeuristic::OnInterest(Ptr<Face> face,
 			}
 			else if(isSameLane(m_sensor->getLane(), currentLane))
 			{
-				cout << "IsConnected / DETECT_PACKET / OnInterest / forwarder" << endl;
+				//cout << "IsConnected / DETECT_PACKET / OnInterest / forwarder" << endl;
 				Time sendInterval = (MilliSeconds(interval) +  (m_gap+5) * m_timeSlot);
 				//cout<<"detect packet   send interval: "<<sendInterval.GetSeconds()<<endl;
 				m_sendingInterestEvent[nodeId][seq] = Simulator::Schedule(sendInterval,
@@ -351,7 +351,7 @@ void NavigationRouteHeuristic::OnInterest(Ptr<Face> face,
 		}
 		else//重复，准备发送时收到了其他节点转发的同样的包，则取消转发，同时m_interestNonceSeen.Put(interest->GetNonce(),true)，以后不再处理
 		{
-			cout << "isDuplicatedInterest | isJuction / DETECT_PACKET / OnInterest / forwarder" << endl;
+			//cout << "isDuplicatedInterest | isJuction / DETECT_PACKET / OnInterest / forwarder" << endl;
 			m_interestNonceSeen.Put(interest->GetNonce(),true);
 			ExpireInterestPacketTimer(nodeId,seq);
 			return;
@@ -528,7 +528,7 @@ void NavigationRouteHeuristic::OnData(Ptr<Face> face, Ptr<Data> data)
 
 	if(RESOURCE_PACKET == packetTypeTag.Get())
 	{
-		//cout << "into RESOURCE_PACKET / onData / forwarder" << endl;
+		cout << "node: " << m_node->GetId() << " into RESOURCE_PACKET / onData / forwarder" << endl;
 		if(isJuction(m_sensor->getLane() )|| (isSameLane(m_sensor->getLane(), currentLane) && isDuplicatedData(nodeId,signature)))
 		{//若处在路口，或者收到同路段车辆转发的包
 			ExpireDataPacketTimer(nodeId,signature);
@@ -545,15 +545,17 @@ void NavigationRouteHeuristic::OnData(Ptr<Face> face, Ptr<Data> data)
 		Time sendInterval = (MilliSeconds(interval) );
 		if(isSameLane(m_sensor->getLane(),currentLane) && !m_fib->Find(data->GetName()))
 		{
-				m_fib-> AddFibEntry(data->GetNamePtr(),preLane, std::pair<uint32_t, uint32_t>(hopCountTag.Get(), 0) );
-				m_sendingDataEvent[nodeId][signature]=
-								Simulator::Schedule(sendInterval, &NavigationRouteHeuristic::ForwardResourcePacket, this,data);
+			cout  << "node: " << m_node->GetId() << " isSameLane & !fib->Find" << endl;
+			m_fib-> AddFibEntry(data->GetNamePtr(),preLane, std::pair<uint32_t, uint32_t>(hopCountTag.Get(), 0) );
+			m_sendingDataEvent[nodeId][signature]=
+				Simulator::Schedule(sendInterval, &NavigationRouteHeuristic::ForwardResourcePacket, this,data);
 		}
 		else  if(!m_fib->Find(data->GetName()) && IsConnected(m_sensor->getLane(), currentLane) && !isSameLane(m_sensor->getLane(),currentLane)&& !isSameLane(m_sensor->getLane(),preLane)  )
 		{
-				m_fib-> AddFibEntry(data->GetNamePtr(),currentLane, std::pair<uint32_t, uint32_t>(hopCountTag.Get(), 0) );
-				m_sendingDataEvent[nodeId][signature]=
-								Simulator::Schedule(sendInterval+ m_gap* m_timeSlot, &NavigationRouteHeuristic::ForwardResourcePacket, this,data);
+			cout  << "node: " << m_node->GetId() << " !isSameLane & IsConnected & !fib->Find" << endl;
+			m_fib-> AddFibEntry(data->GetNamePtr(),currentLane, std::pair<uint32_t, uint32_t>(hopCountTag.Get(), 0) );
+			m_sendingDataEvent[nodeId][signature]=
+				Simulator::Schedule(sendInterval+ m_gap* m_timeSlot, &NavigationRouteHeuristic::ForwardResourcePacket, this,data);
 		}
 			return;
 	}//end if (RESOURCE_PACKET == packetTypeTag.Get())
@@ -606,7 +608,7 @@ void NavigationRouteHeuristic::OnData(Ptr<Face> face, Ptr<Data> data)
 	{
 		if(!isDuplicatedData(nodeId,signature))
 		{
-			cout<<"node: "<<m_node->GetId()<<" receive confirm packet from "<<nodeId<<endl;
+			cout<<"node: "<<m_node->GetId()<<" receive confirm packet from "<< nodeId <<endl;
 			if(isDuplicatedInterest(nodeId,signature))
 			{
 				 ExpireInterestPacketTimer(nodeId,signature);
@@ -976,7 +978,7 @@ void NavigationRouteHeuristic::ForwardInterestPacket(Ptr<Interest> src)
 void NavigationRouteHeuristic::ReplyConfirmPacket(Ptr<Interest> interest)
 {
 	if (!m_running)  return;
-	//cout<<"into reply confirm packet"<<endl;
+	cout<<"into reply confirm packet"<<endl;
 	Ptr<Data> data = Create<Data>(Create<Packet>(m_virtualPayloadSize));
 	Ptr<Name> dataName = Create<Name>(interest->GetName());
 	data->SetName(dataName);
