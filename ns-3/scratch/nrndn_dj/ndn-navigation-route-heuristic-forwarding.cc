@@ -742,7 +742,7 @@ void NavigationRouteHeuristic::ForwardResourcePacket(Ptr<Data> src)
 	// 	2.2 setup FwHopCountTag
 	FwHopCountTag hopCountTag;
 	nrPayload->RemovePacketTag( hopCountTag);
-	cout << "node: " << m_node-><GetId() << " hop:" << hopCountTag.Get() << endl;
+	cout << "node: " << m_node->GetId() << " hop:" << hopCountTag.Get() << endl;
 	if(hopCountTag.Get() > 14)
 	{
 		m_dataSignatureSeen.Put(src->GetSignature(),true);
@@ -794,7 +794,7 @@ void NavigationRouteHeuristic::ForwardConfirmPacket(Ptr<Data> src)
 	// 	2.2 setup FwHopCountTag
 	FwHopCountTag hopCountTag;
 	nrPayload->RemovePacketTag( hopCountTag);
-	cout << "node: " << m_node-><GetId() << " hop:" << hopCountTag.Get() << endl;
+	cout << "node: " << m_node->GetId() << " hop:" << hopCountTag.Get() << endl;
 	if(hopCountTag.Get() > 3)
 	{
 		m_dataSignatureSeen.Put(src->GetSignature(),true);
@@ -900,7 +900,7 @@ void NavigationRouteHeuristic::ForwardDetectPacket(Ptr<Interest> src)
 
 	FwHopCountTag hopCountTag;
 	nrPayload->RemovePacketTag( hopCountTag);
-	cout << "node: " << m_node-><GetId() << " hop:" << hopCountTag.Get() << endl;
+	cout << "node: " << m_node->GetId() << " hop:" << hopCountTag.Get() << endl;
 	if(hopCountTag.Get() > 3)
 	{
 			m_interestNonceSeen.Put(src->GetNonce(),true);
