@@ -1213,7 +1213,7 @@ void NavigationRouteHeuristic::PrepareDetectPacket(Ptr<Interest> interest)
 		nrPayload->AddPacketTag(hopCountTag);
 	}
 	
-	ndn::nrndn::PacketTypeTag typeTag(DETECT_PACKET)
+	ndn::nrndn::PacketTypeTag typeTag(DETECT_PACKET);
 
 	//cout << "PeekPacketTag(typeTag): " << nrPayload->PeekPacketTag(typeTag) << endl;
 	if(!nrPayload->PeekPacketTag(typeTag)){
