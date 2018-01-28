@@ -362,6 +362,7 @@ void NavigationRouteHeuristic::OnInterest(Ptr<Face> face,
 		if(!isDuplicatedInterest(nodeId,seq) )
 		{
 			cout << "m_cs->Find(interest->GetName()):" << (interest->GetName()).toUri() << ':' << m_cs->Find(interest->GetName()) << endl;
+			getchar();
 			if(m_cs->Find(interest->GetName()) )
 			{
 				cout << "into cs_find / INTEREST_PACKET / OnInterest / forwarder" << endl; 
@@ -1205,24 +1206,18 @@ void NavigationRouteHeuristic::PrepareDetectPacket(Ptr<Interest> interest)
 	//nrPayload->PrintPacketTags(std::cout);
 	//cout << endl;
 	FwHopCountTag hopCountTag;
-	//cout << "removing hopCountTag" << endl;
-	//nrPayload->RemovePacketTag(hopCountTag);
 
-	//nrPayload->PrintPacketTags(std::cout);
-	//cout << endl;
-	cout << "PeekPacketTag(hopCountTag): " << nrPayload->PeekPacketTag(hopCountTag) << endl;
+	//cout << "PeekPacketTag(hopCountTag): " << nrPayload->PeekPacketTag(hopCountTag) << endl;
 	if(!nrPayload->PeekPacketTag(hopCountTag)){
-		cout << "nrPayload->AddPacketTag(hopCountTag)" << endl;
+		//cout << "nrPayload->AddPacketTag(hopCountTag)" << endl;
 		nrPayload->AddPacketTag(hopCountTag);
 	}
 	
-	ndn::nrndn::PacketTypeTag typeTag(DETECT_PACKET);
-	//cout << "adding typeTag" << endl;
-	//nrPayload->RemovePacketTag(typeTag);
+	ndn::nrndn::PacketTypeTag typeTag(DETECT_PACKET)
 
-	cout << "PeekPacketTag(typeTag): " << nrPayload->PeekPacketTag(typeTag) << endl;
+	//cout << "PeekPacketTag(typeTag): " << nrPayload->PeekPacketTag(typeTag) << endl;
 	if(!nrPayload->PeekPacketTag(typeTag)){
-		cout << "nrPayload->AddPacketTag(typeTag)" << endl;
+		//cout << "nrPayload->AddPacketTag(typeTag)" << endl;
 		nrPayload->AddPacketTag (typeTag);
 	}
 
