@@ -232,6 +232,7 @@ void NavigationRouteHeuristic::AddFace(Ptr<Face> face)
 	else
 	{
 		NS_LOG_DEBUG("Node "<<m_node->GetId()<<" add NOT application face "<<face->GetId());
+		std::cout << "Node "<<m_node->GetId()<<" add NOT application face "<<face->GetId() << endl;
 		m_outFaceList.push_back(face);
 	}
 }
