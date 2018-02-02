@@ -363,7 +363,7 @@ void NavigationRouteHeuristic::OnInterest(Ptr<Face> face,
 		if(!isDuplicatedInterest(nodeId,seq) )
 		{
 			cout << "m_cs->Find(interest->GetName()):" << (interest->GetName()).toUri() << ':' << m_cs->Find(interest->GetName()) << endl;
-			getchar();
+			//getchar();
 			if(m_cs->Find(interest->GetName()) )
 			{
 				cout << "into cs_find / INTEREST_PACKET / OnInterest / forwarder" << endl; 
@@ -742,7 +742,7 @@ void NavigationRouteHeuristic::ForwardResourcePacket(Ptr<Data> src)
 	// 	2.2 setup FwHopCountTag
 	FwHopCountTag hopCountTag;
 	nrPayload->RemovePacketTag( hopCountTag);
-	cout << "node: " << m_node->GetId() << " hop:" << hopCountTag.Get() << endl;
+	//cout << "node: " << m_node->GetId() << " hop:" << hopCountTag.Get() << endl;
 	if(hopCountTag.Get() > 14)
 	{
 		m_dataSignatureSeen.Put(src->GetSignature(),true);
@@ -900,7 +900,7 @@ void NavigationRouteHeuristic::ForwardDetectPacket(Ptr<Interest> src)
 
 	FwHopCountTag hopCountTag;
 	nrPayload->RemovePacketTag( hopCountTag);
-	cout << "node: " << m_node->GetId() << " hop:" << hopCountTag.Get() << endl;
+	//cout << "node: " << m_node->GetId() << " hop:" << hopCountTag.Get() << endl;
 	if(hopCountTag.Get() > 3)
 	{
 			m_interestNonceSeen.Put(src->GetNonce(),true);
