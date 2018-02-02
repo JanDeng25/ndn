@@ -953,7 +953,7 @@ void NavigationRouteHeuristic::ForwardInterestPacket(Ptr<Interest> src)
 	nrheader.setY(m_sensor->getY());
 	nrheader.setPreLane(m_sensor->getLane());
 	nrheader.setLaneList(lanelist);
-	if(m_fib->Find( src->GetName()) == 0)
+	if(m_fib->Find(src->GetName()) == 0)
 	{
 		return;
 	}
