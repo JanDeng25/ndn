@@ -528,7 +528,7 @@ void NavigationRouteHeuristic::OnData(Ptr<Face> face, Ptr<Data> data)
 
 	if(RESOURCE_PACKET == packetTypeTag.Get())
 	{
-		cout << "node: " << m_node->GetId() << " into RESOURCE_PACKET / onData / forwarder" << endl;
+		//cout << "node: " << m_node->GetId() << " into RESOURCE_PACKET / onData / forwarder" << endl;
 		if(isJuction(m_sensor->getLane() )|| (isSameLane(m_sensor->getLane(), currentLane) && isDuplicatedData(nodeId,signature)))
 		{//若处在路口，或者收到同路段车辆转发的包
 			ExpireDataPacketTimer(nodeId,signature);
