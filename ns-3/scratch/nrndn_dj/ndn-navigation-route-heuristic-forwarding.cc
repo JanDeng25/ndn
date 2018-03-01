@@ -277,6 +277,11 @@ void NavigationRouteHeuristic::OnInterest(Ptr<Face> face,
 		Simulator::Schedule(MilliSeconds(m_uniformRandomVariable->GetInteger(0, 100)),
 						&NavigationRouteHeuristic::PreparePacket, this, interest);
 		return;
+
+		//on Mar 1, 2018 by DJ: test interest
+		if(interest->GetScope == INTEREST_PACKET){
+			cout << "node: " <<m_node->GetId() << " interest packet from itself, name:" << (interest->GetName()).toUri() << endl;
+		}
 	}
 
 	if(HELLO_PACKET  == interest->GetScope())

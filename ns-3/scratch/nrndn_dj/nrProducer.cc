@@ -179,7 +179,7 @@ void nrProducer::sendResourcePacket(uint32_t n)
 	FwHopCountTag hopCountTag;
 	data->GetPayload()->AddPacketTag(hopCountTag);
 
-	std::cout<<"siu:"<<"node("<< GetNode()->GetId() <<")\t send Resource Packet in producer:" << data->GetName ()<<",signature:"<<data->GetSignature()<<std::endl;
+	//std::cout<<"siu:"<<"node("<< GetNode()->GetId() <<")\t send Resource Packet in producer:" << data->GetName ()<<",signature:"<<data->GetSignature()<<std::endl;
 
 	m_face->ReceiveData(data);
 	m_transmittedDatas(data, this, m_face);
