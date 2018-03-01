@@ -322,8 +322,8 @@ void NavigationRouteHeuristic::OnInterest(Ptr<Face> face,
 
 	cout << "forwarder " << "node: "<<m_node->GetId()<< " scope(int): " << (int)(interest->GetScope())<< " scope: " << (interest->GetScope()) << endl;
 	cout << "DETECT_PACKET: " << DETECT_PACKET << " INTEREST_PACKET: " << INTEREST_PACKET << endl;
-	cout << "DETECT_PACKET == interest->GetScope():" << DETECT_PACKET == interest->GetScope() << " DETECT_PACKET == (int)interest->GetScope():" << DETECT_PACKET == (int)(interest->GetScope()) << endl;
-	cout << "INTEREST_PACKET == interest->GetScope():" << INTEREST_PACKET == interest->GetScope() << " INTEREST_PACKET == (int)interest->GetScope():" << INTEREST_PACKET == (int)(interest->GetScope()) << endl;
+	cout << "DETECT_PACKET == interest->GetScope():" << (DETECT_PACKET == interest->GetScope()) << " DETECT_PACKET == (int)interest->GetScope():" << (DETECT_PACKET == (int)(interest->GetScope())) << endl;
+	cout << "INTEREST_PACKET == interest->GetScope():" << (INTEREST_PACKET == interest->GetScope()) << " INTEREST_PACKET == (int)interest->GetScope():" << (INTEREST_PACKET == (int)(interest->GetScope())) << endl;
 	if(DETECT_PACKET == interest->GetScope())
 	{
 		//cout << "DETECT_PACKET / OnInterest / forwarder" << endl;
