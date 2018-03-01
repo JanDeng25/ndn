@@ -268,7 +268,7 @@ void NavigationRouteHeuristic::OnInterest(Ptr<Face> face,
 	if(Face::APPLICATION==face->GetFlags())
 	{
 		NS_LOG_DEBUG("Get interest packet from APPLICATION");
-		
+
 		//on Mar 1, 2018 by DJ: test interest
 		if(interest->GetScope() == INTEREST_PACKET){
 			cout << "node: " <<m_node->GetId() << " interest packet from itself, name:" << (interest->GetName()).toUri() << endl;
@@ -1164,6 +1164,7 @@ void NavigationRouteHeuristic::PrepareInterestPacket(Ptr<Interest> interest)
 	nrPayload->AddPacketTag (typeTag);
 
 	interest->SetPayload(nrPayload);
+	cout << "forwarder " << "node: "<<m_node->GetId()<< " scope: " << interest->scope() << endl;
 	Simulator::Schedule(
 					MilliSeconds(m_uniformRandomVariable->GetInteger(0, 100)),
 					&NavigationRouteHeuristic::SendInterestPacket, this, interest);
@@ -1279,8 +1280,10 @@ void NavigationRouteHeuristic::SendInterestPacket(Ptr<Interest> interest)
 	vector<Ptr<Face> >::iterator fit;
 	for(fit=m_outFaceList.begin();fit!=m_outFaceList.end();++fit)
 	{
+		cout << "1 In SendInterestPacket node: " << m_node->GetId() << " m_fib->Find(interest->GetName())" << ":"  << interest->GetName() << endl;
 		(*fit)->SendInterest(interest);
 		//////ndn::nrndn::nrUtils::AggrateInterestPacketSize(interest);
+		cout << "2 In SendInterestPacket node: " << m_node->GetId() << " m_fib->Find(interest->GetName())" << ":"  << interest->GetName() << endl;
 	}
 }
 
