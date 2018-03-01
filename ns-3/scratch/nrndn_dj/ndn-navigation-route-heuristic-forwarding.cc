@@ -159,7 +159,7 @@ void NavigationRouteHeuristic::Start()
 		}
 	}
 	//Simulator::Schedule (Seconds (50), & NavigationRouteHeuristic::fibnum, this);
-	Simulator::Schedule (Seconds (50), & NavigationRouteHeuristic::CheckTable, this);
+	//Simulator::Schedule (Seconds (50), & NavigationRouteHeuristic::CheckTable, this);
 }
 
 void NavigationRouteHeuristic::fibnum()
