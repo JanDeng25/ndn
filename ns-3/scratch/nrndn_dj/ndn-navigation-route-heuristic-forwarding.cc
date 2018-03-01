@@ -265,10 +265,10 @@ void NavigationRouteHeuristic::OnInterest(Ptr<Face> face,
 {
 	if(!m_running) return;
 	//cout << "into OnInterest in forwarder" << endl; 
-	cout << "forwarder " << "node: "<<m_node->GetId()<< " scope(int): " << (int)(interest->GetScope())<< " scope: " << (interest->GetScope()) << " nonce:" << interest->GetNonce() << endl;
-	cout << "DETECT_PACKET: " << DETECT_PACKET << " INTEREST_PACKET: " << INTEREST_PACKET << endl;
-	cout << "DETECT_PACKET == interest->GetScope():" << (DETECT_PACKET == interest->GetScope()) << " DETECT_PACKET == (int)interest->GetScope():" << (DETECT_PACKET == (int)(interest->GetScope())) << endl;
-	cout << "INTEREST_PACKET == interest->GetScope():" << (INTEREST_PACKET == interest->GetScope()) << " INTEREST_PACKET == (int)interest->GetScope():" << (INTEREST_PACKET == (int)(interest->GetScope())) << endl;
+	//cout << "forwarder " << "node: "<<m_node->GetId()<< " scope(int): " << (int)(interest->GetScope())<< " scope: " << (interest->GetScope()) << " nonce:" << interest->GetNonce() << endl;
+	//cout << "DETECT_PACKET: " << DETECT_PACKET << " INTEREST_PACKET: " << INTEREST_PACKET << endl;
+	//cout << "DETECT_PACKET == interest->GetScope():" << (DETECT_PACKET == interest->GetScope()) << " DETECT_PACKET == (int)interest->GetScope():" << (DETECT_PACKET == (int)(interest->GetScope())) << endl;
+	//cout << "INTEREST_PACKET == interest->GetScope():" << (INTEREST_PACKET == interest->GetScope()) << " INTEREST_PACKET == (int)interest->GetScope():" << (INTEREST_PACKET == (int)(interest->GetScope())) << endl;
 
 	if(Face::APPLICATION==face->GetFlags())
 	{
@@ -574,7 +574,7 @@ void NavigationRouteHeuristic::OnData(Ptr<Face> face, Ptr<Data> data)
 	}//end if (RESOURCE_PACKET == packetTypeTag.Get())
 	else if (DATA_PACKET == packetTypeTag.Get())
 	{
-		cout << "into DATA_PACKET / onData / forwarder" << endl;
+		cout << "node: " << m_node->GetId() << "into DATA_PACKET / onData / forwarder" << endl;
 		if(!isDuplicatedData(nodeId,signature))
 		{
 			m_cs->Add(data);
@@ -587,7 +587,7 @@ void NavigationRouteHeuristic::OnData(Ptr<Face> face, Ptr<Data> data)
 			}
 			if(m_pit->Find(data->GetName()))
 			{
-				cout << "into m_pit->Find(data->GetName()) / DATA_PACKET / onData / forwarder" << endl;
+				cout << "node: " << m_node->GetId() << "into m_pit->Find(data->GetName()) / DATA_PACKET / onData / forwarder" << endl;
 				if(OnTheWay(laneList))//在数据包应走的下一跳，可能有多个
 				{
 					Time sendInterval = MilliSeconds(interval) ;
@@ -634,7 +634,7 @@ void NavigationRouteHeuristic::OnData(Ptr<Face> face, Ptr<Data> data)
 				return;
 			}
 			//建立FIB表项
-			cout << cout<<"node: "<<m_node->GetId()<< " AddFibEntry "<<nodeId<<endl;
+			cout<<"node: "<<m_node->GetId()<< " AddFibEntry "<<nodeId<<endl;
 			m_fib-> AddFibEntry(data->GetNamePtr(),preLane, std::pair<uint32_t, uint32_t>(nrheader.getTTL(), 0));
 			if(isSameLane(m_sensor->getLane(),currentLane))
 			{
@@ -994,7 +994,7 @@ void NavigationRouteHeuristic::ForwardInterestPacket(Ptr<Interest> src)
 void NavigationRouteHeuristic::ReplyConfirmPacket(Ptr<Interest> interest)
 {
 	if (!m_running)  return;
-	cout<<"into reply confirm packet"<<endl;
+	cout << "node: "<<m_node->GetId() << "into reply confirm packet"<<endl;
 	Ptr<Data> data = Create<Data>(Create<Packet>(m_virtualPayloadSize));
 	Ptr<Name> dataName = Create<Name>(interest->GetName());
 	data->SetName(dataName);
@@ -1214,7 +1214,7 @@ void NavigationRouteHeuristic::PrepareDetectPacket(Ptr<Interest> interest)
 {
 	if(!m_running) return;
 	NS_LOG_FUNCTION (this);
-	cout<<"into prepare detect packet"<<endl;
+	cout << "node: "<<m_node->GetId() << "into prepare detect packet"<<endl;
 
 	Ptr<Packet> nrPayload= interest->GetPayload()->Copy();
 	ndn::nrndn::nrndnHeader nrheader;
