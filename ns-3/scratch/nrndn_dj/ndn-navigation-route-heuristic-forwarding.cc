@@ -265,6 +265,11 @@ void NavigationRouteHeuristic::OnInterest(Ptr<Face> face,
 {
 	if(!m_running) return;
 	//cout << "into OnInterest in forwarder" << endl; 
+	cout << "forwarder " << "node: "<<m_node->GetId()<< " scope(int): " << (int)(interest->GetScope())<< " scope: " << (interest->GetScope()) << " nonce:" << interest->GetNonce() << endl;
+	cout << "DETECT_PACKET: " << DETECT_PACKET << " INTEREST_PACKET: " << INTEREST_PACKET << endl;
+	cout << "DETECT_PACKET == interest->GetScope():" << (DETECT_PACKET == interest->GetScope()) << " DETECT_PACKET == (int)interest->GetScope():" << (DETECT_PACKET == (int)(interest->GetScope())) << endl;
+	cout << "INTEREST_PACKET == interest->GetScope():" << (INTEREST_PACKET == interest->GetScope()) << " INTEREST_PACKET == (int)interest->GetScope():" << (INTEREST_PACKET == (int)(interest->GetScope())) << endl;
+	
 	if(Face::APPLICATION==face->GetFlags())
 	{
 		NS_LOG_DEBUG("Get interest packet from APPLICATION");
@@ -320,10 +325,7 @@ void NavigationRouteHeuristic::OnInterest(Ptr<Face> face,
 	double distance = sqrt(disX *disX + disY * disY);
 	double interval = (600 - distance) *1.5;
 
-	cout << "forwarder " << "node: "<<m_node->GetId()<< " scope(int): " << (int)(interest->GetScope())<< " scope: " << (interest->GetScope()) << endl;
-	cout << "DETECT_PACKET: " << DETECT_PACKET << " INTEREST_PACKET: " << INTEREST_PACKET << endl;
-	cout << "DETECT_PACKET == interest->GetScope():" << (DETECT_PACKET == interest->GetScope()) << " DETECT_PACKET == (int)interest->GetScope():" << (DETECT_PACKET == (int)(interest->GetScope())) << endl;
-	cout << "INTEREST_PACKET == interest->GetScope():" << (INTEREST_PACKET == interest->GetScope()) << " INTEREST_PACKET == (int)interest->GetScope():" << (INTEREST_PACKET == (int)(interest->GetScope())) << endl;
+	
 	if(DETECT_PACKET == interest->GetScope())
 	{
 		//cout << "DETECT_PACKET / OnInterest / forwarder" << endl;
@@ -1168,7 +1170,7 @@ void NavigationRouteHeuristic::PrepareInterestPacket(Ptr<Interest> interest)
 	nrPayload->AddPacketTag (typeTag);
 
 	interest->SetPayload(nrPayload);
-	cout << "forwarder " << "node: "<<m_node->GetId()<< " scope: " << (int)(interest->GetScope()) << endl;
+	cout << "forwarder " << "node: "<<m_node->GetId()<< " nonce: " << interest->GetNonce() << endl;
 	Simulator::Schedule(
 					MilliSeconds(m_uniformRandomVariable->GetInteger(0, 100)),
 					&NavigationRouteHeuristic::SendInterestPacket, this, interest);
