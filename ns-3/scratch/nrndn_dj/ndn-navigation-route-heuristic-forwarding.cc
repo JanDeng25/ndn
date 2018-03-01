@@ -268,6 +268,12 @@ void NavigationRouteHeuristic::OnInterest(Ptr<Face> face,
 	if(Face::APPLICATION==face->GetFlags())
 	{
 		NS_LOG_DEBUG("Get interest packet from APPLICATION");
+		
+		//on Mar 1, 2018 by DJ: test interest
+		if(interest->GetScope() == INTEREST_PACKET){
+			cout << "node: " <<m_node->GetId() << " interest packet from itself, name:" << (interest->GetName()).toUri() << endl;
+		}
+
 		if(interest->GetScope() == MOVE_TO_NEW_LANE)
 		{
 			PrepareMoveToNewLanePacket(interest);//发送MOVE_TO_NEW_LANE包
@@ -276,12 +282,8 @@ void NavigationRouteHeuristic::OnInterest(Ptr<Face> face,
 		cout << "PreparePacket / OnInterest / forwarder" << endl;
 		Simulator::Schedule(MilliSeconds(m_uniformRandomVariable->GetInteger(0, 100)),
 						&NavigationRouteHeuristic::PreparePacket, this, interest);
+		
 		return;
-
-		//on Mar 1, 2018 by DJ: test interest
-		if(interest->GetScope() == INTEREST_PACKET){
-			cout << "node: " <<m_node->GetId() << " interest packet from itself, name:" << (interest->GetName()).toUri() << endl;
-		}
 	}
 
 	if(HELLO_PACKET  == interest->GetScope())
