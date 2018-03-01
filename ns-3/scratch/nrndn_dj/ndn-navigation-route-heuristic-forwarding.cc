@@ -1150,7 +1150,7 @@ void NavigationRouteHeuristic::PrepareInterestPacket(Ptr<Interest> interest)
 	//cout<<"into prepare interest packet"<<endl;
 	// 2. prepare the interest
 	interest->SetScope(INTEREST_PACKET);
-	interest->SetNonce(m_uniformRandomVariable->GetValue());
+	interest->SetNonce(m_rand.GetValue());
 	Ptr<Packet> nrPayload= interest->GetPayload()->Copy();
 	ndn::nrndn::nrndnHeader nrheader;
 	nrPayload->RemoveHeader(nrheader);
@@ -1170,7 +1170,7 @@ void NavigationRouteHeuristic::PrepareInterestPacket(Ptr<Interest> interest)
 	nrPayload->AddPacketTag (typeTag);
 
 	interest->SetPayload(nrPayload);
-	cout << "forwarder PrepareInterestPacket " << "node: "<<m_node->GetId()<< " nonce: " << interest->GetNonce() << ",m_uniformRandomVariable:" << m_uniformRandomVariable->GetValue() << endl;
+	cout << "forwarder PrepareInterestPacket " << "node: "<<m_node->GetId()<< " nonce: " << interest->GetNonce() << ",m_uniformRandomVariable:" << m_rand.GetValue() << endl;
 	Simulator::Schedule(
 					MilliSeconds(m_uniformRandomVariable->GetInteger(0, 100)),
 					&NavigationRouteHeuristic::SendInterestPacket, this, interest);
@@ -1244,8 +1244,8 @@ void NavigationRouteHeuristic::PrepareDetectPacket(Ptr<Interest> interest)
 
 	interest->SetPayload(nrPayload);
 	interest->SetScope(DETECT_PACKET);
-	interest->SetNonce(m_uniformRandomVariable->GetValue());
-	cout << "forwarder PrepareDetectPacket " << "node: "<<m_node->GetId()<< " nonce: " << interest->GetNonce() << ",m_uniformRandomVariable:" << m_uniformRandomVariable->GetValue() << endl;
+	interest->SetNonce(m_rand.GetValue());
+	cout << "forwarder PrepareDetectPacket " << "node: "<<m_node->GetId()<< " nonce: " << interest->GetNonce() << ",m_uniformRandomVariable:" << m_rand.GetValue() << endl;
 
 	cout<<"node: "<<m_node->GetId()<<"  send detect packet,name: "<<interest->GetName().toUri()<<" in forwarder"<<endl;
 
@@ -1420,7 +1420,7 @@ void NavigationRouteHeuristic::first_request(std::vector<string> v){
 	Ptr<Interest> interest = Create<Interest> (Create<Packet>(m_virtualPayloadSize));
 	Ptr<Name> interestName = Create<Name>(name);
 	interest->SetName(interestName);
-	interest->SetNonce(m_uniformRandomVariable->GetValue());//just generate a random number
+	interest->SetNonce(m_rand.GetValue());//just generate a random number
 	interest->SetScope(ASK_FOR_TABLE);
 
 	ndn::nrndn::nrndnHeader nrheader;
@@ -1463,7 +1463,7 @@ void NavigationRouteHeuristic::second_request(std::vector<string> v){
 	Ptr<Interest> interest = Create<Interest> (Create<Packet>(m_virtualPayloadSize));
 	Ptr<Name> interestName = Create<Name>(name);
 	interest->SetName(interestName);
-	interest->SetNonce(m_uniformRandomVariable->GetValue());//just generate a random number
+	interest->SetNonce(m_rand.GetValue());//just generate a random number
 	interest->SetScope(ASK_FOR_TABLE);
 
 	ndn::nrndn::nrndnHeader nrheader;
@@ -1508,7 +1508,7 @@ void NavigationRouteHeuristic::AskForTable(vector<string> sourcename)
 	Ptr<Interest> interest = Create<Interest> (Create<Packet>(m_virtualPayloadSize));
 	Ptr<Name> interestName = Create<Name>(name);
 	interest->SetName(interestName);
-	interest->SetNonce(m_uniformRandomVariable->GetValue());//just generate a random number
+	interest->SetNonce(m_rand.GetValue());//just generate a random number
 	interest->SetScope(ASK_FOR_TABLE);
 
 	ndn::nrndn::nrndnHeader nrheader;
