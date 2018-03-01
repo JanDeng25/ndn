@@ -269,7 +269,7 @@ void NavigationRouteHeuristic::OnInterest(Ptr<Face> face,
 	cout << "DETECT_PACKET: " << DETECT_PACKET << " INTEREST_PACKET: " << INTEREST_PACKET << endl;
 	cout << "DETECT_PACKET == interest->GetScope():" << (DETECT_PACKET == interest->GetScope()) << " DETECT_PACKET == (int)interest->GetScope():" << (DETECT_PACKET == (int)(interest->GetScope())) << endl;
 	cout << "INTEREST_PACKET == interest->GetScope():" << (INTEREST_PACKET == interest->GetScope()) << " INTEREST_PACKET == (int)interest->GetScope():" << (INTEREST_PACKET == (int)(interest->GetScope())) << endl;
-	
+
 	if(Face::APPLICATION==face->GetFlags())
 	{
 		NS_LOG_DEBUG("Get interest packet from APPLICATION");
@@ -1170,7 +1170,7 @@ void NavigationRouteHeuristic::PrepareInterestPacket(Ptr<Interest> interest)
 	nrPayload->AddPacketTag (typeTag);
 
 	interest->SetPayload(nrPayload);
-	cout << "forwarder " << "node: "<<m_node->GetId()<< " nonce: " << interest->GetNonce() << endl;
+	cout << "forwarder PrepareInterestPacket " << "node: "<<m_node->GetId()<< " nonce: " << interest->GetNonce() << ",m_uniformRandomVariable:" << m_uniformRandomVariable->GetValue() << endl;
 	Simulator::Schedule(
 					MilliSeconds(m_uniformRandomVariable->GetInteger(0, 100)),
 					&NavigationRouteHeuristic::SendInterestPacket, this, interest);
@@ -1245,6 +1245,7 @@ void NavigationRouteHeuristic::PrepareDetectPacket(Ptr<Interest> interest)
 	interest->SetPayload(nrPayload);
 	interest->SetScope(DETECT_PACKET);
 	interest->SetNonce(m_uniformRandomVariable->GetValue());
+	cout << "forwarder PrepareDetectPacket " << "node: "<<m_node->GetId()<< " nonce: " << interest->GetNonce() << ",m_uniformRandomVariable:" << m_uniformRandomVariable->GetValue() << endl;
 
 	cout<<"node: "<<m_node->GetId()<<"  send detect packet,name: "<<interest->GetName().toUri()<<" in forwarder"<<endl;
 
