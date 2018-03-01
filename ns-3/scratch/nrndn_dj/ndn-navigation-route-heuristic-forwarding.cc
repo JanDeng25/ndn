@@ -320,6 +320,10 @@ void NavigationRouteHeuristic::OnInterest(Ptr<Face> face,
 	double distance = sqrt(disX *disX + disY * disY);
 	double interval = (600 - distance) *1.5;
 
+	cout << "forwarder " << "node: "<<m_node->GetId()<< " scope(int): " << (int)(interest->GetScope())<< " scope: " << (interest->GetScope()) << endl;
+	cout << "DETECT_PACKET: " <<DETECT_PACKET << " INTEREST_PACKET: " << INTEREST_PACKET << endl;
+	cout << "DETECT_PACKET == interest->GetScope():" << DETECT_PACKET == interest->GetScope() << " DETECT_PACKET == (int)interest->GetScope():" << DETECT_PACKET == (int)(interest->GetScope())< endl;
+	cout << "INTEREST_PACKET == interest->GetScope():" << INTEREST_PACKET == interest->GetScope() << " INTEREST_PACKET == (int)interest->GetScope():" << INTEREST_PACKET == (int)(interest->GetScope())< endl;
 	if(DETECT_PACKET == interest->GetScope())
 	{
 		//cout << "DETECT_PACKET / OnInterest / forwarder" << endl;
@@ -1280,10 +1284,10 @@ void NavigationRouteHeuristic::SendInterestPacket(Ptr<Interest> interest)
 	vector<Ptr<Face> >::iterator fit;
 	for(fit=m_outFaceList.begin();fit!=m_outFaceList.end();++fit)
 	{
-		cout << "1 In SendInterestPacket node: " << m_node->GetId() << " m_fib->Find(interest->GetName())" << ":"  << interest->GetName() << endl;
+		//cout << "1 In SendInterestPacket node: " << m_node->GetId() << " m_fib->Find(interest->GetName())" << ":"  << interest->GetName() << endl;
 		(*fit)->SendInterest(interest);
 		//////ndn::nrndn::nrUtils::AggrateInterestPacketSize(interest);
-		cout << "2 In SendInterestPacket node: " << m_node->GetId() << " m_fib->Find(interest->GetName())" << ":"  << interest->GetName() << endl;
+		//cout << "2 In SendInterestPacket node: " << m_node->GetId() << " m_fib->Find(interest->GetName())" << ":"  << interest->GetName() << endl;
 	}
 }
 
