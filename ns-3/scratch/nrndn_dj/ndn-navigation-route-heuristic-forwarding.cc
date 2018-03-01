@@ -279,7 +279,7 @@ void NavigationRouteHeuristic::OnInterest(Ptr<Face> face,
 		return;
 
 		//on Mar 1, 2018 by DJ: test interest
-		if(interest->GetScope == INTEREST_PACKET){
+		if(interest->GetScope() == INTEREST_PACKET){
 			cout << "node: " <<m_node->GetId() << " interest packet from itself, name:" << (interest->GetName()).toUri() << endl;
 		}
 	}
