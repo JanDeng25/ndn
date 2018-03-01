@@ -1164,7 +1164,7 @@ void NavigationRouteHeuristic::PrepareInterestPacket(Ptr<Interest> interest)
 	nrPayload->AddPacketTag (typeTag);
 
 	interest->SetPayload(nrPayload);
-	cout << "forwarder " << "node: "<<m_node->GetId()<< " scope: " << interest->scope() << endl;
+	cout << "forwarder " << "node: "<<m_node->GetId()<< " scope: " << interest->GetScope() << endl;
 	Simulator::Schedule(
 					MilliSeconds(m_uniformRandomVariable->GetInteger(0, 100)),
 					&NavigationRouteHeuristic::SendInterestPacket, this, interest);
