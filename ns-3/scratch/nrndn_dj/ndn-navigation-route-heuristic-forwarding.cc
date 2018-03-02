@@ -352,6 +352,7 @@ void NavigationRouteHeuristic::OnInterest(Ptr<Face> face,
 				Time sendInterval = (MilliSeconds(interval) +  m_gap * m_timeSlot);
 				
 				cout << "node: " <<m_node->GetId() << " before schedule in !isSame&IsConnected / DETECT_PACKET / OnInterest / forwarder" << endl; 
+				cout << "MilliSeconds(interval):" << MilliSeconds(interval) << " interval:" << interval << " sendInterval:" << sendInterval << endl;
 				m_sendingInterestEvent[nodeId][seq] = Simulator::Schedule(sendInterval,
 									&NavigationRouteHeuristic::ForwardDetectPacket, this,interest);
 				return;
