@@ -325,7 +325,9 @@ void NavigationRouteHeuristic::OnInterest(Ptr<Face> face,
 	double disX = m_sensor->getX() - x;
 	double disY = m_sensor->getY() - y;
 	double distance = sqrt(disX *disX + disY * disY);
-	double interval = (600 - distance) *1.5;
+	
+	//distance范围一般在100-1000,1066.37的时候，interval为负，所以600的值改为800
+	double interval = (800 - distance) *1.5;
 
 	
 	if(DETECT_PACKET == interest->GetScope())
