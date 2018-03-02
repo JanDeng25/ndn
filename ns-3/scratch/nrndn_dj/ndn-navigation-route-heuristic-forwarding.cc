@@ -322,8 +322,8 @@ void NavigationRouteHeuristic::OnInterest(Ptr<Face> face,
 	std::string preLane = nrheader.getPreLane();
 	std::vector<std::string> laneList = nrheader.getLaneList();
 
-	double disX =m_sensor->getX() - x;
-	double disY =m_sensor->getY() - y;
+	double disX = m_sensor->getX() - x;
+	double disY = m_sensor->getY() - y;
 	double distance = sqrt(disX *disX + disY * disY);
 	double interval = (600 - distance) *1.5;
 
@@ -352,7 +352,7 @@ void NavigationRouteHeuristic::OnInterest(Ptr<Face> face,
 				Time sendInterval = (MilliSeconds(interval) +  m_gap * m_timeSlot);
 				
 				cout << "node: " <<m_node->GetId() << " before schedule in !isSame&IsConnected / DETECT_PACKET / OnInterest / forwarder" << endl; 
-				cout << "MilliSeconds(interval):" << MilliSeconds(interval) << " interval:" << interval << " sendInterval:" << sendInterval << endl;
+				cout << "distance:" << distance << "MilliSeconds(interval):" << MilliSeconds(interval) << " interval:" << interval << " sendInterval:" << sendInterval << endl;
 				m_sendingInterestEvent[nodeId][seq] = Simulator::Schedule(sendInterval,
 									&NavigationRouteHeuristic::ForwardDetectPacket, this,interest);
 				return;
