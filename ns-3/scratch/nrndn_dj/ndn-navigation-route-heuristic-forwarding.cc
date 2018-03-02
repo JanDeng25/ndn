@@ -340,7 +340,8 @@ void NavigationRouteHeuristic::OnInterest(Ptr<Face> face,
 			{
 				//cout << "into find(interest->GetName()) / DETECT_PACKET / OnInterest / forwarder" << endl;
 				Time sendInterval = MilliSeconds(distance*1.5);
-				//cout<<"detect packet  send interval: "<<sendInterval.GetSeconds()<<endl;
+				
+				cout << "node: " <<m_node->GetId() << " before schedule in fib & cs find(interest->GetName()) / DETECT_PACKET / OnInterest / forwarder" << endl; 
 				m_sendingDataEvent[nodeId][seq] = Simulator::Schedule(sendInterval,
 									&NavigationRouteHeuristic::ReplyConfirmPacket, this,interest);//回复的确认包，设置为此探测包的nonce和nodeid
 				return;
@@ -349,7 +350,8 @@ void NavigationRouteHeuristic::OnInterest(Ptr<Face> face,
 			{
 				//cout << "!isSame&IsConnected / DETECT_PACKET / OnInterest / forwarder" << endl;
 				Time sendInterval = (MilliSeconds(interval) +  m_gap * m_timeSlot);
-				//cout<<"detect packet   send interval: "<<sendInterval.GetSeconds()<<endl;
+				
+				cout << "node: " <<m_node->GetId() << " before schedule in !isSame&IsConnected / DETECT_PACKET / OnInterest / forwarder" << endl; 
 				m_sendingInterestEvent[nodeId][seq] = Simulator::Schedule(sendInterval,
 									&NavigationRouteHeuristic::ForwardDetectPacket, this,interest);
 				return;
@@ -358,7 +360,8 @@ void NavigationRouteHeuristic::OnInterest(Ptr<Face> face,
 			{
 				//cout << "IsConnected / DETECT_PACKET / OnInterest / forwarder" << endl;
 				Time sendInterval = (MilliSeconds(interval) +  (m_gap+5) * m_timeSlot);
-				//cout<<"detect packet   send interval: "<<sendInterval.GetSeconds()<<endl;
+				
+				cout << "node: " <<m_node->GetId() << " before schedule in IsConnected / DETECT_PACKET / OnInterest / forwarder" << endl;
 				m_sendingInterestEvent[nodeId][seq] = Simulator::Schedule(sendInterval,
 									&NavigationRouteHeuristic::ForwardDetectPacket, this,interest);
 				return;
@@ -445,6 +448,7 @@ void NavigationRouteHeuristic::OnInterest(Ptr<Face> face,
 			//By DJ on Jan 22, 2018: no update of MOVE_TO_NEW_LANE on PIT
 			//m_pit->UpdatePit(currentLane, interest);
 			Time sendInterval = MilliSeconds( interval);
+			cout << "node: " <<m_node->GetId() << " before schedule in MOVE_TO_NEW_LANE / OnInterest / forwarder" << endl;
 			m_sendingInterestEvent[nodeId][seq] = Simulator::Schedule(sendInterval ,
 												&NavigationRouteHeuristic::ForwardMoveToNewLanePacket, this,interest);
 			return;
@@ -462,6 +466,8 @@ void NavigationRouteHeuristic::OnInterest(Ptr<Face> face,
 		 if(isSameLane(m_sensor->getLane(), currentLane) && !m_fib->getFIB().empty())
 		{
 			Time sendInterval = MilliSeconds(distance*3 + (500 - m_fib->getFIB().size() * 2) );///!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+			cout << "node: " <<m_node->GetId() << " before schedule in ASK_FOR_TABLE / OnInterest / forwarder" << endl;
 			m_sendingDataEvent[nodeId][seq] = Simulator::Schedule(sendInterval ,
 										&NavigationRouteHeuristic::ReplyTablePacket, this,interest);
 			return;
