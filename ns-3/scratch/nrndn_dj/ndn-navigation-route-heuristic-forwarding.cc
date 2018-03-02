@@ -328,7 +328,7 @@ void NavigationRouteHeuristic::OnInterest(Ptr<Face> face,
 
 	//distance范围一般在100-1000,1066.37的时候，interval为负，所以600的值改为800
 	//800为标准时，1277仍为负
-	double interval = (1000 - distance) *1.5;
+	double interval = (1100 - distance) *1.5;
 	//double interval = 1500.0 / distance;
 	
 	if(DETECT_PACKET == interest->GetScope())
