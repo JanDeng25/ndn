@@ -159,7 +159,8 @@ void NavigationRouteHeuristic::Start()
 		}
 	}
 	//Simulator::Schedule (Seconds (50), & NavigationRouteHeuristic::fibnum, this);
-	//Simulator::Schedule (Seconds (50), & NavigationRouteHeuristic::CheckTable, this);
+	cout << "node: " <<m_node->GetId() << " before schedule in start / forwarder" << endl; 
+	Simulator::Schedule (Seconds (50), & NavigationRouteHeuristic::CheckTable, this);
 }
 
 void NavigationRouteHeuristic::fibnum()
@@ -177,6 +178,7 @@ void NavigationRouteHeuristic::fibnum()
 	}*/
 	if(m_node->GetId() % 10 == 1 && m_node->GetId() > 10)
 		cout<<"node:"<<m_node->GetId()<<" has "<<m_fib->getFIB().size()<<" FIB"<<endl;
+	cout << "node: " <<m_node->GetId() << " before schedule in fibnum / forwarder" << endl; 
 	Simulator::Schedule (Seconds (10), &NavigationRouteHeuristic::fibnum, this);
 }
 
@@ -479,6 +481,8 @@ void NavigationRouteHeuristic::OnData(Ptr<Face> face, Ptr<Data> data)
 		// 2. record the Data Packet(only record the forwarded packet)
 		m_dataSignatureSeen.Put(data->GetSignature(),true);
 		// 3. Then forward the data packet directly
+
+		cout << "node: " <<m_node->GetId() << " before schedule in onData / forwarder" << endl; 
 		Simulator::Schedule(
 				MilliSeconds(m_uniformRandomVariable->GetInteger(0, 100)),
 				&NavigationRouteHeuristic::SendDataPacket, this, data);
@@ -1171,6 +1175,7 @@ void NavigationRouteHeuristic::PrepareInterestPacket(Ptr<Interest> interest)
 
 	interest->SetPayload(nrPayload);
 	cout << "forwarder PrepareInterestPacket " << "node: "<<m_node->GetId()<< " nonce: " << interest->GetNonce() << ",m_uniformRandomVariable:" << m_uniformRandomVariable->GetInteger(0,std::numeric_limits<uint32_t>::max ()) << endl;
+	cout << "node: " <<m_node->GetId() << " before schedule in PrepareInterestPacket / forwarder" << endl; 
 	Simulator::Schedule(
 					MilliSeconds(m_uniformRandomVariable->GetInteger(0, 100)),
 					&NavigationRouteHeuristic::SendInterestPacket, this, interest);
@@ -1205,6 +1210,8 @@ void NavigationRouteHeuristic::PrepareMoveToNewLanePacket(Ptr<Interest> interest
 	m_interestNonceSeen.Put(interest->GetNonce(),true);
 	ndn::nrndn::nrUtils::IncreaseTableNum();
 	//SendInterestPacket(interest);
+
+	cout << "node: " <<m_node->GetId() << " before schedule in PrepareMoveToNewLanePacket / forwarder" << endl; 
 	Simulator::Schedule(
 						MilliSeconds(m_uniformRandomVariable->GetInteger(0, 100)),
 						&NavigationRouteHeuristic::SendInterestPacket, this, interest);
@@ -1251,9 +1258,13 @@ void NavigationRouteHeuristic::PrepareDetectPacket(Ptr<Interest> interest)
 
 	m_interestNonceSeen.Put(interest->GetNonce(),true);
 	//SendInterestPacket(interest);
+
+	cout << "node: " <<m_node->GetId() << " before schedule SendInterestPacket in PrepareDetectPacket / forwarder" << endl; 
 	Simulator::Schedule(
 						MilliSeconds(m_uniformRandomVariable->GetInteger(0, 100)),
 						&NavigationRouteHeuristic::SendInterestPacket, this, interest);
+
+	cout << "node: " <<m_node->GetId() << " before schedule PreparePacket in PrepareDetectPacket / forwarder" << endl; 
 	Simulator::Schedule (Seconds (5.0), & NavigationRouteHeuristic::PreparePacket, this,interest);
 	ndn::nrndn::nrUtils::IncreaseDetectNum();
 }
@@ -1263,6 +1274,8 @@ void NavigationRouteHeuristic::PreparePacket(Ptr<Interest> interest)
 	//cout<<"prepare packet"<<endl;
 	if(m_fib->getFIB().size() == 0){
 		cout << "node: " << m_node->GetId() << " m_fib->getFIB().size() == 0" << endl;
+
+		cout << "node: " <<m_node->GetId() << " before schedule in PreparePacket / forwarder" << endl; 
 		Simulator::Schedule (Seconds (5.0), & NavigationRouteHeuristic::PreparePacket, this,interest);
 	}
 	else if (m_fib->Find(interest->GetName())){
@@ -1405,6 +1418,7 @@ void NavigationRouteHeuristic::CheckTable()
 			sourcename.push_back(name.toUri());
 	}
 	AskForTable(sourcename);
+	cout << "node: " <<m_node->GetId() << " before schedule in CheckTable / forwarder" << endl; 
 	Simulator::Schedule (Seconds (10), & NavigationRouteHeuristic::CheckTable, this);
 }
 
