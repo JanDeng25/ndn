@@ -62,7 +62,7 @@ public:
 
 	void setX(double x)
 	{
-		m_x=x;
+		m_x = x;
 	}
 
 	double getY() const

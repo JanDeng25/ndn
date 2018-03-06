@@ -328,7 +328,7 @@ void NavigationRouteHeuristic::OnInterest(Ptr<Face> face,
 
 	//distance范围一般在100-1000,1066.37的时候，interval为负，所以600的值改为800
 	//800为标准时，1277仍为负
-	double interval = (1100 - distance) *1.5;
+	double interval = (600 - distance) *1.5;
 	//double interval = 1500.0 / distance;
 	
 	if(DETECT_PACKET == interest->GetScope())
@@ -781,7 +781,7 @@ void NavigationRouteHeuristic::ForwardResourcePacket(Ptr<Data> src)
 	Ptr<Data> data = Create<Data> (*src);
 	data->SetPayload(nrPayload);
 
-	//cout<<"node: "<<m_node->GetId()<<" forward resource packet from "<<nrheader.getSourceId()<<" name:"<<data->GetName().toUri ()<<" prelane:"<<prelane<<" currentlane:"<<nrheader.getCurrentLane()<<" ttl:"<<(hopCountTag.Get()+1)<<endl;
+	cout<<"node: "<<m_node->GetId()<<" forward resource packet from "<<nrheader.getSourceId()<<" name:"<<data->GetName().toUri ()<<" prelane:"<<prelane<<" currentlane:"<<nrheader.getCurrentLane()<<" ttl:"<<(hopCountTag.Get()+1)<<endl;
 	SendDataPacket(data);
 
 	ndn::nrndn::nrUtils::IncreaseResourceForwardCounter();
