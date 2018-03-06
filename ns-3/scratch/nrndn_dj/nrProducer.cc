@@ -98,9 +98,7 @@ void nrProducer::StartApplication()
 	{
 		//delay 50s to broadcast resource packet
 		//Simulator::Schedule (Seconds (50.0 + delay), &nrProducer::sendResourcePacket, this, i);
-		
-		//No
-		Simulator::Schedule (Seconds (delay), &nrProducer::sendResourcePacket, this, i);
+		Simulator::Schedule (Seconds (50.0 + delay), &nrProducer::sendResourcePacket, this, i);
 	}
 
 }
