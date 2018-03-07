@@ -870,7 +870,7 @@ void NavigationRouteHeuristic::ForwardDataPacket(Ptr<Data> src)
 		std::unordered_set< std::string >::const_iterator it;
 		for(it =nexthop->getIncomingnbs().begin(); it != nexthop->getIncomingnbs().end(); ++it)
 		{
-					lanelist.push_back(*it);
+			lanelist.push_back(*it);
 		}
 		// 	2.1 setup nrheader, source id do not change
 		nrheader.setX(x);
