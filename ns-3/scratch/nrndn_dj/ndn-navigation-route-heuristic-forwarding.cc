@@ -358,7 +358,7 @@ void NavigationRouteHeuristic::OnInterest(Ptr<Face> face,
 				
 				cout << "node: " <<m_node->GetId() << " x: " << m_sensor->getX() << " y: " << m_sensor->getY()  << " before schedule in !isSame&IsConnected / DETECT_PACKET / OnInterest / forwarder" << endl; 
 				cout << "lastNode: " << lastNode << " x: " << x << " y: " << y << endl;
-				cout << "distX: " << distX << " distY: " << distY << endl;
+				cout << "disX: " << disX << " disY: " << disY << endl;
 				cout << " sourceNode: " << nodeId << endl;
 				cout << "distance:" << distance << "MilliSeconds(interval):" << MilliSeconds(interval) << " interval:" << interval << " sendInterval:" << sendInterval << endl;
 				m_sendingInterestEvent[nodeId][seq] = Simulator::Schedule(sendInterval,
@@ -441,7 +441,7 @@ void NavigationRouteHeuristic::OnInterest(Ptr<Face> face,
 						Time sendInterval = (MilliSeconds(interval) +  (m_gap+5)* m_timeSlot);
 						cout << "node: " <<m_node->GetId() << " x: " << m_sensor->getX() << " y: " << m_sensor->getY() << " before schedule in isJuction / INTEREST_PACKET / OnInterest / forwarder" << endl; 
 						cout << "lastNode: " << lastNode << " x: " << x << " y: " << y << endl;
-						cout << "distX: " << distX << " distY: " << distY << endl;
+						cout << "disX: " << disX << " disY: " << disY << endl;
 						cout << " sourceNode: " << nodeId << endl;
 						cout << "distance:" << distance << "MilliSeconds(interval):" << MilliSeconds(interval) << " interval:" << interval << " sendInterval:" << sendInterval << endl;
 
