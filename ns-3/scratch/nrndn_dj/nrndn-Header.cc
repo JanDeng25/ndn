@@ -16,13 +16,14 @@ namespace nrndn
 
 nrndnHeader::nrndnHeader():
 		m_sourceId(0),
+		m_receivedId(0),
 		m_x(0),
 		m_y(0),
 		m_type(0),
 		m_TTL(0)
 {
 	// TODO Auto-generated constructor stub
-
+	// By DJ: add receivedId
 }
 
 nrndnHeader::~nrndnHeader()
@@ -48,6 +49,8 @@ uint32_t nrndnHeader::GetSerializedSize() const
 {
 	uint32_t size=0;
 	size += sizeof(m_sourceId);
+	// By DJ: add receivedId
+	size += sizeof(m_receivedId);
 	size += sizeof(m_x);
 	size += sizeof(m_y);
 	size += sizeof(m_type);
@@ -69,6 +72,8 @@ void nrndnHeader::Serialize(Buffer::Iterator start) const
 {
 	Buffer::Iterator& i = start;
 	i.WriteHtonU32(m_sourceId);
+	// By DJ: add receivedId
+	i.WriteHtonU32(m_receivedId);
 	i.Write((uint8_t*)&m_x,sizeof(m_x));
 	i.Write((uint8_t*)&m_y,sizeof(m_y));
 	i.WriteHtonU32(m_type);
@@ -94,7 +99,8 @@ void nrndnHeader::Serialize(Buffer::Iterator start) const
 uint32_t nrndnHeader::Deserialize(Buffer::Iterator start)
 {
 	Buffer::Iterator i = start;
-	m_sourceId	=	i.ReadNtohU32();
+	m_sourceId = i.ReadNtohU32();
+	m_receivedId = i.ReadNtohU32();
 	i.Read((uint8_t*)&m_x,sizeof(m_x));
 	i.Read((uint8_t*)&m_y,sizeof(m_y));
 	m_type = 	i.ReadNtohU32();
@@ -160,6 +166,7 @@ void nrndnHeader::Print(std::ostream& os) const
 {
 	os<<"nrndnHeader content: "
 			<<" NodeID="<<m_sourceId
+			<<" lasthop =" << m_receivedId
 			<<" coordinate = ("<<m_x<<","<<m_y<<")"
 			<<" type="<<m_type
 			<<" TTL="<<m_TTL

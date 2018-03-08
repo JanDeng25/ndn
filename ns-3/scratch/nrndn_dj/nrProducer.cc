@@ -97,7 +97,7 @@ void nrProducer::StartApplication()
 	for(uint32_t i = 1; i <= 20; ++i)
 	{
 		//delay 50s to broadcast resource packet
-		Simulator::Schedule (Seconds (30.0 + delay), &nrProducer::sendResourcePacket, this, i);
+		Simulator::Schedule (Seconds (50.0 + delay), &nrProducer::sendResourcePacket, this, i);
 		
 		//No delay
 		//Simulator::Schedule (Seconds (delay), &nrProducer::sendResourcePacket, this, i);
@@ -165,7 +165,9 @@ void nrProducer::sendResourcePacket(uint32_t n)
 	}
 
 	ndn::nrndn::nrndnHeader nrheader;
-	nrheader.setSourceId(GetNode()->GetId() );
+	nrheader.setSourceId(GetNode()->GetId());
+	
+	nrheader.setReceivedId(GetNode()->GetId());
 	nrheader.setX(m_sensor->getX());
 	nrheader.setY(m_sensor->getY());
 	string lane = m_sensor->getLane();
@@ -250,6 +252,8 @@ void nrProducer::laneChange(string oldLane, string newLane){
 	//add header;
 	ndn::nrndn::nrndnHeader nrheader;
 	nrheader.setSourceId(GetNode()->GetId());
+	
+	nrheader.setReceivedId(GetNode()->GetId());
 	nrheader.setX(m_sensor->getX());
 	nrheader.setY(m_sensor->getY());
 	std::string lane = m_sensor->getLane();

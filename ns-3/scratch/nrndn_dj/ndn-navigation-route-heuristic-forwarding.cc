@@ -765,6 +765,7 @@ void NavigationRouteHeuristic::ForwardResourcePacket(Ptr<Data> src)
 	vector<string> lanelist = nrheader.getLaneList();
 
 	// 	2.1 setup nrheader, source id do not change
+	nrheader.setReceivedId(m_node->GetId());
 	nrheader.setX(x);
 	nrheader.setY(y);
 	nrheader.setCurrentLane(currentlane);
@@ -818,6 +819,7 @@ void NavigationRouteHeuristic::ForwardConfirmPacket(Ptr<Data> src)
 	std::string prelane = m_sensor->getLane();
 
 	// 	2.1 setup nrheader, source id do not change
+	nrheader.setReceivedId(m_node->GetId());
 	nrheader.setX(x);
 	nrheader.setY(y);
 	nrheader.setCurrentLane(currentlane);
@@ -866,13 +868,14 @@ void NavigationRouteHeuristic::ForwardDataPacket(Ptr<Data> src)
 			return ;
 		}
 		Ptr<ndn::pit::nrndn::EntryNrImpl> nexthop;
-		nexthop = DynamicCast<ndn::pit::nrndn::EntryNrImpl>(m_pit->Find( src->GetName()));
+		nexthop = DynamicCast<ndn::pit::nrndn::EntryNrImpl>(m_pit->Find(src->GetName()));
 		std::unordered_set< std::string >::const_iterator it;
 		for(it =nexthop->getIncomingnbs().begin(); it != nexthop->getIncomingnbs().end(); ++it)
 		{
 			lanelist.push_back(*it);
 		}
 		// 	2.1 setup nrheader, source id do not change
+		nrheader.setReceivedId(m_node->GetId());
 		nrheader.setX(x);
 		nrheader.setY(y);
 		nrheader.setPreLane(prelane);
@@ -881,7 +884,7 @@ void NavigationRouteHeuristic::ForwardDataPacket(Ptr<Data> src)
 
 		// 	2.2 setup FwHopCountTag
 		FwHopCountTag hopCountTag;
-		nrPayload->RemovePacketTag( hopCountTag);
+		nrPayload->RemovePacketTag(hopCountTag);
 		if(hopCountTag.Get() > 14)
 		{
 			m_dataSignatureSeen.Put(src->GetSignature(),true);
@@ -925,6 +928,7 @@ void NavigationRouteHeuristic::ForwardDetectPacket(Ptr<Interest> src)
 	lanelist.push_back(m_sensor->getLane() );
 	double x= m_sensor->getX();
 	double y= m_sensor->getY();
+	nrheader.setReceivedId(m_node->GetId());
 	nrheader.setX(x);
 	nrheader.setY(y);
 	nrheader.setCurrentLane(m_sensor->getLane());
@@ -982,6 +986,8 @@ void NavigationRouteHeuristic::ForwardInterestPacket(Ptr<Interest> src)
 	string preprelane = nrheader.getPreLane();
 	vector<string> lanelist;
 	lanelist.push_back(preprelane);
+	
+	nrheader.setReceivedId(m_node->GetId());
 	nrheader.setX(m_sensor->getX());
 	nrheader.setY(m_sensor->getY());
 	nrheader.setPreLane(m_sensor->getLane());
@@ -1024,6 +1030,7 @@ void NavigationRouteHeuristic::ReplyConfirmPacket(Ptr<Interest> interest)
 
 	ndn::nrndn::nrndnHeader nrheader;
 	interest->GetPayload()->PeekHeader(nrheader);
+	nrheader.setReceivedId(m_node->GetId());
 	nrheader.setX(m_sensor->getX());
 	nrheader.setY(m_sensor->getY());
 	std::string currentlane = nrheader.getLaneList()[0] ;
@@ -1090,6 +1097,8 @@ void NavigationRouteHeuristic::ReplyTablePacket(Ptr<Interest> interest)
 
 	ndn::nrndn::tableHeader tableheader;
 	tableheader.setSourceId(sourceid);
+	
+	nrheader.setReceivedId(m_node->GetId());
 	tableheader.setSignature(interest->GetNonce());
 	tableheader.setCurrentLane(m_sensor->getLane());
 
@@ -1139,6 +1148,8 @@ void NavigationRouteHeuristic::ReplyDataPacket(Ptr<Interest> interest)
 
 	ndn::nrndn::nrndnHeader nrheader;
 	interest->GetPayload()->PeekHeader(nrheader);
+	
+	nrheader.setReceivedId(m_node->GetId());
 	nrheader.setX(m_sensor->getX());
 	nrheader.setY(m_sensor->getY());
 	nrheader.setCurrentLane(nrheader.getPreLane());

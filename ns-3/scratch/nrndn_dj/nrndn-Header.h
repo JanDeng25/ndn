@@ -52,6 +52,20 @@ public:
 		m_sourceId = sourceId;
 	}
 
+
+	//by DJ
+	uint32_t getReceivedId() const
+	{
+		return m_receivedId;
+	}
+
+	//by DJ
+	void setReceivedId(uint32_t receivedId)
+	{
+		m_receivedId = receivedId;
+	}
+	//
+
 	double getX() const
 	{
 		return m_x;
@@ -125,14 +139,16 @@ public:
 	//\}
 
 private:
-	uint32_t		m_sourceId;	//\ (source)	id of source node (source)
+	uint32_t	m_sourceId;	//\ (source)	id of source node (source)
+	//add by DJ on Mar 8, 2018
+	uint32_t	m_receivedId;  //(received) id of the node which the received packet comes from
 	double		m_x;		//\ (forwarder)	forwarder x coordinate, not source node position!!!!
 	double 		m_y;    	//\ (forwarder)	forwarder y coordinate, not source node position!!!!
-	uint32_t        m_type;
-	uint32_t        m_TTL;
-	std::string             m_preLane;
-	std::string             m_currentLane;
-	std::vector<std::string>   m_laneList;//
+	uint32_t    m_type;
+	uint32_t    m_TTL;
+	std::string m_preLane;
+	std::string m_currentLane;
+	std::vector<std::string> m_laneList;//
 
 };
 

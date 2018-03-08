@@ -128,6 +128,8 @@ void nrConsumer::SendPacket()
 	   //add header;
 	  ndn::nrndn::nrndnHeader nrheader;
 	  nrheader.setSourceId(GetNode()->GetId());
+	  
+	  nrheader.setReceivedId(GetNode()->GetId());
 	  nrheader.setX(m_sensor->getX());
 	  nrheader.setY(m_sensor->getY());
 	  std::string lane = m_sensor->getLane();
@@ -205,6 +207,8 @@ void nrConsumer::laneChange(std::string oldLane, std::string newLane)
 	//add header;
 	ndn::nrndn::nrndnHeader nrheader;
 	nrheader.setSourceId(GetNode()->GetId());
+	
+	nrheader.setReceivedId(GetNode()->GetId());
 	nrheader.setX(m_sensor->getX());
 	nrheader.setY(m_sensor->getY());
 	std::string lane = m_sensor->getLane();
