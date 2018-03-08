@@ -356,8 +356,10 @@ void NavigationRouteHeuristic::OnInterest(Ptr<Face> face,
 				//cout << "!isSame&IsConnected / DETECT_PACKET / OnInterest / forwarder" << endl;
 				Time sendInterval = (MilliSeconds(interval) +  m_gap * m_timeSlot);
 				
-				cout << "node: " <<m_node->GetId() << " before schedule in !isSame&IsConnected / DETECT_PACKET / OnInterest / forwarder" << endl; 
-				cout << "lastNode: " << lastNode << " sourceNode: " << nodeId << endl;
+				cout << "node: " <<m_node->GetId() << " x: " << m_sensor->getX() << " y: " << m_sensor->getY()  << " before schedule in !isSame&IsConnected / DETECT_PACKET / OnInterest / forwarder" << endl; 
+				cout << "lastNode: " << lastNode << " x: " << x << " y: " << y << endl;
+				cout << "distX: " << distX << " distY: " << distY << endl;
+				cout << " sourceNode: " << nodeId << endl;
 				cout << "distance:" << distance << "MilliSeconds(interval):" << MilliSeconds(interval) << " interval:" << interval << " sendInterval:" << sendInterval << endl;
 				m_sendingInterestEvent[nodeId][seq] = Simulator::Schedule(sendInterval,
 									&NavigationRouteHeuristic::ForwardDetectPacket, this,interest);
@@ -437,8 +439,10 @@ void NavigationRouteHeuristic::OnInterest(Ptr<Face> face,
 					{
 						m_pit->UpdatePit(laneList.front(), interest);
 						Time sendInterval = (MilliSeconds(interval) +  (m_gap+5)* m_timeSlot);
-						cout << "node: " <<m_node->GetId() << " before schedule in isJuction / INTEREST_PACKET / OnInterest / forwarder" << endl; 
-						cout << "lastNode: " << lastNode << " sourceNode: " << nodeId << endl;
+						cout << "node: " <<m_node->GetId() << " x: " << m_sensor->getX() << " y: " << m_sensor->getY() << " before schedule in isJuction / INTEREST_PACKET / OnInterest / forwarder" << endl; 
+						cout << "lastNode: " << lastNode << " x: " << x << " y: " << y << endl;
+						cout << "distX: " << distX << " distY: " << distY << endl;
+						cout << " sourceNode: " << nodeId << endl;
 						cout << "distance:" << distance << "MilliSeconds(interval):" << MilliSeconds(interval) << " interval:" << interval << " sendInterval:" << sendInterval << endl;
 
 						m_sendingInterestEvent[nodeId][seq] = Simulator::Schedule(sendInterval,
