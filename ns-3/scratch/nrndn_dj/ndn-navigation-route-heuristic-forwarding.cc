@@ -1201,6 +1201,14 @@ void NavigationRouteHeuristic::PrepareInterestPacket(Ptr<Interest> interest)
 	hop = (nexthop->getIncomingnbs()).begin()->first;
 	nrheader.setCurrentLane(hop);
 	nrheader.setPreLane(m_sensor->getLane());
+	//Add to update location & nodeId
+	double x= m_sensor->getX();
+	double y= m_sensor->getY();
+	nrheader.setReceivedId(m_node->GetId());
+	nrheader.setX(x);
+	nrheader.setY(y);
+	//
+	
 	nrPayload->AddHeader(nrheader);
 	nrPayload->RemoveAllPacketTags();
 	FwHopCountTag hopCountTag;
@@ -1262,6 +1270,15 @@ void NavigationRouteHeuristic::PrepareDetectPacket(Ptr<Interest> interest)
 	Ptr<Packet> nrPayload= interest->GetPayload()->Copy();
 	ndn::nrndn::nrndnHeader nrheader;
 	nrPayload->RemoveHeader(nrheader);
+	
+	//Add to update location & nodeId
+	double x= m_sensor->getX();
+	double y= m_sensor->getY();
+	nrheader.setReceivedId(m_node->GetId());
+	nrheader.setX(x);
+	nrheader.setY(y);
+	//
+	
 	vector<string> lanelist;
 	lanelist.push_back(m_sensor->getLane());
 	nrheader.setLaneList(lanelist);
