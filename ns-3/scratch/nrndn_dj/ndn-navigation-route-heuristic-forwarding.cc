@@ -160,7 +160,7 @@ void NavigationRouteHeuristic::Start()
 	}
 	//Simulator::Schedule (Seconds (50), & NavigationRouteHeuristic::fibnum, this);
 	cout << "node: " <<m_node->GetId() << " before schedule in start / forwarder" << endl; 
-	Simulator::Schedule (Seconds (50), & NavigationRouteHeuristic::CheckTable, this);
+	//Simulator::Schedule (Seconds (50), & NavigationRouteHeuristic::CheckTable, this);
 }
 
 void NavigationRouteHeuristic::fibnum()
@@ -1409,8 +1409,8 @@ void NavigationRouteHeuristic::DoInitialize(void)
 	{
 		m_sensor = m_node->GetObject<ndn::nrndn::NodeSensor>();
 		NS_ASSERT_MSG(m_sensor,"NavigationRouteHeuristic::DoInitialize cannot find ns3::ndn::nrndn::NodeSensor");
-		if(m_sensor != NULL)
-						m_sensor->TraceConnectWithoutContext ("LaneChange", MakeCallback (&NavigationRouteHeuristic::laneChange,this));
+		//if(m_sensor != NULL)
+			//m_sensor->TraceConnectWithoutContext ("LaneChange", MakeCallback (&NavigationRouteHeuristic::laneChange,this));
 	}
 	super::DoInitialize();
 }
@@ -1671,9 +1671,9 @@ void NavigationRouteHeuristic::NotifyNewAggregate()
 
   if (m_sensor == 0)
   {
-	  m_sensor = GetObject<ndn::nrndn::NodeSensor> ();
-	  if(m_sensor != NULL)
-	  						m_sensor->TraceConnectWithoutContext ("LaneChange", MakeCallback (&NavigationRouteHeuristic::laneChange,this));
+	  	m_sensor = GetObject<ndn::nrndn::NodeSensor> ();
+	  	//if(m_sensor != NULL)
+	  		//m_sensor->TraceConnectWithoutContext("LaneChange", MakeCallback (&NavigationRouteHeuristic::laneChange,this));
    }
 
   if ( m_pit == 0)
