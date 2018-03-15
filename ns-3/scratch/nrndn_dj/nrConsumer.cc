@@ -159,7 +159,7 @@ void nrConsumer::OnData(Ptr<const Data> data)
 {
 	 if (!m_active) return;
 	NS_LOG_FUNCTION (this);
-	// cout<<"consumer on data"<<endl;
+	cout<<m_node->GetId() <<" consumer on data"<<endl;
 	Ptr<Packet> nrPayload	= data->GetPayload()->Copy();
 	nrndnHeader nrheader;
 	nrPayload->RemoveHeader(nrheader);
@@ -171,12 +171,13 @@ void nrConsumer::OnData(Ptr<const Data> data)
 	uint32_t signature=data->GetSignature();
 
 	map<uint32_t, string>::iterator it = interestSent.find(signature);
+	cout<<m_node->GetId() <<" consumer find signature:" << signature <<endl;
 	if(it != interestSent.end())
 	{
 		nrUtils::IncreaseInterestedNodeReceivedSum();
 		double delay = Simulator::Now().GetSeconds() - msgTime[name.toUri()];
 		nrUtils::GetDelaySum(delay);
-		std::cout<<m_node->GetId()<<"\treceived data "<<name.toUri()<<" from "<<nodeId<<"\tSignature "<<signature<<" delay"<<delay<<endl;
+		cout<<m_node->GetId()<<"\treceived data "<<name.toUri()<<" from "<<nodeId<<"\tSignature "<<signature<<" delay"<<delay<<endl;
 		cout<<"now InterestedNodeReceivedSum = "<<nrUtils::InterestedNodeReceivedSum<<"  now InterestedNodeSum = "<<nrUtils::InterestedNodeSum<<endl;
 		interestSent.erase(it);
 	}
