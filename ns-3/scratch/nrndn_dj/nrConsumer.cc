@@ -179,7 +179,7 @@ void nrConsumer::OnData(Ptr<const Data> data)
 	for(itr; itr != interestSent.end(); itr++){
 		cout << itr->first << ' ' << itr->second << endl;
 	}
-	if(it != interestSent.end())
+	if(prefix.toUri() == name.toUri())
 	{
 		nrUtils::IncreaseInterestedNodeReceivedSum();
 		double delay = Simulator::Now().GetSeconds() - msgTime[name.toUri()];
