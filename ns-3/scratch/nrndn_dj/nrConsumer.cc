@@ -143,7 +143,9 @@ void nrConsumer::SendPacket()
 	  newPayload->AddHeader(nrheader);
 	  interest->SetPayload(newPayload);
 
-	  cout<< "consumer " << "node: "<<GetNode()->GetId()<<"  send interest packet,name: "<<prefix.toUri()<<" in consumer"<<endl;
+	  m_prefix = prefix;
+	  cout<< "consumer " << "node: "<<GetNode()->GetId()<<"  send interest packet,name: "<<prefix.toUri() << " m_prefix: " << m_prefix.toUri() <<" in consumer"<<endl;
+
 
 	  m_transmittedInterests (interest, this, m_face);
 	  m_face->ReceiveInterest (interest);
@@ -174,12 +176,13 @@ void nrConsumer::OnData(Ptr<const Data> data)
 	cout<<m_node->GetId() <<" consumer find signature:" << signature <<endl;
 	cout << "interestSent.find(signature): " << (it == interestSent.end()) << endl;
 	cout << "data name:" << data->GetName() << "data name.toUri" << data->GetName().toUri() << " value name:" << name << " value name.toUri" << name.toUri() << endl;
+	cout << "interestName: " << m_prefix.toUri() << endl;
 	map<uint32_t, string>::iterator itr = interestSent.begin();
 	cout << "interestSent: " << endl;
 	for(itr; itr != interestSent.end(); itr++){
 		cout << itr->first << ' ' << itr->second << endl;
 	}
-	if(prefix.toUri() == name.toUri())
+	if(m_prefix.toUri() == name.toUri())
 	{
 		nrUtils::IncreaseInterestedNodeReceivedSum();
 		double delay = Simulator::Now().GetSeconds() - msgTime[name.toUri()];
