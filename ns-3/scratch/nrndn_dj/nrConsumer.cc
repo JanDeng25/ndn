@@ -189,7 +189,14 @@ void nrConsumer::OnData(Ptr<const Data> data)
 		nrUtils::GetDelaySum(delay);
 		cout<<m_node->GetId()<<"\treceived data "<<name.toUri()<<" from "<<nodeId<<"\tSignature "<<signature<<" delay"<<delay<<endl;
 		cout<<"now InterestedNodeReceivedSum = "<<nrUtils::InterestedNodeReceivedSum<<"  now InterestedNodeSum = "<<nrUtils::InterestedNodeSum<<endl;
-		interestSent.erase(it);
+		/*
+		//消费者对多个数据感兴趣
+		for(it==interestSent.begin(); it != interestSent.end(); it++){
+			if(it->second == name.toUri())
+				interestSent.erase(it);
+		}
+		*/
+		
 	}
 }
 
