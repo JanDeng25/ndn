@@ -174,7 +174,7 @@ void nrConsumer::OnData(Ptr<const Data> data)
 	cout<<m_node->GetId() <<" consumer find signature:" << signature <<endl;
 	cout << "interestSent.find(signature): " << (it == interestSent.end()) << endl;
 	cout << "data name:" << data->GetName() << "data name.toUri" << data->GetName().toUri() << " value name:" << name << " value name.toUri" << name.toUri() << endl;
-	map<map<uint32_t, string>::iterator itr = interestSent.begin();
+	map<uint32_t, string>::iterator itr = interestSent.begin();
 	cout << "interestSent: " << endl;
 	for(itr; itr != interestSent.end(); itr++){
 		cout << itr->first << ' ' << itr->second << endl;
