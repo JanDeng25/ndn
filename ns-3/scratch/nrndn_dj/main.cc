@@ -364,9 +364,9 @@ nrndnExample::Report ()
 			<<" Resourceforward times:"<< ResourceForwardTimes<<"\t\n"
 			<<" average interest forwards times:"<<averageInterestForwardTimes<<"\t\n"
 			<<" average data froward times:"<<averageDataForwardTimes<<"\t\n"
-			<<" table Sum:"<<tableSum<<"\t\n"
-			<<" average Detect Rate:"<<averageDetectRate<<"\t\n"
-			<<" average Confirm Rate:"<<averageConfirmRate<<"\t\n"
+			//<<" table Sum:"<<tableSum<<"\t\n"
+			//<<" average Detect Rate:"<<averageDetectRate<<"\t\n"
+			//<<" average Confirm Rate:"<<averageConfirmRate<<"\t\n"
 			<<" average Forward Sum:"<<averageForwardSum<<"\t\n"
 			<<" InterestedNodeReceivedSum:"<<InterestedNodeReceivedSum<<"\t\n"
 			<<endl;
