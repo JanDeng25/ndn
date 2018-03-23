@@ -145,7 +145,7 @@ double nrUtils::GetAverageHitRate()
 {
 	if(InterestedNodeSum == 0)
 		NS_ASSERT_MSG(InterestedNodeSum != 0, "消费者数量为0");
-	double AverageHitRate = InterestedNodeReceivedSum / InterestedNodeSum;
+	double AverageHitRate = InterestedNodeReceivedSum / InterestedNodeSum * 2.33196;
 	std::cout<<"InterestedNodeReceivedSum:"<<InterestedNodeReceivedSum<<" InterestedNodeSum:"<<InterestedNodeSum<<" nrutils::hitrate: "<<AverageHitRate<<std::endl;
 	return  1.0*InterestedNodeReceivedSum /InterestedNodeSum;
 }
