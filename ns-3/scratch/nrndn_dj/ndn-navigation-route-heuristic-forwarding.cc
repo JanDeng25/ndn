@@ -469,8 +469,8 @@ void NavigationRouteHeuristic::OnInterest(Ptr<Face> face,
 			Time sendInterval = MilliSeconds( interval);
 			cout << "node: " <<m_node->GetId() << " before schedule in MOVE_TO_NEW_LANE / OnInterest / forwarder" << endl;
 			cout << "distance:" << distance << "MilliSeconds(interval):" << MilliSeconds(interval) << " interval:" << interval << " sendInterval:" << sendInterval << endl;
-			m_sendingInterestEvent[nodeId][seq] = Simulator::Schedule(sendInterval ,
-												&NavigationRouteHeuristic::ForwardMoveToNewLanePacket, this,interest);
+			//m_sendingInterestEvent[nodeId][seq] = Simulator::Schedule(sendInterval ,
+			//									&NavigationRouteHeuristic::ForwardMoveToNewLanePacket, this,interest);
 			return;
 		}
 		else
