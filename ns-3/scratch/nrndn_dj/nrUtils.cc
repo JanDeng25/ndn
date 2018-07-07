@@ -147,7 +147,7 @@ double nrUtils::GetAverageHitRate()
 		NS_ASSERT_MSG(InterestedNodeSum != 0, "消费者数量为0");
 	double AverageHitRate = InterestedNodeReceivedSum / InterestedNodeSum;
 	std::cout<<"InterestedNodeReceivedSum:"<<InterestedNodeReceivedSum<<" InterestedNodeSum:"<<InterestedNodeSum<<" nrutils::hitrate: "<<AverageHitRate<<std::endl;
-	return  1.0*InterestedNodeReceivedSum /InterestedNodeSum + 0.4089442487;
+	return  1.0*InterestedNodeReceivedSum /InterestedNodeSum;
 }
 double nrUtils::GetAverageDetectRate()//平均探测率：detectNum/interestedNodeSum
 {
